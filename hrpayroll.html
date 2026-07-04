@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payroll Coordination Center | Aura HRMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-accent": "#7b2600",
+                    "surface-variant": "#dae2fc",
+                    "secondary-fixed-dim": "#b8c7e2",
+                    "inverse-on-surface": "#eef0ff",
+                    "on-background": "#131b2e",
+                    "on-secondary-fixed-variant": "#39485e",
+                    "surface-bright": "#faf8ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#56657c",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "on-primary-fixed-variant": "#08409e",
+                    "error": "#ba1a1a",
+                    "glass-bg": "rgba(255, 255, 255, 0.4)",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-container": "#eaedff",
+                    "on-surface": "#131b2e",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#0c1c30",
+                    "glass-border": "rgba(255, 255, 255, 0.5)",
+                    "tertiary": "#7b2600",
+                    "secondary": "#505f76",
+                    "inverse-primary": "#b2c5ff",
+                    "on-primary-container": "#c4d2ff",
+                    "surface-tint": "#2f59b7",
+                    "secondary-container": "#d4e3ff",
+                    "on-surface-variant": "#434654",
+                    "on-secondary": "#ffffff",
+                    "surface": "#faf8ff",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "on-primary-fixed": "#001848",
+                    "surface-container-high": "#e1e7ff",
+                    "primary-container": "#2a56b4",
+                    "tertiary-container": "#a33500",
+                    "surface-container-low": "#f2f3ff",
+                    "surface-dim": "#d2d9f4",
+                    "primary-fixed": "#dae2ff",
+                    "secondary-fixed": "#d4e3ff",
+                    "primary": "#003d9a",
+                    "surface-container-highest": "#dae2fc",
+                    "inverse-surface": "#283044",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c3c6d6",
+                    "background": "#faf8ff",
+                    "error-red": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#380d00",
+                    "on-tertiary-container": "#ffc6b2",
+                    "outline": "#737685"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "sidebar-expanded": "260px",
+                    "sidebar-collapsed": "64px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "code-sm": ["JetBrains Mono"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-xl": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "headline-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 61, 155, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 61, 155, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary-container selection:text-white">
+<!-- WebGL Background Placeholder -->
+
+<!-- SideNavBar -->
+<aside class="fixed h-screen w-sidebar-expanded left-0 top-0 bg-glass-bg backdrop-blur-xl border-r border-glass-border shadow-md flex flex-col py-xl z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Aura HRMS</h1>
+<p class="font-label-md text-label-md text-secondary opacity-70 uppercase tracking-widest">Enterprise Elite</p>
+</div>
+<nav class="flex-1 flex flex-col gap-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Employee Profile</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Projects</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-body-md text-body-md">Attendance</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">event_busy</span>
+<span class="font-body-md text-body-md">Leave Management</span>
+</a>
+<!-- Active State: Payroll -->
+<a class="flex items-center gap-md px-lg py-sm border-l-4 border-primary text-primary font-bold bg-primary/5 scale-[1.02] origin-left duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md text-body-md">Payroll</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-body-md text-body-md">Performance</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md text-body-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:text-primary hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-lg pt-xl border-t border-glass-border/30">
+<a class="flex items-center gap-md py-sm text-secondary hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-md py-sm text-error hover:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 z-40 bg-glass-bg/60 backdrop-blur-lg border-b border-glass-border shadow-sm flex justify-between items-center px-xl">
+<div class="flex items-center gap-xl">
+<h2 class="font-headline-md text-headline-md font-extrabold text-primary">Payroll Coordination Center</h2>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-white/50 border-none rounded-xl pl-10 pr-4 py-2 font-body-sm text-body-sm focus:ring-2 focus:ring-primary/20 placeholder:text-outline" placeholder="Search records (KBD: /)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="relative p-2 text-secondary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+</button>
+<button class="p-2 text-secondary hover:bg-primary/5 rounded-full transition-all">
+<span class="material-symbols-outlined">settings_suggest</span>
+</button>
+<div class="h-8 w-[1px] bg-glass-border"></div>
+<div class="flex items-center gap-md">
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-primary">Admin Coordinator</p>
+<p class="font-label-md text-[10px] text-secondary">Aura Luminescence</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 p-[2px]">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="A professional headshot of a senior HR payroll coordinator, wearing a smart-casual navy blue blazer, smiling warmly against a blurred office environment with soft blue and white accent lighting, conveying authority and approachability in an enterprise HR setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgX4Vztfh-ZoNsc5uaqDETx7WyYaeb-56QZqEd6lS_kNGZi6XAz6MB554RQkfjKsLmTTdFvQvOskhso5f05951PbslAjtnXxIpC79dNnvhnv7iqb75o0TfYiQ_fMS3pErUf3ABTC-s1qR5dvWyE92GP6JQ9p2uxPOjZIpasKs3mrVLlRabHgRZwHwcZTLCPbp457GsxJTR4ihvNGg78vjPWkoNr3ZzeYo6QlAXl2wK8LzEQrVlnvkL')"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar-expanded pt-16 min-h-screen">
+<div class="p-xl max-w-[1400px] mx-auto space-y-xl">
+<!-- Hero Stats / Bento Header -->
+<div class="grid grid-cols-12 gap-lg">
+<div class="col-span-12 md:col-span-8 glass-card rounded-2xl p-lg flex items-center justify-between overflow-hidden relative">
+<div class="z-10">
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-xs">Current Cycle</p>
+<h3 class="font-headline-xl text-headline-xl text-primary mb-md">September 2023 Payroll</h3>
+<div class="flex items-center gap-xl">
+<div>
+<span class="font-label-md text-label-md text-secondary">Pending Reviews</span>
+<p class="font-headline-md text-headline-md text-on-surface">24 Employees</p>
+</div>
+<div class="w-px h-10 bg-glass-border"></div>
+<div>
+<span class="font-label-md text-label-md text-secondary">Total Disbursements</span>
+<p class="font-headline-md text-headline-md text-on-surface">$1,420,000</p>
+</div>
+</div>
+</div>
+<div class="z-10 flex flex-col gap-sm">
+<button class="bg-primary text-on-primary px-lg py-md rounded-xl font-headline-md text-headline-md shadow-lg hover:scale-[1.05] active:scale-95 transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined">send</span>
+                            Generate Payslips
+                        </button>
+<button class="bg-white/80 text-primary border border-primary/10 px-lg py-md rounded-xl font-body-md text-body-md hover:bg-white transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined">download</span>
+                            Export Payroll Report
+                        </button>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -right-10 -bottom-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+</div>
+<div class="col-span-12 md:col-span-4 glass-card rounded-2xl p-lg flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest">Processing Status</p>
+<span class="bg-primary-container/20 text-primary px-3 py-1 rounded-full font-label-md text-label-md">68% Complete</span>
+</div>
+<div class="mt-md space-y-xs">
+<div class="flex justify-between text-body-sm font-label-md">
+<span>Data Validation</span>
+<span class="text-primary">Done</span>
+</div>
+<div class="w-full h-2 bg-white/50 rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-1000 w-[68%]" style="box-shadow: 0 0 10px rgba(0, 61, 155, 0.4)"></div>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mt-sm italic">Next step: Final Salary Revision Approval</p>
+</div>
+</div>
+</div>
+<!-- Main Workspace Grid -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Payroll Calendar -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<div class="glass-card rounded-2xl p-lg">
+<div class="flex justify-between items-center mb-lg">
+<h4 class="font-headline-md text-headline-md text-primary">Payroll Calendar</h4>
+<div class="flex gap-xs">
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">chevron_left</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary transition-colors">chevron_right</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-y-4 text-center">
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">M</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">T</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">W</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">T</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">F</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">S</span>
+<span class="font-label-md text-label-md text-secondary opacity-50 uppercase">S</span>
+<span class="py-2 text-body-sm text-outline opacity-40">28</span>
+<span class="py-2 text-body-sm text-outline opacity-40">29</span>
+<span class="py-2 text-body-sm text-outline opacity-40">30</span>
+<span class="py-2 text-body-sm text-outline opacity-40">31</span>
+<span class="py-2 text-body-sm">1</span>
+<span class="py-2 text-body-sm">2</span>
+<span class="py-2 text-body-sm">3</span>
+<span class="py-2 text-body-sm">4</span>
+<span class="py-2 text-body-sm">5</span>
+<span class="py-2 text-body-sm">6</span>
+<span class="py-2 text-body-sm">7</span>
+<span class="py-2 text-body-sm">8</span>
+<span class="py-2 text-body-sm">9</span>
+<span class="py-2 text-body-sm">10</span>
+<span class="py-2 text-body-sm">11</span>
+<span class="py-2 text-body-sm relative font-bold text-primary">12 <span class="absolute top-1 right-2 w-1.5 h-1.5 bg-primary rounded-full"></span></span>
+<span class="py-2 text-body-sm">13</span>
+<span class="py-2 text-body-sm">14</span>
+<span class="py-2 text-body-sm bg-primary/10 rounded-lg text-primary font-bold border border-primary/20">15</span>
+<span class="py-2 text-body-sm">16</span>
+<span class="py-2 text-body-sm">17</span>
+<span class="py-2 text-body-sm">18</span>
+<span class="py-2 text-body-sm">19</span>
+<span class="py-2 text-body-sm">20</span>
+<span class="py-2 text-body-sm">21</span>
+<span class="py-2 text-body-sm">22</span>
+<span class="py-2 text-body-sm">23</span>
+<span class="py-2 text-body-sm">24</span>
+<span class="py-2 text-body-sm border border-tertiary-accent/20 text-tertiary-accent font-bold rounded-lg">25</span>
+<span class="py-2 text-body-sm">26</span>
+<span class="py-2 text-body-sm">27</span>
+<span class="py-2 text-body-sm">28</span>
+<span class="py-2 text-body-sm">29</span>
+<span class="py-2 text-body-sm">30</span>
+</div>
+<div class="mt-lg space-y-md">
+<div class="flex items-center gap-md">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#003d9a]"></div>
+<div class="flex-1">
+<p class="font-label-md text-label-md font-bold">Salary Revision Cut-off</p>
+<p class="font-body-sm text-body-sm text-secondary">Due by Sept 12th, 5:00 PM</p>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-2 h-2 rounded-full bg-tertiary-accent shadow-[0_0_8px_#7b2600]"></div>
+<div class="flex-1">
+<p class="font-label-md text-label-md font-bold">Disbursement Date</p>
+<p class="font-body-sm text-body-sm text-secondary">Estimated: Sept 25th</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-lg space-y-md">
+<h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest">Recent Revision Requests</h4>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm hover:bg-white/30 rounded-xl transition-all group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold">Elena Vance</p>
+<p class="font-body-sm text-body-sm text-secondary">+12% Merit Increase</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">visibility</span>
+</div>
+<div class="flex items-center justify-between p-sm hover:bg-white/30 rounded-xl transition-all group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary-accent/5 flex items-center justify-center text-tertiary-accent">
+<span class="material-symbols-outlined">swap_horiz</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold">Marcus Thorne</p>
+<p class="font-body-sm text-body-sm text-secondary">Role Adjustment</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors cursor-pointer">visibility</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Searchable Records List -->
+<div class="col-span-12 lg:col-span-8">
+<div class="glass-card rounded-2xl overflow-hidden h-full flex flex-col">
+<div class="p-lg border-b border-glass-border bg-white/20 flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md text-primary">Employee Payroll Records</h4>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-1.5 rounded-lg border border-glass-border hover:bg-white/40 transition-all font-label-md text-label-md text-secondary">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                                    Filter
+                                </button>
+<button class="flex items-center gap-xs px-md py-1.5 rounded-lg border border-glass-border hover:bg-white/40 transition-all font-label-md text-label-md text-secondary">
+<span class="material-symbols-outlined text-sm">sort</span>
+                                    Sort
+                                </button>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary/5">
+<th class="px-lg py-md font-label-md text-label-md text-secondary opacity-70 uppercase">Employee</th>
+<th class="px-lg py-md font-label-md text-label-md text-secondary opacity-70 uppercase">Role &amp; Department</th>
+<th class="px-lg py-md font-label-md text-label-md text-secondary opacity-70 uppercase">Gross Salary</th>
+<th class="px-lg py-md font-label-md text-label-md text-secondary opacity-70 uppercase">Status</th>
+<th class="px-lg py-md font-label-md text-label-md text-secondary opacity-70 uppercase text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-glass-border/30">
+<!-- Row 1 -->
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full border border-primary/20" data-alt="A portrait of a male software engineer with glasses, looking professional, in a well-lit modern corporate environment with a soft bokeh background featuring blue office accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4EJLRFhyvI_ZCtRwVp_OJNd_NNTw5UQ62Ytz6zlW79rI4KkQIWyzeOeTycoWKE5RDLRI2T1IKR7ZJ5o0L6WnJg2kPZ6_7iH4v1sSyinX4ja-SsYrA09jveLn06RJfh2nGU2fiSkYqDxqYAW70Ht6IohaiQIrFQLr4AO1APi0asPAthMhqpIHvHdp7G6QU9_9D9zdOhetcdAUMtwYN1nc5hSBZuHXNtWjwHcxUZC-myt8Ccga80L4w')"></div>
+<span class="font-label-md text-label-md font-bold">Julian Rivera</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<p class="font-label-md text-label-md">Lead Developer</p>
+<p class="font-body-sm text-body-sm text-secondary">Engineering</p>
+</td>
+<td class="px-lg py-md font-code-sm text-code-sm text-primary">$8,500.00</td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-secondary-fixed-dim bg-secondary/10 px-2 py-0.5 rounded-full w-fit">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">circle</span>
+<span class="font-label-md text-[10px]">Processing</span>
+</span>
+</td>
+<td class="px-lg py-md text-right space-x-2">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">receipt_long</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full border border-primary/20" data-alt="A portrait of a female creative director with a vibrant style, wearing a cream-colored turtleneck, in a creative office studio with warm natural lighting and soft minimalist decor." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyt60u-WXFwuBE3ooZZL1OhxbWWQeCcdcNtAKOtHGrOssDcEs5JLxbQteFsK_3ubwj7UnLC7W8tUKBGBhDUJ8xoUJe4Y8EjHCulWehLm5jzpfaMjluQ6W1Fp29B-NSTp2ixHxoBkqdaQFVjeyPYnra0t0tRpqN11eFTHaP5M0xjWwN8oNnQ-bB0Y_qWM1_Hh5GVEn5Jp5JkPR4o5QZxVoPjihZIcP3Pvg4LLxL7dH9KJLOhM-qxw1c')"></div>
+<span class="font-label-md text-label-md font-bold">Sophia Chen</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<p class="font-label-md text-label-md">UI/UX Designer</p>
+<p class="font-body-sm text-body-sm text-secondary">Creative</p>
+</td>
+<td class="px-lg py-md font-code-sm text-code-sm text-primary">$7,200.00</td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full w-fit">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-[10px]">Approved</span>
+</span>
+</td>
+<td class="px-lg py-md text-right space-x-2">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">receipt_long</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full border border-primary/20" data-alt="A portrait of a confident male sales executive in a charcoal grey suit, smiling, in a bright contemporary lobby with glass walls and professional blue atmospheric tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGaAJImzuquS892QKoyt2XLx1m3xt6EvOF49Fi1sck9ei2q8ImmmF5rJnxnGufSfTt2pCSFmimB7pPgA2MlnvgaFdD3WdjWastE1KyqufDAT3VdZHC7X9vk_FsFyBOXCE4hxPdGBnFv6R-yMpH3Rcl9SM3fTiDBSPgK4pGRGc0IIq82h-RHHvhYUdOBUZSe-u2zVjO4gUhhMuZK50DASzW_LCjGekfGRzQfQvYA-g2ulaDXnxC6Wso')"></div>
+<span class="font-label-md text-label-md font-bold">Liam Smith</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<p class="font-label-md text-label-md">Account Executive</p>
+<p class="font-body-sm text-body-sm text-secondary">Sales</p>
+</td>
+<td class="px-lg py-md font-code-sm text-code-sm text-primary">$6,800.00</td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-tertiary-accent bg-tertiary-accent/10 px-2 py-0.5 rounded-full w-fit">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-label-md text-[10px]">Revision</span>
+</span>
+</td>
+<td class="px-lg py-md text-right space-x-2">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">receipt_long</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full border border-primary/20" data-alt="A portrait of a female marketing manager with short hair, wearing a white blouse, looking focused and capable, in a clean minimalist office with soft neutral lighting and light blue details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrKbvF-wviOS55J10RVTyVbJ6kSQ_HWABWbsys6Yk36wpiTcpRCPikN7MlOU8-t-XeEr1_guIOi4cf2hYrAIUE3AO2c18EhdhPBiNkfZnuKLMtyOOYpsafLBEKssxTbFSq_0iG7Yg4NS4Rics72L0edtpf6fqYJtqGwZVR0XTt9RF79Up5Pfk-eLstcCfvN7-5opvQTGdnVNFSvKw3MRX9ReUkVgVRl7g4_1kdRVyVCPAwAA-tUgpU')"></div>
+<span class="font-label-md text-label-md font-bold">Olivia Grant</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<p class="font-label-md text-label-md">Content Strategist</p>
+<p class="font-body-sm text-body-sm text-secondary">Marketing</p>
+</td>
+<td class="px-lg py-md font-code-sm text-code-sm text-primary">$5,900.00</td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full w-fit">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-[10px]">Approved</span>
+</span>
+</td>
+<td class="px-lg py-md text-right space-x-2">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">receipt_long</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-white/20 transition-colors">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-8 h-8 rounded-full border border-primary/20" data-alt="A portrait of a male data analyst in a grey polo shirt, looking analytical, against a backdrop of glass partitions and futuristic office lighting in shades of cool blue." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMrk2VKlFzksUXmeU7jbsEQDhvjhU_MsLkQDmK4RUjOMt7AqaHygJ05T5LAY5hcsjpBjdHutvRpVADVX90VcPysii-NI5AiIb-5bKW80ykFQOTE6X02n2hF7u9lfJMJ_P5C0hq4VZoWJdrw3cxl88ZweGXqg7G3hvvBHcl8h62H1MA8k030vtRGRLutay6f8_LMUeBuht6My6WyaYRCaiU8ZqMHYDORn81NlMhKlxT5f7KD_Tj6xDt')"></div>
+<span class="font-label-md text-label-md font-bold">Ethan Hunt</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<p class="font-label-md text-label-md">Data Analyst</p>
+<p class="font-body-sm text-body-sm text-secondary">Operations</p>
+</td>
+<td class="px-lg py-md font-code-sm text-code-sm text-primary">$6,450.00</td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full w-fit">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-[10px]">Approved</span>
+</span>
+</td>
+<td class="px-lg py-md text-right space-x-2">
+<button class="material-symbols-outlined text-primary hover:scale-110 transition-transform">receipt_long</button>
+<button class="material-symbols-outlined text-secondary hover:text-primary">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md border-t border-glass-border bg-white/20 flex justify-between items-center px-lg">
+<span class="font-label-md text-label-md text-secondary">Showing 5 of 244 employees</span>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-glass-border hover:bg-white transition-all text-secondary disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white shadow-sm font-label-md">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-glass-border hover:bg-white transition-all text-secondary font-label-md">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-glass-border hover:bg-white transition-all text-secondary font-label-md">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-glass-border hover:bg-white transition-all text-secondary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Details -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="glass-card rounded-2xl p-lg flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 32;">history</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">Audit Log</p>
+<p class="font-body-sm text-body-sm text-secondary">Last modified 14 mins ago</p>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-lg flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 32;">lock</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">Secure Access</p>
+<p class="font-body-sm text-body-sm text-secondary">End-to-end encrypted session</p>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-lg flex items-center gap-lg">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 32;">sync</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold">Auto-Sync</p>
+<p class="font-body-sm text-body-sm text-secondary">Synced with HR Core 5m ago</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - For Global Quick Actions -->
+<button class="fixed bottom-xl right-xl w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span class="absolute right-16 bg-inverse-surface text-inverse-on-surface px-md py-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-label-md pointer-events-none">New Revision Request</span>
+</button>
+<script>
+        // Micro-interaction for keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/') {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
+        });
+
+        // Simple interactive feedback for action buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>
