@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leave Management | Aura Luminescence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#dae2ff",
+                    "on-secondary-fixed": "#0c1c30",
+                    "on-primary-container": "#c4d2ff",
+                    "error-red": "#ba1a1a",
+                    "tertiary-accent": "#7b2600",
+                    "on-secondary-fixed-variant": "#39485e",
+                    "on-surface-variant": "#434654",
+                    "on-primary-fixed": "#001848",
+                    "secondary": "#505f76",
+                    "primary": "#003d9a",
+                    "surface-container-high": "#e1e7ff",
+                    "surface": "#faf8ff",
+                    "tertiary": "#7b2600",
+                    "background": "#faf8ff",
+                    "on-secondary-container": "#56657c",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-bright": "#faf8ff",
+                    "secondary-fixed-dim": "#b8c7e2",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#a33500",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "on-tertiary-fixed": "#380d00",
+                    "surface-container": "#eaedff",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#dae2fc",
+                    "surface-dim": "#d2d9f4",
+                    "outline-variant": "#c3c6d6",
+                    "surface-container-highest": "#dae2fc",
+                    "inverse-surface": "#283044",
+                    "surface-tint": "#2f59b7",
+                    "on-tertiary-container": "#ffc6b2",
+                    "glass-bg": "rgba(255, 255, 255, 0.4)",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "surface-container-low": "#f2f3ff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131b2e",
+                    "secondary-container": "#d4e3ff",
+                    "on-surface": "#131b2e",
+                    "inverse-primary": "#b2c5ff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#eef0ff",
+                    "glass-border": "rgba(255, 255, 255, 0.5)",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d4e3ff",
+                    "outline": "#737685",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#2a56b4",
+                    "on-primary-fixed-variant": "#08409e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-collapsed": "64px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "sidebar-expanded": "260px",
+                    "md": "16px",
+                    "2xl": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "code-sm": ["JetBrains Mono"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: radial-gradient(circle at top right, #e1e7ff, transparent),
+                        radial-gradient(circle at bottom left, #f2f3ff, transparent);
+            background-attachment: fixed;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 12px 24px rgba(0, 61, 155, 0.08);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(0, 61, 155, 0.15);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dae2fc;
+            border-radius: 10px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .day-cell {
+            aspect-ratio: 1/1;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface bg-surface overflow-x-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-expanded bg-surface dark:bg-on-background/10 backdrop-blur-xl border-r border-white/10 shadow-xl z-50 flex flex-col py-lg gap-sm">
+<div class="px-lg mb-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Aura Luminescence</h1>
+<p class="text-label-md font-label-md text-on-surface-variant/70 uppercase tracking-widest">Enterprise HRMS</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="oho.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="employeedetails.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md">Employee Profile</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="projects.html">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-body-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="attendance.html">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-body-md">Attendance</span>
+</a>
+<!-- Active Tab: Leave Management -->
+<a class="flex items-center gap-3 px-lg py-2 text-primary border-l-4 border-primary bg-primary/5 active-glow" href="leavemanage.html">
+<span class="material-symbols-outlined">event_busy</span>
+<span class="font-body-md font-semibold">Leave Management</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="payroll.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Payroll</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="oho.html">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-body-md">Performance</span>
+</a>
+<a class="flex items-center gap-3 px-lg py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all duration-200" href="oho.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md">Assets</span>
+</a>
+</nav>
+<div class="px-lg mt-auto pt-lg border-t border-white/10 space-y-1">
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="oho.html">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-body-md">Notifications</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="index.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-error-red hover:bg-error-red/5 transition-colors" href="index.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-260px)] h-16 bg-glass-bg backdrop-blur-2xl border-b border-glass-border shadow-sm z-40 flex justify-between items-center px-gutter">
+<div class="flex items-center gap-xl w-1/2">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">search</span>
+<input class="w-full bg-white/50 border-none rounded-xl pl-10 pr-4 py-2 text-body-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search leave records, policies..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 opacity-40">
+<span class="px-1.5 py-0.5 rounded border border-outline-variant text-[10px] font-code-sm">⌘</span>
+<span class="px-1.5 py-0.5 rounded border border-outline-variant text-[10px] font-code-sm">K</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/50 transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant">mail</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">help</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md font-bold text-on-surface leading-tight">Marcus Thorne</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Senior Product Design</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 p-0.5 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional headshot of a creative male executive with a focused expression, wearing modern business attire. The background is a blurred, high-end office with soft blue and silver architectural details. The lighting is crisp and flattering, emphasizing a premium enterprise atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI4QacaMv-xVEF8U-O-zbavkyA0eLfd3no1udUUcNxV7t_qmkjHk-8WjRxXxsElQwKmD12s5VAkYYTMuPWHl0GHW0dMWeTVUkR4CE2YUIt_-U9dcCb2hyPETHVHizYHRcqemJJnNGPJMhfwWUsc-EvHNxHQQy2EF_M-MSnuI-Hns2M0BjGZfhzagU5ivau7Brv5bFHSuPRDoUu5eujSzt0oYwQ46sEdRkcFwwfYnAuKI7gbjSQpgUD"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar-expanded pt-16 min-h-screen px-gutter pb-2xl max-w-[1400px]">
+<!-- Header & Primary Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-lg pt-xl mb-xl">
+<div>
+<nav class="flex gap-2 text-label-md text-on-surface-variant/60 mb-1">
+<span>Main Dashboard</span>
+<span>/</span>
+<span class="text-primary font-semibold">Leave Management</span>
+</nav>
+<h2 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Time Off &amp; Absence</h2>
+</div>
+<button id="apply-new-leave-button" class="flex items-center gap-2 bg-primary text-white px-lg py-3 rounded-xl shadow-lg hover:shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all font-label-md">
+<span class="material-symbols-outlined">add_circle</span>
+<span>APPLY NEW LEAVE</span>
+</button>
+</div>
+<div class="grid grid-cols-12 gap-lg">
+<!-- Left Column: Balances & Team Visualizer -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<!-- Leave Balance Cards -->
+<div class="glass-card p-lg rounded-2xl">
+<h3 class="font-headline-md text-headline-md mb-md text-on-surface">Available Balances</h3>
+<div class="space-y-sm">
+<!-- Card: Annual -->
+<div class="flex items-center justify-between p-md bg-white/40 rounded-xl border border-white/50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">beach_access</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Annual Leave</p>
+<p class="text-xs text-on-surface-variant">Accrued yearly</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-primary">18</span>
+<span class="text-xs text-on-surface-variant ml-1">Days</span>
+</div>
+</div>
+<!-- Card: Sick -->
+<div class="flex items-center justify-between p-md bg-white/40 rounded-xl border border-white/50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Sick Leave</p>
+<p class="text-xs text-on-surface-variant">Wellness reserve</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-tertiary">07</span>
+<span class="text-xs text-on-surface-variant ml-1">Days</span>
+</div>
+</div>
+<!-- Card: Casual -->
+<div class="flex items-center justify-between p-md bg-white/40 rounded-xl border border-white/50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">event_note</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Casual Leave</p>
+<p class="text-xs text-on-surface-variant">Short-term needs</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-secondary">03</span>
+<span class="text-xs text-on-surface-variant ml-1">Days</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Team Availability (Three.js Mockup Replacement) -->
+<div class="glass-card p-lg rounded-2xl relative overflow-hidden h-72">
+<div class="relative z-10 flex flex-col h-full">
+<h3 class="font-headline-md text-headline-md text-on-surface">Team Hierarchy</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Live availability visualize</p>
+<div class="mt-auto">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs font-semibold">Design Studio (92% Available)</span>
+</div>
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Close up face of a diverse team member, minimalist lighting, professional portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDXvY3ZA_vXz0rIYXULO3odfFdXN4CA-xQnfVFLa3YTt9AT9b0Y3y_yPl6L1jQxdFowTP34pk-LIOvTMP7MHPTysU5x3a5quK7XQJFIIiJOcRTOtVwoUPs7sSmHs8bmiGH9oZrTZ1Uvug1GbienG28OS6I3Dz95nGSbgddrG7agBEnUdeZDlhK2zhZ1YsVxOnjx-gRzFcWG6U8zl-uRciIv5Oueld04UBFAIdlsLaKn1C69LYo50Q3"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Close up face of a diverse team member, minimalist lighting, professional portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gsZ6t4007YLY-nvW3W8ydoEjCyBB4pcBTNJoWAkci-RvvWkMfw_vc_nSTk-ABTGjvZDqNV-KHXxrNIABBJHe-4bV69YzXFKlfvbDj1CmslnA01JFy9ekLCVDyZkvoWOelm7o9cH7vyHdTGmQOieXuhbNWqBAg_r2ksDhSdT5F_KJ0zbn3TU3-yhKqeSAunUdDOg0RBgWne0VSp_XfU6uZXoBVkg8RkgBxIhWKmiYaQmJO2OrKtDC"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Close up face of a diverse team member, minimalist lighting, professional portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCklE0ZG66zKYz_YLyUSLVl7ukMpJAmxCVcKWsxLBuFB97G3pOsDa0pzRemf8FBsDebx6J06t2Zg9yYv92fQTXLLjOG29B3dE3_0RkO_2p4TL5OD7Tlv0LYDODXj30gaTegu8PhWV6mTVWYTfYTPLJcaHR_WJSOHT9MhkslHc9u4Pj-PK7K7xJjoDjFAA7HuUIwHhub0teiqBqbQsBN4VbYL1XqudIbZ0iozMwjG221fpqelXgQcx8m"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border-2 border-white flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+</div>
+</div>
+<!-- Integration of Three.js Hierarchy Visual -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+
+</div>
+</div>
+</div>
+<!-- Right Column: Calendar & History -->
+<div class="col-span-12 lg:col-span-8 space-y-lg">
+<!-- Leave Application Form -->
+<div id="leave-form-card" class="glass-card p-lg rounded-2xl">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Leave Application</h3>
+<p class="text-body-sm text-on-surface-variant max-w-2xl">Submit a leave request directly from the portal and track it in the live leave management table below.</p>
+</div>
+<span class="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em]">Instant Request Entry</span>
+</div>
+<form id="leave-request-form" class="space-y-6" autocomplete="off">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div>
+<label for="employeeName" class="block text-sm font-semibold text-on-surface mb-2">Employee Name</label>
+<input id="employeeName" name="employeeName" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Enter employee name" />
+<p id="error-employeeName" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="employeeId" class="block text-sm font-semibold text-on-surface mb-2">Employee ID</label>
+<input id="employeeId" name="employeeId" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="EMP-1234" />
+<p id="error-employeeId" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="department" class="block text-sm font-semibold text-on-surface mb-2">Department</label>
+<input id="department" name="department" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="HR, Design, Finance" />
+<p id="error-department" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="designation" class="block text-sm font-semibold text-on-surface mb-2">Designation</label>
+<input id="designation" name="designation" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Senior Designer" />
+<p id="error-designation" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="leaveType" class="block text-sm font-semibold text-on-surface mb-2">Leave Type</label>
+<select id="leaveType" name="leaveType" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none">
+<option value="">Choose leave type</option>
+<option>Casual Leave</option>
+<option>Sick Leave</option>
+<option>Earned Leave</option>
+<option>Maternity Leave</option>
+<option>Paternity Leave</option>
+<option>Work From Home</option>
+<option>Unpaid Leave</option>
+</select>
+<p id="error-leaveType" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div class="grid grid-cols-2 gap-lg">
+<div>
+<label for="startDate" class="block text-sm font-semibold text-on-surface mb-2">Start Date</label>
+<input id="startDate" name="startDate" type="date" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" />
+<p id="error-startDate" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="endDate" class="block text-sm font-semibold text-on-surface mb-2">End Date</label>
+<input id="endDate" name="endDate" type="date" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" />
+<p id="error-endDate" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+</div>
+<div>
+<label for="totalDays" class="block text-sm font-semibold text-on-surface mb-2">Total Days</label>
+<input id="totalDays" name="totalDays" type="text" readonly class="w-full rounded-2xl border border-outline-variant bg-surface-container-low px-4 py-3 text-body-md text-on-surface/80 outline-none" placeholder="Calculated automatically" />
+<p id="error-totalDays" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="halfDay" class="block text-sm font-semibold text-on-surface mb-2">Half Day</label>
+<select id="halfDay" name="halfDay" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none">
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+</div>
+<div class="flex items-center gap-3 rounded-2xl border border-outline-variant bg-white/90 px-4 py-4">
+<input id="emergencyLeave" name="emergencyLeave" type="checkbox" class="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary" />
+<label for="emergencyLeave" class="text-body-md text-on-surface">Emergency Leave</label>
+</div>
+<div>
+<label for="priority" class="block text-sm font-semibold text-on-surface mb-2">Priority</label>
+<select id="priority" name="priority" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none">
+<option value="">Choose priority</option>
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+<p id="error-priority" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="contactDuringLeave" class="block text-sm font-semibold text-on-surface mb-2">Contact During Leave</label>
+<input id="contactDuringLeave" name="contactDuringLeave" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Email or phone" />
+<p id="error-contactDuringLeave" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div>
+<label for="reportingManager" class="block text-sm font-semibold text-on-surface mb-2">Reporting Manager</label>
+<input id="reportingManager" name="reportingManager" type="text" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Enter manager name" />
+<p id="error-reportingManager" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div class="md:col-span-2">
+<label for="reason" class="block text-sm font-semibold text-on-surface mb-2">Reason for Leave</label>
+<textarea id="reason" name="reason" rows="4" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" placeholder="Describe the reason for leave"></textarea>
+<p id="error-reason" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+<div class="md:col-span-2">
+<label for="supportingDocument" class="block text-sm font-semibold text-on-surface mb-2">Attach Supporting Document</label>
+<input id="supportingDocument" name="supportingDocument" type="file" class="w-full rounded-2xl border border-outline-variant bg-white/90 px-4 py-3 text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 outline-none" />
+<p id="error-supportingDocument" class="field-error hidden text-[11px] text-error mt-2"></p>
+</div>
+</div>
+<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+<button id="submitLeaveRequest" type="submit" class="inline-flex items-center justify-center rounded-2xl bg-primary px-6 py-3 text-white font-semibold shadow-lg hover:bg-primary-container transition-all">Submit Leave Request</button>
+<button id="resetLeaveForm" type="button" class="inline-flex items-center justify-center rounded-2xl border border-outline-variant bg-white/90 px-6 py-3 text-on-surface font-semibold hover:bg-surface-container transition-all">Reset Form</button>
+</div>
+</form>
+</div>
+<!-- Calendar Module -->
+<div class="glass-card rounded-2xl overflow-hidden">
+<div class="p-lg border-b border-white/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div class="flex items-center gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">October 2023</h3>
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="px-3 py-1 text-xs font-bold bg-white rounded shadow-sm text-primary">Monthly</button>
+<button class="px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-on-surface">Yearly</button>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/50 border border-white/50 transition-colors">
+<span class="material-symbols-outlined text-body-md">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/50 border border-white/50 transition-colors">
+<span class="material-symbols-outlined text-body-md">chevron_right</span>
+</button>
+<button class="ml-2 px-4 py-1.5 text-xs font-bold border border-primary/20 text-primary rounded-lg hover:bg-primary/5 transition-colors">Today</button>
+</div>
+</div>
+<!-- Calendar Body -->
+<div class="p-lg bg-white/20">
+<div class="calendar-grid border-l border-t border-white/40">
+<!-- Weekdays Header -->
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Sun</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Mon</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Tue</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Wed</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Thu</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Fri</div>
+<div class="text-center py-3 text-label-md font-bold text-on-surface-variant border-r border-b border-white/40 bg-white/40">Sat</div>
+<!-- Mock Calendar Days -->
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">24</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">25</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">26</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">27</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">28</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">29</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs text-on-surface-variant/40">30</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold">1</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold">2</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold">3</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold bg-primary/5">
+                                4
+                                <div class="mt-1 flex flex-col gap-1">
+<span class="block h-1 w-full bg-primary rounded-full"></span>
+<span class="text-[9px] text-primary truncate">Annual Leave</span>
+</div>
+</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold bg-primary/5">
+                                5
+                                <div class="mt-1 flex flex-col gap-1">
+<span class="block h-1 w-full bg-primary rounded-full"></span>
+</div>
+</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold">6</div>
+<div class="day-cell p-2 border-r border-b border-white/40 text-xs font-bold">7</div>
+<!-- Continuing days for visual density -->
+<script>
+                                const grid = document.querySelector('.calendar-grid');
+                                for(let i=8; i<=31; i++) {
+                                    const cell = document.createElement('div');
+                                    cell.className = "day-cell p-2 border-r border-b border-white/40 text-xs font-bold";
+                                    cell.textContent = i;
+                                    if(i === 12) {
+                                        cell.classList.add('bg-tertiary/5');
+                                        cell.innerHTML += `
+                                            <div class="mt-1">
+                                                <span class="block h-1 w-1/2 bg-tertiary rounded-full"></span>
+                                                <span class="text-[9px] text-tertiary">Sick</span>
+                                            </div>
+                                        `;
+                                    }
+                                    if(i === 24) {
+                                        cell.classList.add('bg-secondary/5');
+                                        cell.innerHTML += `
+                                            <div class="mt-1">
+                                                <span class="block h-1 w-3/4 bg-secondary rounded-full"></span>
+                                                <span class="text-[9px] text-secondary">Meeting-Free</span>
+                                            </div>
+                                        `;
+                                    }
+                                    grid.appendChild(cell);
+                                }
+                            </script>
+</div>
+</div>
+</div>
+<!-- Leave History Table -->
+<div class="glass-card rounded-2xl overflow-hidden">
+<div class="p-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Leave History</h3>
+<p class="text-body-sm text-on-surface-variant">All submitted leave requests are visible here with live actions for review, edit, and removal.</p>
+</div>
+<div class="flex gap-2 items-center">
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">All Records</span>
+<button class="material-symbols-outlined text-on-surface-variant">filter_list</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full min-w-[1200px] text-left border-collapse">
+<thead>
+<tr class="bg-white/50 border-y border-white/50">
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Request ID</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Employee</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Employee ID</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Department</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Leave Type</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Start</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">End</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Days</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Status</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Manager</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Submitted</th>
+<th class="px-lg py-4 text-label-md font-bold text-on-surface-variant">Actions</th>
+</tr>
+</thead>
+<tbody id="leave-request-table-body" class="divide-y divide-white/20"></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Elements Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hover micro-interactions for calendar cells
+            const cells = document.querySelectorAll('.day-cell');
+            cells.forEach(cell => {
+                cell.addEventListener('mouseenter', () => {
+                    if(!cell.classList.contains('text-on-surface-variant/40')) {
+                        cell.classList.add('bg-white/50', 'scale-105', 'shadow-sm', 'z-10', 'rounded-sm');
+                    }
+                });
+                cell.addEventListener('mouseleave', () => {
+                    cell.classList.remove('bg-white/50', 'scale-105', 'shadow-sm', 'z-10', 'rounded-sm');
+                });
+            });
+
+            // Smooth entrance animations
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            const form = document.getElementById('leave-request-form');
+            const tableBody = document.getElementById('leave-request-table-body');
+            const submitButton = document.getElementById('submitLeaveRequest');
+            const resetButton = document.getElementById('resetLeaveForm');
+            const applyNewLeaveButton = document.getElementById('apply-new-leave-button');
+            const leaveFormCard = document.getElementById('leave-form-card');
+            const totalDaysInput = document.getElementById('totalDays');
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            const halfDayInput = document.getElementById('halfDay');
+            const errorFields = {
+                employeeName: document.getElementById('error-employeeName'),
+                employeeId: document.getElementById('error-employeeId'),
+                department: document.getElementById('error-department'),
+                designation: document.getElementById('error-designation'),
+                leaveType: document.getElementById('error-leaveType'),
+                startDate: document.getElementById('error-startDate'),
+                endDate: document.getElementById('error-endDate'),
+                totalDays: document.getElementById('error-totalDays'),
+                priority: document.getElementById('error-priority'),
+                contactDuringLeave: document.getElementById('error-contactDuringLeave'),
+                reportingManager: document.getElementById('error-reportingManager'),
+                reason: document.getElementById('error-reason'),
+                supportingDocument: document.getElementById('error-supportingDocument')
+            };
+            let editingRequestId = null;
+
+            function createNotification(message, type = 'success') {
+                const notification = document.createElement('div');
+                notification.className = `fixed bottom-6 right-6 z-50 max-w-sm rounded-2xl px-5 py-4 text-sm font-semibold shadow-2xl transition-all duration-300 ${type === 'success' ? 'bg-primary text-white' : 'bg-error text-white'}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                }, 2500);
+                setTimeout(() => {
+                    notification.remove();
+                }, 2800);
+            }
+
+            function formatDisplayDate(value) {
+                if (!value) return '';
+                return new Date(value).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric'
+                });
+            }
+
+            function calculateDays() {
+                const start = new Date(startDateInput.value);
+                const end = new Date(endDateInput.value);
+                if (!startDateInput.value || !endDateInput.value || end < start) {
+                    totalDaysInput.value = '';
+                    return '';
+                }
+                const msPerDay = 1000 * 60 * 60 * 24;
+                const rawDays = Math.round((end - start) / msPerDay) + 1;
+                const isHalfDay = halfDayInput.value === 'yes';
+                const calculated = rawDays > 0 ? rawDays - (isHalfDay ? 0.5 : 0) : 0.5;
+                const display = calculated === 1 ? '1.0' : calculated.toFixed(1);
+                totalDaysInput.value = display;
+                return display;
+            }
+
+            function clearErrors() {
+                Object.values(errorFields).forEach((field) => {
+                    field.textContent = '';
+                    field.classList.add('hidden');
+                });
+            }
+
+            function showFieldError(fieldId, message) {
+                const field = errorFields[fieldId];
+                if (field) {
+                    field.textContent = message;
+                    field.classList.remove('hidden');
+                }
+            }
+
+            function validateForm() {
+                clearErrors();
+                let valid = true;
+                const values = new FormData(form);
+
+                if (!values.get('employeeName').trim()) {
+                    valid = false;
+                    showFieldError('employeeName', 'Employee name is required');
+                }
+                if (!values.get('employeeId').trim()) {
+                    valid = false;
+                    showFieldError('employeeId', 'Employee ID is required');
+                }
+                if (!values.get('department').trim()) {
+                    valid = false;
+                    showFieldError('department', 'Department is required');
+                }
+                if (!values.get('designation').trim()) {
+                    valid = false;
+                    showFieldError('designation', 'Designation is required');
+                }
+                if (!values.get('leaveType')) {
+                    valid = false;
+                    showFieldError('leaveType', 'Leave type must be selected');
+                }
+                if (!values.get('startDate')) {
+                    valid = false;
+                    showFieldError('startDate', 'Start date is required');
+                }
+                if (!values.get('endDate')) {
+                    valid = false;
+                    showFieldError('endDate', 'End date is required');
+                }
+                if (startDateInput.value && endDateInput.value) {
+                    const start = new Date(startDateInput.value);
+                    const end = new Date(endDateInput.value);
+                    if (end < start) {
+                        valid = false;
+                        showFieldError('endDate', 'End date cannot be before start date');
+                    }
+                }
+                if (!totalDaysInput.value) {
+                    valid = false;
+                    showFieldError('totalDays', 'Total days must be calculated');
+                }
+                if (!values.get('priority')) {
+                    valid = false;
+                    showFieldError('priority', 'Priority is required');
+                }
+                if (!values.get('contactDuringLeave').trim()) {
+                    valid = false;
+                    showFieldError('contactDuringLeave', 'Contact detail is required');
+                }
+                if (!values.get('reportingManager').trim()) {
+                    valid = false;
+                    showFieldError('reportingManager', 'Reporting manager is required');
+                }
+                if (!values.get('reason').trim()) {
+                    valid = false;
+                    showFieldError('reason', 'Leave reason is required');
+                }
+
+                return valid;
+            }
+
+            function generateRequestId() {
+                return `LR-${Date.now().toString().slice(-6)}-${Math.floor(Math.random() * 900 + 100)}`;
+            }
+
+            function createStatusBadge(status) {
+                const color = status === 'Pending' ? 'bg-amber-100 text-amber-700' : status === 'Approved' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                return `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full ${color} text-[10px] font-bold uppercase"><span class="w-1.5 h-1.5 rounded-full ${status === 'Pending' ? 'bg-amber-500' : status === 'Approved' ? 'bg-green-500' : 'bg-red-500'}"></span>${status}</span>`;
+            }
+
+            function getFormData() {
+                const data = new FormData(form);
+                return {
+                    id: editingRequestId || generateRequestId(),
+                    employeeName: data.get('employeeName').trim(),
+                    employeeId: data.get('employeeId').trim(),
+                    department: data.get('department').trim(),
+                    designation: data.get('designation').trim(),
+                    leaveType: data.get('leaveType'),
+                    startDate: data.get('startDate'),
+                    endDate: data.get('endDate'),
+                    totalDays: totalDaysInput.value || calculateDays(),
+                    halfDay: data.get('halfDay'),
+                    emergencyLeave: data.get('emergencyLeave') === 'on',
+                    reason: data.get('reason').trim(),
+                    supportingDocument: data.get('supportingDocument')?.name || 'None',
+                    contactDuringLeave: data.get('contactDuringLeave').trim(),
+                    reportingManager: data.get('reportingManager').trim(),
+                    priority: data.get('priority'),
+                    status: 'Pending',
+                    submittedAt: formatDisplayDate(new Date().toISOString())
+                };
+            }
+
+            function buildRow(data) {
+                const row = document.createElement('tr');
+                row.dataset.requestId = data.id;
+                row.className = 'hover:bg-white/30 transition-colors group';
+                row.innerHTML = `
+                    <td class="px-lg py-4 text-body-sm font-semibold text-on-surface">${data.id}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface">${data.employeeName}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${data.employeeId}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${data.department}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${data.leaveType}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${formatDisplayDate(data.startDate)}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${formatDisplayDate(data.endDate)}</td>
+                    <td class="px-lg py-4 text-body-sm font-bold text-on-surface">${data.totalDays}</td>
+                    <td class="px-lg py-4">${createStatusBadge(data.status)}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${data.reportingManager}</td>
+                    <td class="px-lg py-4 text-body-sm text-on-surface-variant">${data.submittedAt}</td>
+                    <td class="px-lg py-4 flex flex-wrap gap-2 items-center">
+                        <button type="button" class="action-view p-2 rounded-xl bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors" title="View request">View</button>
+                        <button type="button" class="action-edit p-2 rounded-xl bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors" title="Edit request">Edit</button>
+                        <button type="button" class="action-delete p-2 rounded-xl bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors" title="Delete request">Delete</button>
+                    </td>
+                `;
+                row.leaveData = data;
+                return row;
+            }
+
+            function addLeaveToTable(data) {
+                const row = buildRow(data);
+                tableBody.prepend(row);
+            }
+
+            function updateTableRow(data) {
+                const row = tableBody.querySelector(`tr[data-request-id="${data.id}"]`);
+                if (!row) return;
+                row.replaceWith(buildRow(data));
+            }
+
+            function resetFormState() {
+                form.reset();
+                totalDaysInput.value = '';
+                editingRequestId = null;
+                submitButton.textContent = 'Submit Leave Request';
+                clearErrors();
+            }
+
+            function showDetailOverlay(data) {
+                const overlay = document.createElement('div');
+                overlay.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4';
+                overlay.innerHTML = `
+                    <div class="w-full max-w-2xl rounded-3xl bg-white p-6 shadow-2xl">
+                        <div class="flex items-center justify-between gap-4 mb-6">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.24em] text-on-surface-variant">Leave Request Details</p>
+                                <h3 class="font-headline-md text-headline-md text-on-surface">${data.employeeName} • ${data.leaveType}</h3>
+                                <p class="text-body-sm text-on-surface-variant">Request ID ${data.id} • Submitted ${data.submittedAt}</p>
+                            </div>
+                            <button type="button" class="close-overlay rounded-full border border-outline-variant px-3 py-2 text-on-surface transition-colors hover:bg-surface-container">Close</button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Employee ID</p><p class="font-semibold text-on-surface">${data.employeeId}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Department</p><p class="font-semibold text-on-surface">${data.department}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Manager</p><p class="font-semibold text-on-surface">${data.reportingManager}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Priority</p><p class="font-semibold text-on-surface">${data.priority}</p></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Dates</p><p class="font-semibold text-on-surface">${formatDisplayDate(data.startDate)} - ${formatDisplayDate(data.endDate)}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Total Days</p><p class="font-semibold text-on-surface">${data.totalDays}</p></div>
+                        </div>
+                        <div class="space-y-3 mb-4">
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Reason</p><p class="text-body-sm text-on-surface">${data.reason}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Supporting Document</p><p class="text-body-sm text-on-surface">${data.supportingDocument}</p></div>
+                            <div><p class="text-[11px] uppercase tracking-[0.24em] text-on-surface-variant mb-2">Emergency Leave</p><p class="text-body-sm text-on-surface">${data.emergencyLeave ? 'Yes' : 'No'}</p></div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="button" class="close-overlay rounded-2xl bg-primary px-5 py-3 text-white font-semibold hover:bg-primary-container transition-all">Close</button>
+                        </div>
+                    </div>
+                `;
+                overlay.querySelectorAll('.close-overlay').forEach(button => {
+                    button.addEventListener('click', () => overlay.remove());
+                });
+                document.body.appendChild(overlay);
+            }
+
+            function handleActionClick(event) {
+                const button = event.target.closest('button');
+                if (!button) return;
+                const row = button.closest('tr');
+                if (!row) return;
+                const rowData = row.leaveData;
+                if (!rowData) return;
+
+                if (button.classList.contains('action-delete')) {
+                    row.remove();
+                    if (editingRequestId === rowData.id) {
+                        resetFormState();
+                    }
+                    createNotification('Leave request deleted successfully', 'success');
+                }
+                if (button.classList.contains('action-edit')) {
+                    editingRequestId = rowData.id;
+                    document.getElementById('employeeName').value = rowData.employeeName;
+                    document.getElementById('employeeId').value = rowData.employeeId;
+                    document.getElementById('department').value = rowData.department;
+                    document.getElementById('designation').value = rowData.designation;
+                    document.getElementById('leaveType').value = rowData.leaveType;
+                    document.getElementById('startDate').value = rowData.startDate;
+                    document.getElementById('endDate').value = rowData.endDate;
+                    document.getElementById('halfDay').value = rowData.halfDay;
+                    document.getElementById('priority').value = rowData.priority;
+                    document.getElementById('contactDuringLeave').value = rowData.contactDuringLeave;
+                    document.getElementById('reportingManager').value = rowData.reportingManager;
+                    document.getElementById('reason').value = rowData.reason;
+                    totalDaysInput.value = rowData.totalDays;
+                    submitButton.textContent = 'Update Request';
+                    leaveFormCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                if (button.classList.contains('action-view')) {
+                    showDetailOverlay(rowData);
+                }
+            }
+
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                calculateDays();
+                if (!validateForm()) {
+                    createNotification('Please fix the highlighted fields.', 'error');
+                    return;
+                }
+                const requestData = getFormData();
+                if (editingRequestId) {
+                    updateTableRow(requestData);
+                    createNotification('Leave request updated successfully', 'success');
+                } else {
+                    addLeaveToTable(requestData);
+                    createNotification('Leave request submitted successfully', 'success');
+                }
+                resetFormState();
+            }
+
+            function handleFormReset() {
+                resetFormState();
+            }
+
+            function bindEvents() {
+                startDateInput.addEventListener('change', calculateDays);
+                endDateInput.addEventListener('change', calculateDays);
+                halfDayInput.addEventListener('change', calculateDays);
+                form.addEventListener('submit', handleFormSubmit);
+                resetButton.addEventListener('click', handleFormReset);
+                applyNewLeaveButton.addEventListener('click', () => {
+                    leaveFormCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+                tableBody.addEventListener('click', handleActionClick);
+            }
+
+            bindEvents();
+        });
+    </script>
+</body></html>
