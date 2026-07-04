@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MAD Guyz HRMS</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Remix Icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="styles.css">
+
+</head>
+
+<body>
+
+<div class="background-wrapper">
+
+    <div class="gradient-layer"></div>
+
+    <div class="noise-layer"></div>
+
+    <div class="particles-layer"></div>
+
+</div>
+
+<div class="page">
+
+    <!-- LEFT PANEL -->
+
+    <section class="left-panel">
+
+<div class="brand">
+
+    <img src="assets/logo.png"
+         alt="MAD Guyz Logo"
+         class="brand-logo">
+
+</div>
+
+        <div class="hero-content">
+
+            <span class="badge">
+
+                Enterprise Workforce Platform
+
+            </span>
+
+            <p>
+
+                Secure enterprise portal for employees,
+                HR administrators and management teams.
+
+            </p>
+
+        </div>
+
+        <div class="feature-list">
+
+            <div class="feature">
+
+                <i class="ri-shield-check-line"></i>
+
+                <span>Enterprise Security</span>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="ri-team-line"></i>
+
+                <span>Employee Management</span>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="ri-calendar-check-line"></i>
+
+                <span>Attendance & Leave</span>
+
+            </div>
+
+            <div class="feature">
+
+                <i class="ri-bar-chart-box-line"></i>
+
+                <span>Payroll & Analytics</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RIGHT PANEL -->
+
+    <section class="right-panel">
+
+        <div class="login-card">
+
+            <div class="login-header">
+
+                <h2>
+
+                    Welcome Back
+
+                </h2>
+
+                <p>
+
+                    Sign in to continue
+
+                </p>
+
+            </div>
+
+            <!-- Identity -->
+
+            <div class="identity-wrapper">
+
+                <button class="identity-card active"
+
+                        id="employeeBtn">
+
+                    <i class="ri-user-3-line"></i>
+
+                    <div>
+
+                        <h4>Employee</h4>
+
+                        <span>Workspace Access</span>
+
+                    </div>
+
+                </button>
+
+                <button class="identity-card"
+
+                        id="hrBtn">
+
+                    <i class="ri-admin-line"></i>
+
+                    <div>
+
+                        <h4>HR Admin</h4>
+
+                        <span>Administration Portal</span>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+            <!-- FORM -->
+
+            <form id="loginForm">
+
+                <div class="input-group">
+
+                    <label>Email Address</label>
+
+                    <div class="input-box">
+
+                        <i class="ri-mail-line"></i>
+
+                        <input
+                            type="email"
+                            placeholder="name@company.com">
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+
+                        <i class="ri-lock-line"></i>
+
+                        <input
+                            type="password"
+                            id="password">
+
+                        <button
+                            type="button"
+                            id="togglePassword">
+
+                            <i class="ri-eye-line"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="options">
+
+                    <label>
+
+                        <input type="checkbox">
+
+                        Remember Me
+
+                    </label>
+
+                    <a href="index.html">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Sign In
+
+                </button>
+
+            </form>
+
+            <div class="footer">
+
+                <p>
+
+                    Protected by enterprise-grade authentication.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+
+</html>
