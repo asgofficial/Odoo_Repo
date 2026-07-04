@@ -1,507 +1,647 @@
-<!DOCTYPE html>
+<html class="light" lang="en"><head></head><body class="bg-background font-body-md text-on-surface selection:bg-primary-container selection:text-white overflow-x-hidden">```html
 
-<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MAD Guyz Luminescence | Command Center</title>
+<title>Aura HRMS - Personal Workspace</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "primary-fixed": "#dae2ff",
-                    "on-secondary-fixed": "#0c1c30",
-                    "on-primary-container": "#c4d2ff",
-                    "error-red": "#ba1a1a",
-                    "tertiary-accent": "#7b2600",
-                    "on-secondary-fixed-variant": "#39485e",
-                    "on-surface-variant": "#434654",
-                    "on-primary-fixed": "#001848",
-                    "secondary": "#505f76",
-                    "primary": "#003d9a",
-                    "surface-container-high": "#e1e7ff",
-                    "surface": "#faf8ff",
-                    "tertiary": "#7b2600",
-                    "background": "#faf8ff",
-                    "on-secondary-container": "#56657c",
-                    "tertiary-fixed": "#ffdbcf",
-                    "surface-bright": "#faf8ff",
-                    "secondary-fixed-dim": "#b8c7e2",
-                    "on-error": "#ffffff",
-                    "tertiary-container": "#a33500",
-                    "primary-fixed-dim": "#b2c5ff",
-                    "on-tertiary-fixed": "#380d00",
-                    "surface-container": "#eaedff",
-                    "error": "#ba1a1a",
-                    "surface-variant": "#dae2fc",
-                    "surface-dim": "#d2d9f4",
-                    "outline-variant": "#c3c6d6",
-                    "surface-container-highest": "#dae2fc",
-                    "inverse-surface": "#283044",
-                    "surface-tint": "#2f59b7",
-                    "on-tertiary-container": "#ffc6b2",
-                    "glass-bg": "rgba(255, 255, 255, 0.4)",
-                    "on-tertiary-fixed-variant": "#812800",
-                    "tertiary-fixed-dim": "#ffb59b",
-                    "surface-container-low": "#f2f3ff",
-                    "on-secondary": "#ffffff",
-                    "on-background": "#131b2e",
-                    "secondary-container": "#d4e3ff",
-                    "on-surface": "#131b2e",
-                    "inverse-primary": "#b2c5ff",
-                    "on-error-container": "#93000a",
-                    "on-tertiary": "#ffffff",
-                    "inverse-on-surface": "#eef0ff",
-                    "glass-border": "rgba(255, 255, 255, 0.5)",
-                    "error-container": "#ffdad6",
-                    "secondary-fixed": "#d4e3ff",
-                    "outline": "#737685",
-                    "surface-container-lowest": "#ffffff",
-                    "on-primary": "#ffffff",
-                    "primary-container": "#2a56b4",
-                    "on-primary-fixed-variant": "#08409e"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "sidebar-collapsed": "64px",
-                    "xl": "32px",
-                    "lg": "24px",
-                    "sm": "8px",
-                    "xs": "4px",
-                    "gutter": "24px",
-                    "sidebar-expanded": "260px",
-                    "md": "16px",
-                    "2xl": "48px"
-            },
-            "fontFamily": {
-                    "body-lg": ["Inter"],
-                    "body-md": ["Inter"],
-                    "label-md": ["Inter"],
-                    "headline-lg": ["Inter"],
-                    "headline-xl": ["Inter"],
-                    "headline-md": ["Inter"],
-                    "code-sm": ["JetBrains Mono"],
-                    "body-sm": ["Inter"]
-            },
-            "fontSize": {
-                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "headline-xl": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                    "headline-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
-                    "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
-                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
 <style>
-        body {
-            background-color: #faf8ff;
-            overflow-x: hidden;
+        :root {
+            --easing: cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-        }
-
-        .glass-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px -20px rgba(0, 61, 154, 0.15);
-        }
-
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
         }
-
-        .active-nav-indicator {
-            box-shadow: 0 0 15px rgba(0, 61, 154, 0.3);
-        }
-
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(10px); }
+        
+        @keyframes stagger-in {
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .animate-count {
-            animation: countUp 0.8s ease-out forwards;
+        .stagger-item {
+            opacity: 0;
+            animation: stagger-in 0.8s var(--easing) forwards;
         }
 
-        .custom-scrollbar::-webkit-scrollbar {
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s var(--easing);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .glass-card:hover {
+            transform: scale(1.01);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(0, 61, 155, 0.1), 0 0 20px rgba(0, 82, 204, 0.05);
+            border-color: rgba(0, 61, 155, 0.2);
+        }
+        
+        .sidebar-blur {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px) saturate(180%);
+        }
+
+        .header-blur {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px) saturate(160%);
+        }
+
+        .premium-btn {
+            transition: all 0.3s var(--easing);
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-btn:active {
+            transform: scale(0.95);
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 61, 154, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(123, 38, 0, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #bg-canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .active-nav-indicator::before {
+            content: '';
+            position: absolute;
+            left: 0;
             width: 4px;
+            height: 32px;
+            background: #003d9a;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 12px rgba(0, 61, 155, 0.4);
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(0, 61, 154, 0.1);
-            border-radius: 10px;
+
+        .quick-action-card:hover .action-icon {
+            transform: translateY(-4px) scale(1.1);
+            color: #003d9a;
         }
     </style>
-</head>
-<body class="font-body-md text-on-surface">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#003d9a",
+                        "primary-container": "#2a56b4",
+                        "on-primary": "#ffffff",
+                        "secondary": "#505f76",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#7b2600",
+                        "surface": "#faf8ff",
+                        "on-surface": "#131b2e",
+                        "on-surface-variant": "#434654",
+                        "outline": "#737685",
+                        "outline-variant": "#c3c6d6",
+                        "background": "#faf8ff",
+                        "glass-bg": "rgba(255, 255, 255, 0.4)",
+                        "glass-border": "rgba(255, 255, 255, 0.5)"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-collapsed": "64px",
+                        "sidebar-expanded": "260px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<div class="noise-overlay"></div>
+<div class="ambient-glow"></div>
 <!-- Atmospheric Background -->
-
-<!-- SideNavBar Component -->
-<aside class="fixed left-0 top-0 h-screen w-sidebar-expanded bg-surface/80 backdrop-blur-xl border-r border-white/20 shadow-xl z-50 flex flex-col py-lg gap-sm transition-all duration-300">
-<div class="px-lg mb-xl">
-<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">MAD Guyz Luminescence</h1>
-<p class="text-label-md font-label-md text-on-surface-variant/60 uppercase tracking-widest">Enterprise HRMS</p>
+<div id="bg-canvas-container">
+<canvas id="shader-canvas-ANIMATION_6" style="display:block;width:100%;height:100%"></canvas>
 </div>
-<nav class="flex-1 flex flex-col gap-xs overflow-y-auto custom-scrollbar px-md">
-<!-- Active: Dashboard -->
-<a class="flex items-center gap-3 px-4 py-2 text-primary border-l-4 border-primary bg-primary/5 hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="oho.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="font-body-md text-body-md font-semibold">Dashboard</span>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] sidebar-blur border-r border-glass-border flex flex-col z-50 transition-all duration-300">
+<div class="flex flex-col py-lg px-md h-full">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Aura HRMS</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">My Workspace</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto no-scrollbar">
+<a class="flex items-center gap-md px-lg py-sm text-primary relative active-nav-indicator hover:bg-white/20 transition-colors" href="oho.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="employeedetails.html">
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="employeedetails.html">
 <span class="material-symbols-outlined">person</span>
-<span class="font-body-md text-body-md">Employee Profile</span>
+<span class="font-body-md text-body-md">My Profile</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="projects.html">
-<span class="material-symbols-outlined">folder_shared</span>
-<span class="font-body-md text-body-md">Projects</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="attendance.html">
-<span class="material-symbols-outlined">event_available</span>
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="attendance.html">
+<span class="material-symbols-outlined">schedule</span>
 <span class="font-body-md text-body-md">Attendance</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="leavemanage.html">
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="leavemanage.html">
 <span class="material-symbols-outlined">event_busy</span>
 <span class="font-body-md text-body-md">Leave Management</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="payroll.html">
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="projects.html">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-body-md text-body-md">My Projects</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="payroll.html">
 <span class="material-symbols-outlined">payments</span>
-<span class="font-body-md text-body-md">Payroll</span>
+<span class="font-body-md text-body-md">My Payroll</span>
 </a>
-
 </nav>
-<div class="mt-auto px-md flex flex-col gap-xs pt-lg border-t border-white/10">
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="index.html">
-<span class="material-symbols-outlined">help</span>
-<span class="font-body-md text-body-md">Support</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90" href="index.html">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-body-md text-body-md">Settings</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 hover:backdrop-blur-md transition-all duration-200 scale-95 active:scale-90 mt-2" href="index.html">
+<div class="mt-auto space-y-xs pt-lg border-t border-glass-border">
+<a class="flex items-center gap-md px-lg py-sm text-tertiary hover:bg-tertiary/10 transition-colors" href="index.html">
 <span class="material-symbols-outlined">logout</span>
 <span class="font-body-md text-body-md">Logout</span>
 </a>
 </div>
+</div>
 </aside>
-<!-- Main Content Canvas -->
-<main class="ml-sidebar-expanded p-gutter min-h-screen">
-<!-- TopNavBar (Integrated) -->
-<header class="flex justify-between items-center mb-xl">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 z-40 w-[calc(100%-260px)] h-16 header-blur border-b border-glass-border flex justify-between items-center px-gutter">
+<div class="flex items-center gap-xl flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full h-10 pl-12 pr-16 bg-white/30 border border-glass-border rounded-xl font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary/40 focus:bg-white/80 transition-all outline-none" placeholder="Search tasks or documents..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
+<kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">CTRL</kbd>
+<kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">K</kbd>
+</div>
+</div>
+</div>
 <div class="flex items-center gap-lg">
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="bg-white/40 backdrop-blur-md border-none focus:ring-2 focus:ring-primary/20 rounded-xl pl-10 pr-4 py-2 w-80 text-body-sm transition-all placeholder:text-outline-variant" placeholder="Search Command Center... (⌘K)" type="text"/>
+<a class="p-2 hover:bg-primary-container/10 rounded-xl transition-all premium-btn" href="mailto:hr@aurahrms.com" aria-label="Contact support">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</a>
+<div class="h-8 w-[1px] bg-glass-border"></div>
+<div class="flex items-center gap-md px-2 py-1 rounded-xl hover:bg-white/30 transition-colors cursor-pointer group active:scale-95">
+<div class="text-right hidden lg:block">
+<p class="font-body-md font-semibold text-primary">Alex Chen</p>
+<p class="font-label-md text-on-surface-variant">Senior Product Designer</p>
 </div>
-</div>
-<div class="flex items-center gap-md">
-<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-white/50 transition-colors">
-<span class="material-symbols-outlined">mail</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-white/50 transition-colors">
-<span class="material-symbols-outlined">mail</span>
-</button>
-<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
-<div class="flex items-center gap-sm">
-<div class="text-right">
-<p class="font-body-sm font-bold text-on-surface">Alex Rivera</p>
-<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">System Administrator</p>
-</div>
-<div class="w-10 h-10 rounded-full border-2 border-primary/20 p-0.5">
-<img class="w-full h-full rounded-full object-cover" data-alt="A professional headshot of a modern executive with a clean-cut appearance, set against a softly blurred office background with cool blue and white lighting to match a premium corporate tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdFnrJQZyK_e72lX7tQXn-a4VVnFC7BadbXZd5lD2ayiG3FUCcTIcQGhLZX9sKUT7_V-v1bwX5xZEnT9nUreUsBQjQb_NBq2O3pWVMTgVlgwn_zDlMWxhc5ansi3HsL7dGpZOYy0DIS6_RGtV4FSl7UUxvd67e_fQT55lJN3SEvgNPYBDE2g-edT50xrPXRag2OrfU_ZfqmJwyf9sLB4pPgJ4_sIF00OZ04KlDTIbra1x7cOQg5OJF"/>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden shadow-sm group-hover:border-primary/50 transition-all">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW2oZy_7myEKJ7yM_WlcZxDAvabYpweRAwT07PY22xSnhdNh2it7Y2wdXMrriqbhDZedE0vABT801NjnjKOdAl5tvKcSP3to4cKZasiHGFDJ01IIR3-PvAyz95Z3NacCIbHvi2AzGp1aTIpaeD_hnIOheMEDxHK44v771ssCqE4WlNuL5LWYkHHauhhfCDYK7jb23DsqVHr2VTDHgMPus8fp0WcAz7L-2V_iSaknDv_ra-gSUz8HGA"/>
 </div>
 </div>
 </div>
 </header>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-12 gap-lg max-w-[1400px]">
-<!-- 1. Welcome Card (Headcount Counter) -->
-<div class="col-span-12 md:col-span-8 glass-card p-xl rounded-2xl flex items-center justify-between overflow-hidden relative group">
-<div class="z-10">
-<h2 class="font-headline-xl text-headline-xl text-primary mb-xs">Welcome back, Alex.</h2>
-<p class="text-on-surface-variant max-w-md">Operations are running smoothly today. Your team's current distribution is optimized across 12 regions.</p>
-<div class="mt-lg flex items-baseline gap-xs">
-<span class="font-headline-xl text-[48px] text-primary font-bold animate-count" id="headcount">0</span>
-<span class="text-on-surface-variant font-label-md uppercase tracking-widest opacity-60">Total Headcount</span>
-</div>
-</div>
-<div class="w-64 h-64 opacity-20 absolute -right-12 -bottom-12 group-hover:scale-110 transition-transform duration-700">
-<span class="material-symbols-outlined text-[200px] text-primary" style="font-variation-settings: 'FILL' 1;">groups</span>
-</div>
-<button class="z-10 self-end mb-2 bg-primary text-white px-lg py-sm rounded-xl font-label-md shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
-                    View Org Chart
-                </button>
-</div>
-<!-- 2. Today's Attendance KPI -->
-<div class="col-span-12 md:col-span-4 glass-card p-xl rounded-2xl flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<h3 class="font-headline-md text-on-surface-variant">Attendance</h3>
-<span class="text-primary-fixed bg-primary-container px-3 py-1 rounded-full text-label-md">Live</span>
-</div>
-<div class="flex flex-col items-center py-lg">
-<div class="relative w-32 h-32 flex items-center justify-center">
-<svg class="w-full h-full transform -rotate-90">
-<circle class="text-primary/10" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-primary transition-all duration-1000 ease-out" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364" stroke-dashoffset="25" stroke-width="8"></circle>
-</svg>
-<div class="absolute inset-0 flex flex-col items-center justify-center">
-<span class="font-headline-lg text-primary">93%</span>
-<span class="text-[10px] uppercase text-outline">Present</span>
-</div>
-</div>
-</div>
-<div class="flex justify-between text-body-sm text-on-surface-variant">
-<p><span class="font-bold text-on-surface">1,240</span> on-site</p>
-<p><span class="font-bold text-on-surface">94</span> remote</p>
-</div>
-</div>
-<!-- 3. Current Projects Summary -->
-<div class="col-span-12 md:col-span-7 glass-card p-xl rounded-2xl">
-<div class="flex justify-between items-center mb-lg">
-<h3 class="font-headline-md text-on-surface">Project Portfolio</h3>
-<button class="text-primary text-label-md font-bold flex items-center gap-xs hover:underline">
-                        View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-<div class="space-y-md">
-<!-- Project 1 -->
-<div class="p-md bg-white/20 rounded-xl hover:bg-white/40 transition-colors cursor-pointer group">
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary">layers</span>
-</div>
+<!-- Main Content -->
+<main class="ml-[260px] mt-16 min-h-screen flex flex-col relative z-20">
+<div class="p-xl space-y-xl max-w-[1400px] mx-auto w-full">
+<!-- Welcome Hero -->
+<section class="stagger-item" style="animation-delay: 0.1s;">
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-xl text-white shadow-2xl">
+<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl opacity-50"></div>
+<div class="relative z-10">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-lg">
 <div>
-<h4 class="font-body-md font-bold">Project Lumina Refresh</h4>
-<p class="text-label-md text-on-surface-variant">Global Operations • 42 Contributors</p>
+<h2 class="font-headline-xl text-headline-xl mb-xs">Good morning, Alex Chen</h2>
+<div class="flex flex-wrap items-center gap-md text-on-primary/80 font-body-md">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">badge</span> ID: AL-0492</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">location_on</span> London, UK</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">manager</span> Manager: Sarah Jenkins</span>
 </div>
 </div>
-<div class="text-right">
-<p class="text-label-md font-bold">78%</p>
-<p class="text-[10px] text-outline uppercase">Progress</p>
+<div class="flex flex-col items-end">
+<p class="font-label-md uppercase tracking-widest text-on-primary/60 mb-1">Current Status</p>
+<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                                Online &amp; Productive
+                            </span>
 </div>
 </div>
-<div class="w-full bg-primary/10 h-1.5 rounded-full overflow-hidden">
-<div class="bg-primary h-full w-[78%] rounded-full transition-all duration-1000"></div>
+</div>
+</div>
+</section>
+<!-- Summary Cards -->
+<section class="grid grid-cols-2 md:grid-cols-5 gap-md stagger-item" style="animation-delay: 0.2s;">
+<div class="glass-card p-lg rounded-2xl">
+<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Check-In</p>
+<p class="font-headline-md text-primary mt-1">09:15 AM</p>
+</div>
+<div class="glass-card p-lg rounded-2xl">
+<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Working Hours</p>
+<div class="flex items-baseline gap-xs mt-1">
+<span class="font-headline-md text-primary counter" data-target="6.5">6.5</span>
+<span class="text-on-surface-variant text-sm">h</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl">
+<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Leave Balance</p>
+<div class="flex items-baseline gap-xs mt-1">
+<span class="font-headline-md text-primary counter" data-target="15">15</span>
+<span class="text-on-surface-variant text-sm">days</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-2xl">
+<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Active Projects</p>
+<span class="font-headline-md text-primary mt-1 counter" data-target="3">3</span>
+</div>
+<div class="glass-card p-lg rounded-2xl">
+<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Payroll Month</p>
+<p class="font-headline-md text-primary mt-1">Oct 2023</p>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-12 gap-xl">
+<!-- Left Column: Core Workflows -->
+<div class="col-span-12 lg:col-span-8 space-y-xl">
+<!-- Attendance & Leave (Shared Row) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl stagger-item" style="animation-delay: 0.3s;">
+<!-- Attendance Widget -->
+<div class="glass-card rounded-3xl p-lg space-y-lg flex flex-col">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined">schedule</span>
+                                Attendance
+                            </h3>
+<span class="text-xs font-bold bg-primary/10 text-primary px-2 py-1 rounded">PRESENT</span>
+</div>
+<div class="grid grid-cols-2 gap-md text-center py-md bg-white/20 rounded-2xl">
+<div>
+<p class="text-label-md text-on-surface-variant">Check In</p>
+<p class="font-bold">09:15 AM</p>
+</div>
+<div class="border-l border-glass-border">
+<p class="text-label-md text-on-surface-variant">Check Out</p>
+<p class="text-outline">--:-- --</p>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-label-md text-on-surface-variant">Attendance Rate</p>
+<p class="font-headline-lg text-primary"><span class="counter" data-target="98">98</span>%</p>
+</div>
+<a class="bg-primary text-white px-lg py-md rounded-2xl font-bold hover:shadow-lg premium-btn inline-flex items-center" href="attendance.html">Mark Attendance</a>
+</div>
+</div>
+<!-- Leave Widget -->
+<div class="glass-card rounded-3xl p-lg space-y-lg flex flex-col">
+<h3 class="font-headline-md flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined">beach_access</span>
+                                Leave Overview
+                            </h3>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center p-2 rounded-xl bg-white/20">
+<p class="text-[10px] font-bold text-on-surface-variant">CASUAL</p>
+<p class="font-bold text-primary">02</p>
+</div>
+<div class="text-center p-2 rounded-xl bg-white/20">
+<p class="text-[10px] font-bold text-on-surface-variant">SICK</p>
+<p class="font-bold text-primary">05</p>
+</div>
+<div class="text-center p-2 rounded-xl bg-white/20">
+<p class="text-[10px] font-bold text-on-surface-variant">EARNED</p>
+<p class="font-bold text-primary">08</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<p class="text-label-md text-on-surface-variant mb-2">Upcoming Holiday</p>
+<div class="flex items-center gap-md bg-white/30 p-2 rounded-2xl border border-white/50">
+<div class="w-10 h-10 bg-primary text-white rounded-xl flex flex-col items-center justify-center font-bold text-xs">
+<span>NOV</span><span>10</span>
+</div>
+<p class="font-bold text-body-sm">National Heritage Day</p>
+</div>
+</div>
+<a class="bg-white/50 border border-primary text-primary px-lg py-md rounded-2xl font-bold hover:bg-primary hover:text-white transition-all inline-flex items-center justify-center" href="leavemanage.html">Apply Leave</a>
+</div>
+</div>
+<!-- My Projects Section -->
+<section class="space-y-md stagger-item" style="animation-delay: 0.4s;">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined">account_tree</span>
+                            My Active Projects
+                        </h3>
+<a class="text-primary text-body-sm hover:underline font-semibold" href="projects.html">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Project 1 -->
+<div class="glass-card p-lg rounded-3xl group">
+<div class="flex justify-between items-start mb-md">
+<span class="bg-primary/10 px-sm py-xs rounded text-[10px] font-bold uppercase tracking-wider text-primary">Lead Designer</span>
+<div class="text-tertiary flex items-center gap-xs font-bold text-xs">
+<span class="material-symbols-outlined text-[14px]">event</span> 2 Days Left
+                                </div>
+</div>
+<h4 class="font-bold text-body-lg mb-1">Aura Mobile 2.0</h4>
+<p class="text-on-surface-variant text-body-sm mb-lg">Prototypes &amp; UI Kit finalization.</p>
+<div class="space-y-sm">
+<div class="flex justify-between text-label-md font-bold">
+<span class="text-on-surface-variant">Progress</span>
+<span class="text-primary"><span class="counter" data-target="78">78</span>%</span>
+</div>
+<div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-1000" data-width="78%" style="width: 78%;"></div>
+</div>
 </div>
 </div>
 <!-- Project 2 -->
-<div class="p-md bg-white/20 rounded-xl hover:bg-white/40 transition-colors cursor-pointer">
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+<div class="glass-card p-lg rounded-3xl group">
+<div class="flex justify-between items-start mb-md">
+<span class="bg-secondary/10 px-sm py-xs rounded text-[10px] font-bold uppercase tracking-wider text-secondary">Collaborator</span>
+<span class="text-on-surface-variant text-xs font-bold">Oct 30</span>
+</div>
+<h4 class="font-bold text-body-lg mb-1">Internal HR Portal</h4>
+<p class="text-on-surface-variant text-body-sm mb-lg">Payroll API integration &amp; QA.</p>
+<div class="space-y-sm">
+<div class="flex justify-between text-label-md font-bold">
+<span class="text-on-surface-variant">Progress</span>
+<span class="text-secondary"><span class="counter" data-target="42">42</span>%</span>
+</div>
+<div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-1000" data-width="42%" style="width: 42%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- My Payroll Section -->
+<section class="stagger-item" style="animation-delay: 0.5s;">
+<div class="glass-card rounded-3xl p-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-lg">
+<div class="flex items-center gap-lg">
+<div class="w-14 h-14 bg-emerald-500/10 text-emerald-600 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">payments</span>
 </div>
 <div>
-<h4 class="font-body-md font-bold">EMEA Market Expansion</h4>
-<p class="text-label-md text-on-surface-variant">Sales &amp; Growth • 18 Contributors</p>
+<h3 class="font-headline-md text-primary">October 2023 Payroll</h3>
+<p class="text-on-surface-variant text-body-sm">Status: <span class="text-emerald-600 font-bold">Paid</span> (Oct 28, 2023)</p>
 </div>
 </div>
+<div class="flex items-center gap-xl">
 <div class="text-right">
-<p class="text-label-md font-bold">34%</p>
-<p class="text-[10px] text-outline uppercase">Progress</p>
+<p class="text-label-md text-on-surface-variant uppercase font-bold">Net Salary</p>
+<p class="font-headline-lg text-primary">$8,450.00</p>
 </div>
-</div>
-<div class="w-full bg-tertiary/10 h-1.5 rounded-full overflow-hidden">
-<div class="bg-tertiary h-full w-[34%] rounded-full transition-all duration-1000"></div>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="p-md bg-white/20 rounded-xl hover:bg-white/40 transition-colors cursor-pointer">
-<div class="flex justify-between items-center mb-sm">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 rounded-lg bg-on-secondary-fixed/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-fixed">shield</span>
-</div>
-<div>
-<h4 class="font-body-md font-bold">Annual Compliance Audit</h4>
-<p class="text-label-md text-on-surface-variant">Risk Management • 8 Contributors</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-label-md font-bold">92%</p>
-<p class="text-[10px] text-outline uppercase">Progress</p>
-</div>
-</div>
-<div class="w-full bg-on-secondary-fixed/10 h-1.5 rounded-full overflow-hidden">
-<div class="bg-on-secondary-fixed h-full w-[92%] rounded-full transition-all duration-1000"></div>
+<a class="flex items-center gap-sm bg-primary text-white px-lg py-md rounded-2xl font-bold premium-btn" href="payroll.html">
+<span class="material-symbols-outlined">download</span>
+                                Download Payslip
+                            </a>
 </div>
 </div>
 </div>
+</section>
 </div>
-<!-- 4. Quick Actions Grid -->
-<div class="col-span-12 md:col-span-5 flex flex-col gap-lg">
-<div class="glass-card p-xl rounded-2xl flex-1">
-<h3 class="font-headline-md text-on-surface mb-lg">Command Actions</h3>
+<!-- Right Column: Quick Actions & Activity -->
+<aside class="col-span-12 lg:col-span-4 space-y-xl">
+<!-- Quick Actions -->
+<section class="space-y-md stagger-item" style="animation-delay: 0.3s;">
+<h3 class="font-headline-md text-primary px-1">Quick Actions</h3>
 <div class="grid grid-cols-2 gap-md">
-<button class="flex flex-col items-center justify-center p-md bg-white/30 hover:bg-primary hover:text-white rounded-2xl transition-all group">
-<span class="material-symbols-outlined text-3xl mb-2 group-hover:scale-110 transition-transform">person_add</span>
-<span class="text-label-md font-bold">New Hire</span>
-</button>
-<button class="flex flex-col items-center justify-center p-md bg-white/30 hover:bg-primary hover:text-white rounded-2xl transition-all group">
-<span class="material-symbols-outlined text-3xl mb-2 group-hover:scale-110 transition-transform">assignment_turned_in</span>
-<span class="text-label-md font-bold">Payroll Batch</span>
-</button>
-<button class="flex flex-col items-center justify-center p-md bg-white/30 hover:bg-primary hover:text-white rounded-2xl transition-all group">
-<span class="material-symbols-outlined text-3xl mb-2 group-hover:scale-110 transition-transform">bar_chart</span>
-<span class="text-label-md font-bold">Export Report</span>
-</button>
-<button class="flex flex-col items-center justify-center p-md bg-white/30 hover:bg-primary hover:text-white rounded-2xl transition-all group">
-<span class="material-symbols-outlined text-3xl mb-2 group-hover:scale-110 transition-transform">campaign</span>
-<span class="text-label-md font-bold">Announcement</span>
-</button>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="attendance.html">
+<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">timer</span>
+<span class="text-[11px] font-bold">Mark Attendance</span>
+</a>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="leavemanage.html">
+<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">event_available</span>
+<span class="text-[11px] font-bold">Apply Leave</span>
+</a>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="projects.html">
+<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">list_alt</span>
+<span class="text-[11px] font-bold">My Projects</span>
+</a>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="payroll.html">
+<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">receipt_long</span>
+<span class="text-[11px] font-bold">Download Payslip</span>
+</a>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="employeedetails.html">
+<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">person_edit</span>
+<span class="text-[11px] font-bold">Update Profile</span>
+</a>
+<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="mailto:hr@aurahrms.com">
+<span class="material-symbols-outlined action-icon text-tertiary transition-all duration-300">contact_support</span>
+<span class="text-[11px] font-bold">Raise HR Ticket</span>
+</a>
 </div>
-</div>
-<!-- 5. Upcoming Holidays -->
-<div class="glass-card p-lg rounded-2xl bg-primary-fixed/20">
-<div class="flex items-center gap-md mb-md">
-<span class="material-symbols-outlined text-primary">calendar_month</span>
-<h3 class="font-body-md font-bold">Upcoming Holidays</h3>
-</div>
-<div class="flex gap-md overflow-x-auto pb-2 custom-scrollbar">
-<div class="min-w-[120px] bg-white/60 p-sm rounded-xl text-center">
-<p class="text-[10px] text-outline uppercase">Sep 04</p>
-<p class="font-body-sm font-bold text-primary">Labor Day</p>
-</div>
-<div class="min-w-[120px] bg-white/40 p-sm rounded-xl text-center">
-<p class="text-[10px] text-outline uppercase">Oct 09</p>
-<p class="font-body-sm font-bold">Columbus Day</p>
-</div>
-<div class="min-w-[120px] bg-white/40 p-sm rounded-xl text-center">
-<p class="text-[10px] text-outline uppercase">Nov 11</p>
-<p class="font-body-sm font-bold">Veterans Day</p>
-</div>
-</div>
-</div>
-</div>
-<!-- 6. Recent Activities Timeline -->
-<div class="col-span-12 md:col-span-8 glass-card p-xl rounded-2xl">
-<div class="flex justify-between items-center mb-xl">
-<h3 class="font-headline-md text-on-surface">Recent Activity</h3>
-<span class="text-label-md text-on-surface-variant font-medium">Last 24 Hours</span>
-</div>
-<div class="space-y-xl relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-[2px] before:bg-primary/10">
-<!-- Activity 1 -->
-<div class="relative pl-xl flex items-start gap-md">
-<div class="absolute left-0 w-10 h-10 rounded-full bg-white border-4 border-primary flex items-center justify-center z-10 shadow-sm">
-<span class="material-symbols-outlined text-primary text-sm">edit</span>
-</div>
-<div class="flex-1 bg-white/20 p-md rounded-xl">
-<div class="flex justify-between items-center mb-1">
-<p class="font-body-md font-bold">Sarah Jenkins updated Profile</p>
-<span class="text-[10px] text-outline">12m ago</span>
-</div>
-<p class="text-body-sm text-on-surface-variant">Updated primary bank details and emergency contact information in EMEA division.</p>
-</div>
-</div>
-<!-- Activity 2 -->
-<div class="relative pl-xl flex items-start gap-md">
-<div class="absolute left-0 w-10 h-10 rounded-full bg-white border-4 border-tertiary flex items-center justify-center z-10 shadow-sm">
-<span class="material-symbols-outlined text-tertiary text-sm">payments</span>
-</div>
-<div class="flex-1 bg-white/20 p-md rounded-xl">
-<div class="flex justify-between items-center mb-1">
-<p class="font-body-md font-bold">Payroll Reconciliation Complete</p>
-<span class="text-[10px] text-outline">2h ago</span>
-</div>
-<p class="text-body-sm text-on-surface-variant">Global Q3 bonus adjustments have been verified for 840 employees.</p>
-</div>
-</div>
-<!-- Activity 3 -->
-<div class="relative pl-xl flex items-start gap-md">
-<div class="absolute left-0 w-10 h-10 rounded-full bg-white border-4 border-on-secondary-fixed flex items-center justify-center z-10 shadow-sm">
-<span class="material-symbols-outlined text-on-secondary-fixed text-sm">person_add</span>
-</div>
-<div class="flex-1 bg-white/20 p-md rounded-xl">
-<div class="flex justify-between items-center mb-1">
-<p class="font-body-md font-bold">Onboarding: Marcus Thorne</p>
-<span class="text-[10px] text-outline">5h ago</span>
-</div>
-<p class="text-body-sm text-on-surface-variant">Asset allocation and credentials provisioned for Senior Product Manager role.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- 7. Payroll Summary -->
-<div class="col-span-12 md:col-span-4">
-<div class="glass-card p-xl rounded-2xl flex flex-col justify-between h-full">
+</section>
+<!-- Recent Activity -->
+<section class="glass-card rounded-3xl p-lg space-y-md stagger-item" style="animation-delay: 0.4s;">
+<h3 class="font-headline-md text-primary">Recent Activity</h3>
+<div class="space-y-lg relative before:absolute before:left-3 before:top-4 before:bottom-4 before:w-[1px] before:bg-glass-border">
+<div class="relative pl-8 flex gap-md">
+<div class="absolute left-1.5 top-2 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm z-10"></div>
 <div>
-<h4 class="text-label-md font-bold text-on-surface-variant uppercase tracking-widest mb-1">Payroll Efficiency</h4>
-<p class="font-headline-md text-on-surface">99.8% <span class="text-tertiary text-body-sm font-medium">Accuracy</span></p>
-</div>
-<div class="h-16 flex items-end gap-1 mt-md">
-<div class="flex-1 bg-tertiary h-[95%] rounded-t-sm"></div>
-<div class="flex-1 bg-tertiary h-[98%] rounded-t-sm"></div>
-<div class="flex-1 bg-tertiary/20 h-[88%] rounded-t-sm"></div>
-<div class="flex-1 bg-tertiary h-[99%] rounded-t-sm"></div>
-<div class="flex-1 bg-tertiary h-[97%] rounded-t-sm"></div>
+<p class="font-bold text-body-sm">Check-in at 09:15 AM</p>
+<p class="text-on-surface-variant text-[11px]">Today, 09:15 AM</p>
 </div>
 </div>
+<div class="relative pl-8 flex gap-md">
+<div class="absolute left-1.5 top-2 w-3 h-3 bg-primary rounded-full border-2 border-white shadow-sm z-10"></div>
+<div>
+<p class="font-bold text-body-sm">Downloaded October Payslip</p>
+<p class="text-on-surface-variant text-[11px]">Oct 28, 04:30 PM</p>
 </div>
 </div>
+<div class="relative pl-8 flex gap-md">
+<div class="absolute left-1.5 top-2 w-3 h-3 bg-tertiary rounded-full border-2 border-white shadow-sm z-10"></div>
+<div>
+<p class="font-bold text-body-sm">Applied for Casual Leave</p>
+<p class="text-on-surface-variant text-[11px]">Oct 26, 11:20 AM</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Support Compact -->
+<section class="glass-card rounded-3xl p-lg space-y-md bg-primary/5 stagger-item" style="animation-delay: 0.5s;">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<p class="font-bold text-body-sm text-primary">HR Handbook</p>
+<p class="text-[11px] text-on-surface-variant leading-none">Policies &amp; Guidelines</p>
+</div>
+</div>
+<p class="text-[11px] text-on-surface-variant">Need help with benefits or policies? Raise a query with HR.</p>
+<button class="w-full py-2 bg-white/50 border border-primary/20 rounded-xl text-[11px] font-bold text-primary hover:bg-primary hover:text-white transition-all">Ask HR a Question</button>
+</section>
+</aside>
+</div>
+</div>
+<footer class="mt-auto p-lg border-t border-glass-border text-center backdrop-blur-md bg-white/10">
+<p class="text-label-md text-on-surface-variant font-medium">© 2023 Aura HRMS. All organizational data is confidential. Support available 24/7.</p>
+</footer>
 </main>
-<!-- FAB (Contextual for Dashboard) -->
-<button class="fixed bottom-xl right-xl w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-transform z-50 group">
-<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform">add</span>
-<div class="absolute right-full mr-4 bg-on-surface text-white px-4 py-2 rounded-xl text-label-md whitespace-nowrap opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all pointer-events-none">
-            Quick Create
-        </div>
-</button>
 <script>
-        // Micro-interaction for Headcount Counter
-        function animateCounter(id, target, duration) {
-            const element = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                element.innerText = Math.floor(progress * target).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
+    // WebGL Shader Logic
+    (function() {
+        const canvas = document.getElementById('shader-canvas-ANIMATION_6');
+        function syncSize() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            if (canvas.width !== w || canvas.height !== h) {
+                canvas.width = w;
+                canvas.height = h;
+            }
         }
+        window.addEventListener('resize', syncSize);
+        syncSize();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Wait slightly for background to load
-            setTimeout(() => {
-                animateCounter('headcount', 1432, 2000);
-            }, 500);
-
-            // Subtle parallax effect on cards based on mouse move
-            document.addEventListener('mousemove', (e) => {
-                const amount = 5;
-                const x = (e.clientX / window.innerWidth - 0.5) * amount;
-                const y = (e.clientY / window.innerHeight - 0.5) * amount;
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) return;
+        
+        const vs = `attribute vec2 a_position; varying vec2 v_texCoord; void main() { v_texCoord = a_position * 0.5 + 0.5; gl_Position = vec4(a_position, 0.0, 1.0); }`;
+        const fs = `precision highp float;
+            uniform float u_time;
+            uniform vec2 u_resolution;
+            void main() {
+                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                float time = u_time * 0.08;
+                vec3 color1 = vec3(0.98, 0.97, 1.0);
+                vec3 color2 = vec3(0.93, 0.94, 0.98);
+                vec3 color3 = vec3(0.9, 0.92, 0.96);
                 
-                document.querySelectorAll('.glass-card').forEach(card => {
-                    card.style.transform = `translate(${x}px, ${y}px) scale(${card.matches(':hover') ? 1.02 : 1})`;
-                });
+                float n1 = sin(uv.x * 3.0 + time) * cos(uv.y * 2.0 - time * 0.5);
+                float n2 = sin(uv.y * 4.0 - time * 0.3) * cos(uv.x * 2.5 + time * 0.8);
+                
+                vec3 base = mix(color1, color2, n1 * 0.3 + 0.5);
+                base = mix(base, color3, n2 * 0.2 + 0.4);
+                
+                float d = distance(uv, vec2(0.5 + sin(time*0.5)*0.1, 0.5 + cos(time*0.3)*0.1));
+                base = mix(base, vec3(1.0), (1.0 - d) * 0.05);
+                
+                gl_FragColor = vec4(base, 1.0);
+            }`;
+
+        function cs(type, src) {
+            const s = gl.createShader(type);
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            return s;
+        }
+        const prog = gl.createProgram();
+        gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+        gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+        gl.linkProgram(prog);
+        gl.useProgram(prog);
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+        const pos = gl.getAttribLocation(prog, 'a_position');
+        gl.enableVertexAttribArray(pos);
+        gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+        const uTime = gl.getUniformLocation(prog, 'u_time');
+        const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+        function render(t) {
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform1f(uTime, t * 0.001);
+            gl.uniform2f(uRes, canvas.width, canvas.height);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(render);
+        }
+        render(0);
+    })();
+
+    // Animation & Counter Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const animateCounters = () => {
+            document.querySelectorAll('.counter').forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const isFloat = counter.getAttribute('data-target').includes('.');
+                let count = 0;
+                const duration = 2000;
+                const startTime = performance.now();
+                
+                const update = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+                    
+                    count = easedProgress * target;
+                    
+                    if (isFloat) {
+                        counter.innerText = count.toFixed(1);
+                    } else {
+                        counter.innerText = Math.floor(count);
+                    }
+                    
+                    if (progress < 1) requestAnimationFrame(update);
+                };
+                requestAnimationFrame(update);
             });
+        };
+
+        setTimeout(animateCounters, 600);
+
+        // Progress Bar Widths
+        setTimeout(() => {
+            document.querySelectorAll('[data-width]').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }, 1000);
+
+        // Search Keyboard Shortcut
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
         });
-    </script>
-</body></html>
+    });
+</script>
+
+
+```</body></html>
