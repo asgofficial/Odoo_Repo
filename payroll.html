@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MAD Guyz HRMS | Payroll Management</title>
+    
+    <script src="payroll.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: '#f8fafc',
+              surface: '#ffffff',
+              'on-surface': '#0f172a',
+              'surface-variant': '#f1f5f9',
+              'on-surface-variant': '#475569',
+              primary: '#2563eb',
+              'on-primary': '#ffffff',
+              'primary-fixed': '#dbeafe',
+              'on-primary-fixed': '#1e3a8a',
+              'primary-fixed-dim': '#bfdbfe',
+              'primary-container': '#dbeafe',
+              'on-primary-container': '#1e3a8a',
+              'on-primary-fixed-variant': '#1e40af',
+              secondary: '#475569',
+              'secondary-fixed-dim': '#cbd5e1',
+              'on-secondary-fixed': '#0f172a',
+              tertiary: '#0ea5e9',
+              error: '#ef4444',
+              'error-container': '#fee2e2',
+              outline: '#94a3b8',
+              'outline-variant': '#e2e8f0',
+              'surface-container': '#f8fafc',
+              'surface-container-low': '#f1f5f9',
+              'surface-container-high': '#e2e8f0',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="payroll.css"/>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary-fixed font-sans">
+    <div class="flex min-h-screen">
+        
+        <aside class="fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-inverse-surface border-r border-outline-variant flex flex-col z-50">
+            <div class="p-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-primary leading-none">Aura HRMS</h1>
+                        <span class="text-[10px] uppercase tracking-widest text-outline">Enterprise Edition</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="flex-1 flex flex-col py-4 gap-1">
+                <div class="flex items-center gap-4 text-on-surface-variant px-6 py-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span class="text-sm">Dashboard</span>
+                </div>
+                <div class="flex items-center gap-4 text-on-surface-variant px-6 py-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">badge</span>
+                    <span class="text-sm">Employees</span>
+                </div>
+                <div class="flex items-center gap-4 text-on-surface-variant px-6 py-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">account_tree</span>
+                    <span class="text-sm">Projects</span>
+                </div>
+                <div class="flex items-center gap-4 text-on-surface-variant px-6 py-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    <span class="text-sm">Attendance</span>
+                </div>
+                <div class="flex items-center gap-4 bg-surface-container-high text-primary border-l-[4px] border-primary px-[20px] py-2 scale-[0.98] transition-transform">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+                    <span class="text-sm font-semibold">Payroll</span>
+                </div>
+                <div class="flex items-center gap-4 text-on-surface-variant px-6 py-2 hover:bg-surface-container-low transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">person_add</span>
+                    <span class="text-sm">Recruitment</span>
+                </div>
+            </nav>
+            
+            <div class="mt-auto p-6 flex flex-col gap-3 border-t border-outline-variant">
+                <div class="flex items-center gap-4 text-on-surface-variant hover:text-error transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="text-sm">Sign Out</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 ml-[260px] p-8 space-y-8 max-w-[1400px] mx-auto w-full relative">
+            <header class="flex justify-between items-center sticky top-0 z-40 bg-surface/80 backdrop-blur-xl -mx-8 px-8 py-4 mb-8">
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-2xl text-on-surface font-bold">Payroll Management</h2>
+                        <span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">Active / Processing</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm">Current Cycle: October 2023 • Next run in 4 days</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="bg-white text-primary px-6 py-2 rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">play_arrow</span>
+                        Process Payroll
+                    </button>
+                    <button class="border border-outline-variant text-on-surface-variant px-6 py-2 rounded-xl font-medium hover:bg-surface-container transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">description</span>
+                        Generate Payslips
+                    </button>
+                    <button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined">more_vert</span>
+                    </button>
+                </div>
+            </header>
+
+            <section class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-on-surface">Payroll Insights</h3>
+                        <p class="text-sm text-on-surface-variant">A quick view of the current cycle and upcoming actions.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" class="payroll-slide-btn h-9 w-9 rounded-full border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container" data-direction="prev" aria-label="Previous slide">
+                            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                        </button>
+                        <button type="button" class="payroll-slide-btn h-9 w-9 rounded-full border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container" data-direction="next" aria-label="Next slide">
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-2xl border border-outline-variant/60">
+                    <div id="payroll-slide-track" class="flex transition-transform duration-300 ease-out">
+                        <div class="w-full flex-shrink-0 p-5 bg-surface-container-low">
+                            <div class="flex items-center gap-2 text-primary font-semibold mb-2">
+                                <span class="material-symbols-outlined">schedule</span>
+                                <span>Next payout window</span>
+                            </div>
+                            <p class="text-sm text-on-surface-variant mb-3">The next batch is scheduled for 08:00 AM tomorrow and includes 1,284 employees.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[11px] font-bold">Auto-approval ready</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-outline-variant text-[11px] font-bold">Bank sync active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2" id="payroll-slide-dots" aria-label="Slide indicators">
+                    <button type="button" class="h-2.5 w-2.5 rounded-full bg-primary transition-all payroll-dot active" data-slide="0" aria-label="Go to slide 1"></button>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+                        <span class="text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">trending_up</span> 4.2%
+                        </span>
+                    </div>
+                    <h3 class="text-on-surface-variant text-sm font-medium mb-1">Total Payroll Amount</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-bold text-on-surface tracking-tight">$4.2M</span>
+                    </div>
+                    <div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
+                        <div class="h-full bg-primary w-[75%] rounded-full shadow-[0_0_8px_rgba(37,99,235,0.4)]"></div>
+                    </div>
+                </div>
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="material-symbols-outlined text-tertiary text-[28px]" style="font-variation-settings: 'FILL' 1;">group</span>
+                        <span class="text-on-surface-variant bg-surface-container px-3 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
+                            Stable
+                        </span>
+                    </div>
+                    <h3 class="text-on-surface-variant text-sm font-medium mb-1">Employees Paid</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-bold text-on-surface tracking-tight">9,420</span>
+                    </div>
+                    <div class="mt-4 flex items-center gap-2">
+                        <div class="flex -space-x-2">
+                            <img class="w-6 h-6 rounded-full border-2 border-white" data-alt="Employee 1" src="https://ui-avatars.com/api/?name=HR&background=random"/>
+                            <img class="w-6 h-6 rounded-full border-2 border-white" data-alt="Employee 2" src="https://ui-avatars.com/api/?name=IT&background=random"/>
+                            <div class="w-6 h-6 rounded-full bg-surface-container-high border-2 border-white text-[8px] flex items-center justify-center font-bold">+9k</div>
+                        </div>
+                        <span class="text-[10px] text-on-surface-variant">98.2% Completion</span>
+                    </div>
+                </div>
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="material-symbols-outlined text-secondary text-[28px]">receipt_long</span>
+                        <span class="text-error bg-error-container px-3 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">trending_up</span> 1.8%
+                        </span>
+                    </div>
+                    <h3 class="text-on-surface-variant text-sm font-medium mb-1">Tax Deductions</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-bold text-on-surface tracking-tight">$842k</span>
+                    </div>
+                    <div class="mt-4 h-8 flex items-end gap-1">
+                        <div class="flex-1 bg-surface-container h-3 rounded-t-sm"></div>
+                        <div class="flex-1 bg-surface-container h-5 rounded-t-sm"></div>
+                        <div class="flex-1 bg-secondary h-8 rounded-t-sm"></div>
+                        <div class="flex-1 bg-surface-container h-6 rounded-t-sm"></div>
+                        <div class="flex-1 bg-surface-container h-4 rounded-t-sm"></div>
+                    </div>
+                </div>
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl flex flex-col">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="material-symbols-outlined text-primary-container text-[28px]" style="font-variation-settings: 'FILL' 1;">card_giftcard</span>
+                        <span class="text-primary bg-primary-fixed px-3 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
+                            Bonus Phase
+                        </span>
+                    </div>
+                    <h3 class="text-on-surface-variant text-sm font-medium mb-1">Bonuses Issued</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-bold text-on-surface tracking-tight">$1.1M</span>
+                    </div>
+                    <div class="mt-4 text-[10px] text-on-surface-variant flex justify-between">
+                        <span>Q3 Performance Pay</span>
+                        <span class="font-bold">42% Eligible</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl lg:col-span-2 flex flex-col h-[400px]">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold text-on-surface">Monthly Payroll Trend</h3>
+                        <div class="flex gap-3">
+                            <span class="px-3 py-1 bg-surface-container rounded-lg text-[10px] font-bold">2023</span>
+                            <span class="px-3 py-1 bg-white border border-outline-variant rounded-lg text-[10px] font-bold">Monthly</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 relative">
+                        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 300">
+                            <defs>
+                                <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%" stop-color="rgba(37, 99, 235, 0.2)"></stop>
+                                    <stop offset="100%" stop-color="rgba(37, 99, 235, 0)"></stop>
+                                </linearGradient>
+                            </defs>
+                            <line stroke="#e2e8f0" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+                            <line stroke="#e2e8f0" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+                            <line stroke="#e2e8f0" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="250" y2="250"></line>
+                            <path d="M0,280 L50,220 L150,240 L250,180 L350,210 L450,140 L550,160 L650,100 L750,120 L800,80 V300 H0 Z" fill="url(#chartGradient)"></path>
+                            <path class="animate-draw chart-glow" d="M0,280 L50,220 L150,240 L250,180 L350,210 L450,140 L550,160 L650,100 L750,120 L800,80" fill="none" stroke="#2563eb" stroke-width="3"></path>
+                            <circle cx="800" cy="80" fill="#2563eb" r="4"></circle>
+                        </svg>
+                        <div class="absolute top-10 right-0 bg-white border border-outline-variant shadow-sm px-4 py-2 rounded-lg flex flex-col">
+                            <span class="text-[10px] text-on-surface-variant font-bold uppercase">Oct 2023</span>
+                            <span class="text-xl font-bold text-primary">$4.22M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-outline-variant shadow-sm p-6 rounded-2xl flex flex-col">
+                    <h3 class="text-xl font-bold text-on-surface mb-6">Salary Distribution</h3>
+                    <div class="flex-1 flex flex-col justify-center items-center relative">
+                        <svg class="w-48 h-48 transform -rotate-90">
+                            <circle cx="96" cy="96" fill="transparent" r="80" stroke="#f1f5f9" stroke-width="16"></circle>
+                            <circle class="transition-all duration-1000" cx="96" cy="96" fill="transparent" r="80" stroke="#2563eb" stroke-dasharray="502" stroke-dashoffset="150" stroke-width="16"></circle>
+                            <circle cx="96" cy="96" fill="transparent" r="80" stroke="#0ea5e9" stroke-dasharray="502" stroke-dashoffset="400" stroke-width="16"></circle>
+                        </svg>
+                        <div class="absolute flex flex-col items-center">
+                            <span class="text-3xl font-bold">12</span>
+                            <span class="text-[10px] text-on-surface-variant uppercase">Depts</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mt-6">
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                                <span>Engineering</span>
+                            </div>
+                            <span class="font-bold">45%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                                <span>Operations</span>
+                            </div>
+                            <span class="font-bold">30%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span>Sales & Marketing</span>
+                            </div>
+                            <span class="font-bold">25%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white border border-outline-variant shadow-sm rounded-2xl overflow-hidden flex flex-col">
+                <div class="p-6 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="text-xl font-bold text-on-surface">Intelligence Grid</h3>
+                    <div class="flex items-center gap-3">
+                        <div class="relative group">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+                            <input class="bg-surface-container border-none rounded-xl pl-10 pr-6 py-2 text-sm focus:ring-2 focus:ring-primary-container w-64 transition-all" placeholder="Search employees..." type="text"/>
+                        </div>
+                        <button class="px-6 py-2 bg-surface-container rounded-xl text-sm flex items-center gap-2 border border-outline-variant">
+                            <span class="material-symbols-outlined text-[18px]">filter_list</span> Filter
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr class="bg-surface-container-low sticky top-0 text-on-surface-variant text-[11px] uppercase font-bold tracking-widest">
+                                <th class="px-6 py-4 border-b border-outline-variant">Employee</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">ID</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Dept</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Basic</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Allowance</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Bonus</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Deductions</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Net Salary</th>
+                                <th class="px-6 py-4 border-b border-outline-variant">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant">
+                            <tr class="group hover:bg-surface-container transition-colors cursor-pointer" onclick="toggleDrawer()">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-10 h-10 rounded-xl border-2 border-primary/20" data-alt="Alex" src="https://ui-avatars.com/api/?name=Alex+Rivera&background=random"/>
+                                        <div>
+                                            <p class="font-bold text-on-surface">Alex Rivera</p>
+                                            <p class="text-[11px] text-outline">Lead Engineer</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-mono">E0921</td>
+                                <td class="px-6 py-4 text-sm">Engineering</td>
+                                <td class="px-6 py-4 text-sm font-semibold">$12,400</td>
+                                <td class="px-6 py-4 text-sm">$1,200</td>
+                                <td class="px-6 py-4 text-sm">$2,500</td>
+                                <td class="px-6 py-4 text-sm text-error">-$1,100</td>
+                                <td class="px-6 py-4 text-sm font-bold text-primary">$15,000</td>
+                                <td class="px-6 py-4">
+                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-lg uppercase">Paid</span>
+                                </td>
+                            </tr>
+                            <tr class="group hover:bg-surface-container transition-colors cursor-pointer" onclick="toggleDrawer()">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <img class="w-10 h-10 rounded-xl border-2 border-primary/20" data-alt="Elena" src="https://ui-avatars.com/api/?name=Elena+Vance&background=random"/>
+                                        <div>
+                                            <p class="font-bold text-on-surface">Elena Vance</p>
+                                            <p class="text-[11px] text-outline">Product Designer</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-mono">E0455</td>
+                                <td class="px-6 py-4 text-sm">Design</td>
+                                <td class="px-6 py-4 text-sm font-semibold">$9,800</td>
+                                <td class="px-6 py-4 text-sm">$950</td>
+                                <td class="px-6 py-4 text-sm">$0</td>
+                                <td class="px-6 py-4 text-sm text-error">-$820</td>
+                                <td class="px-6 py-4 text-sm font-bold text-primary">$9,930</td>
+                                <td class="px-6 py-4">
+                                    <span class="px-3 py-1 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-lg uppercase">Processing</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-6 bg-surface-container-low flex justify-between items-center text-sm text-on-surface-variant">
+                    <p>Showing 1-2 of 9,420 entries</p>
+                    <div class="flex gap-2">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors border border-outline-variant">
+                            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                        </button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors border border-outline-variant">2</button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors border border-outline-variant">
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="fixed inset-y-0 right-0 w-[450px] bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col border-l border-outline-variant" id="sideDrawer">
+        <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+            <h4 class="text-xl font-bold text-on-surface">Employee Details</h4>
+            <button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white transition-colors" onclick="toggleDrawer()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
+            <div class="flex items-center gap-6">
+                <img class="w-20 h-20 rounded-2xl border-2 border-primary/10 object-cover shadow-sm" data-alt="Alex Rivera" src="https://ui-avatars.com/api/?name=Alex+Rivera&background=random"/>
+                <div>
+                    <h5 class="text-2xl font-bold text-on-surface">Alex Rivera</h5>
+                    <p class="text-on-surface-variant text-sm">Lead Software Engineer • Engineering</p>
+                    <div class="mt-2 flex items-center gap-3">
+                        <span class="text-primary font-bold text-xl">$15,000.00</span>
+                        <span class="text-sm text-outline">Net Salary</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h6 class="text-[11px] uppercase font-bold tracking-widest text-outline">Earnings Structure</h6>
+                <div class="bg-surface-container rounded-2xl p-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span>Basic Salary</span>
+                        <span class="font-semibold">$12,400.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span>House Rent Allowance (HRA)</span>
+                        <span class="font-semibold">$600.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span>Medical Allowance</span>
+                        <span class="font-semibold">$300.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-primary font-bold pt-3 border-t border-outline-variant">
+                        <span>Gross Salary</span>
+                        <span>$13,600.00</span>
+                    </div>
+                </div>
+                
+                <h6 class="text-[11px] uppercase font-bold tracking-widest text-outline pt-4">Deductions</h6>
+                <div class="bg-error-container rounded-2xl p-4 space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span>Income Tax (TDS)</span>
+                        <span class="font-semibold text-error">-$850.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h6 class="text-[11px] uppercase font-bold tracking-widest text-outline">Activity Log</h6>
+                <div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant">
+                    <div class="relative">
+                        <div class="absolute -left-[24px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-4 border-white"></div>
+                        <p class="text-sm font-bold text-on-surface">Payroll Generated</p>
+                        <p class="text-[11px] text-outline">Oct 24, 2023 • 09:12 AM by System</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-[24px] top-1 w-4 h-4 rounded-full bg-primary border-4 border-white animate-pulse"></div>
+                        <p class="text-sm font-bold text-on-surface">Bank Transfer Initiated</p>
+                        <p class="text-[11px] text-outline">Oct 25, 2023 • 02:30 PM (Pending Confirmation)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('sideDrawer');
+            if (drawer) {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+    </script>
+    <script>
+// Responsive behavior for sidebar, tables, and containers.
+(() => {
+    const root = document.documentElement;
+    const body = document.body;
+    let resizeFrame = null;
+    let toggleButton = null;
+    let backdrop = null;
+
+    function getSidebar() {
+        return document.querySelector('aside, .sidebar, .glass-sidebar, [data-sidebar]');
+    }
+
+    function getMain() {
+        return document.querySelector('main');
+    }
+
+    function createBackdrop() {
+        if (backdrop) return backdrop;
+        backdrop = document.createElement('div');
+        backdrop.setAttribute('aria-hidden', 'true');
+        backdrop.style.position = 'fixed';
+        backdrop.style.inset = '0';
+        backdrop.style.background = 'rgba(0, 0, 0, 0.28)';
+        backdrop.style.zIndex = '50';
+        backdrop.style.display = 'none';
+        backdrop.addEventListener('click', closeSidebar);
+        body.appendChild(backdrop);
+        return backdrop;
+    }
+
+    function createToggleButton() {
+        if (toggleButton) return toggleButton;
+        const header = document.querySelector('header');
+        const target = header || getMain() || body;
+        toggleButton = document.createElement('button');
+        toggleButton.id = 'responsive-nav-toggle';
+        toggleButton.type = 'button';
+        toggleButton.setAttribute('aria-expanded', 'false');
+        toggleButton.setAttribute('aria-label', 'Toggle navigation');
+        toggleButton.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+        toggleButton.style.cssText = 'position:fixed; top:16px; left:16px; z-index:70; display:none; width:44px; height:44px; border:none; border-radius:999px; background:rgba(255,255,255,0.95); box-shadow:0 10px 30px rgba(0,0,0,0.12); align-items:center; justify-content:center; cursor:pointer;';
+        toggleButton.addEventListener('click', toggleSidebar);
+        if (header && header.firstChild) {
+            header.insertBefore(toggleButton, header.firstChild);
+        } else {
+            target.appendChild(toggleButton);
+        }
+        return toggleButton;
+    }
+
+    function openSidebar() {
+        const sidebar = getSidebar();
+        const overlay = createBackdrop();
+        if (!sidebar) return;
+        sidebar.style.transform = 'translateX(0)';
+        if (toggleButton) toggleButton.setAttribute('aria-expanded', 'true');
+        if (overlay) overlay.style.display = 'block';
+        body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+        const sidebar = getSidebar();
+        const overlay = createBackdrop();
+        if (!sidebar) return;
+        sidebar.style.transform = 'translateX(-100%)';
+        if (toggleButton) toggleButton.setAttribute('aria-expanded', 'false');
+        if (overlay) overlay.style.display = 'none';
+        body.style.overflow = '';
+    }
+
+    function toggleSidebar() {
+        const sidebar = getSidebar();
+        if (!sidebar) return;
+        const isOpen = sidebar.style.transform === 'translateX(0)' || sidebar.style.transform === 'translateX(0px)';
+        if (isOpen) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+
+    function makeTablesResponsive() {
+        document.querySelectorAll('table').forEach((table) => {
+            if (table.closest('.responsive-table-wrap')) return;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'responsive-table-wrap';
+            wrapper.style.overflowX = 'auto';
+            wrapper.style.maxWidth = '100%';
+            wrapper.style.webkitOverflowScrolling = 'touch';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    }
+
+    function adjustCardsAndContainers() {
+        document.querySelectorAll('.glass-card, .card-premium, .card, .section-card, .stat-card, .surface-card, .rounded-2xl').forEach((el) => {
+            el.style.maxWidth = '100%';
+            el.style.width = '100%';
+            el.style.boxSizing = 'border-box';
+        });
+    }
+
+    function applyLayout() {
+        const sidebar = getSidebar();
+        const main = getMain();
+        const isSmall = window.innerWidth <= 1024;
+
+        createToggleButton();
+        createBackdrop();
+
+        root.style.overflowX = 'hidden';
+        body.style.overflowX = 'hidden';
+        body.style.maxWidth = '100%';
+
+        if (sidebar) {
+            sidebar.style.position = 'fixed';
+            sidebar.style.top = '0';
+            sidebar.style.left = '0';
+            sidebar.style.bottom = '0';
+            sidebar.style.width = '260px';
+            sidebar.style.maxWidth = '100%';
+            sidebar.style.zIndex = '60';
+            sidebar.style.transition = 'transform 0.25s ease';
+            sidebar.style.transform = isSmall ? 'translateX(-100%)' : 'translateX(0)';
+        }
+
+        if (main) {
+            main.style.width = '100%';
+            main.style.maxWidth = '100%';
+            main.style.marginLeft = isSmall ? '0' : '260px';
+            main.style.boxSizing = 'border-box';
+            main.style.overflowX = 'hidden';
+        }
+
+        if (toggleButton) {
+            toggleButton.style.display = isSmall ? 'flex' : 'none';
+        }
+
+        if (sidebar && !isSmall) {
+            if (backdrop) backdrop.style.display = 'none';
+            body.style.overflow = '';
+        }
+
+        document.querySelectorAll('nav a, .sidebar a, .sidebar-nav a, .sidebar-link').forEach((link) => {
+            if (link.dataset.responsiveBound) return;
+            link.dataset.responsiveBound = 'true';
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    setTimeout(closeSidebar, 120);
+                }
+            });
+        });
+
+        makeTablesResponsive();
+        adjustCardsAndContainers();
+    }
+
+    function scheduleLayout() {
+        if (resizeFrame) cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(applyLayout);
+    }
+
+    window.addEventListener('resize', scheduleLayout, { passive: true });
+    window.addEventListener('orientationchange', scheduleLayout, { passive: true });
+    document.addEventListener('DOMContentLoaded', scheduleLayout);
+    window.addEventListener('load', scheduleLayout);
+    scheduleLayout();
+})();
+    </script>
+    <script>
+        (() => {
+            const track = document.getElementById('payroll-slide-track');
+            const dots = Array.from(document.querySelectorAll('.payroll-dot'));
+            const buttons = Array.from(document.querySelectorAll('.payroll-slide-btn'));
+            const slides = track ? Array.from(track.children) : [];
+            let currentIndex = 0;
+
+            if (!track) return;
+            if (slides.length < 2) {
+                buttons.forEach((button) => {
+                    button.style.display = 'none';
+                });
+                document.getElementById('payroll-slide-dots')?.classList.add('hidden');
+                return;
+            }
+
+            function updateSlide(index) {
+                currentIndex = (index + slides.length) % slides.length;
+                const container = track.parentElement;
+                const slideWidth = container ? container.clientWidth : track.clientWidth;
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                dots.forEach((dot, dotIndex) => {
+                    const isActive = dotIndex === currentIndex;
+                    dot.classList.toggle('bg-primary', isActive);
+                    dot.classList.toggle('bg-outline-variant', !isActive);
+                    dot.classList.toggle('active', isActive);
+                    dot.classList.toggle('w-2.5', isActive);
+                    dot.classList.toggle('w-6', !isActive);
+                });
+            }
+
+            function handleResize() {
+                updateSlide(currentIndex);
+            }
+
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const direction = button.getAttribute('data-direction') === 'next' ? 1 : -1;
+                    updateSlide(currentIndex + direction);
+                });
+            });
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    updateSlide(Number(dot.getAttribute('data-slide')));
+                });
+            });
+
+            window.addEventListener('resize', handleResize, { passive: true });
+            setInterval(() => updateSlide(currentIndex + 1), 7000);
+            updateSlide(0);
+        })();
+    </script>
+</body>
+</html>
