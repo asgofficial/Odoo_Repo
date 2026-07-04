@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAD Guyz HRMS - Projects Workspace</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#56657c",
+                        "secondary": "#505f76",
+                        "on-secondary-fixed-variant": "#39485e",
+                        "inverse-primary": "#b2c5ff",
+                        "on-primary-fixed": "#001848",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-background": "#131b2e",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-variant": "#dae2fc",
+                        "glass-border": "rgba(255, 255, 255, 0.5)",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#380d00",
+                        "primary-container": "#2a56b4",
+                        "surface-container": "#eaedff",
+                        "surface-dim": "#d2d9f4",
+                        "on-primary-container": "#c4d2ff",
+                        "primary-fixed": "#dae2ff",
+                        "on-surface-variant": "#434654",
+                        "on-tertiary-container": "#ffc6b2",
+                        "on-surface": "#131b2e",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "secondary-fixed-dim": "#b8c7e2",
+                        "surface-container-highest": "#dae2fc",
+                        "surface-container-high": "#e1e7ff",
+                        "secondary-container": "#d4e3ff",
+                        "outline-variant": "#c3c6d6",
+                        "surface": "#faf8ff",
+                        "on-secondary-fixed": "#0c1c30",
+                        "tertiary-container": "#a33500",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "inverse-surface": "#283044",
+                        "secondary-fixed": "#d4e3ff",
+                        "glass-bg": "rgba(255, 255, 255, 0.4)",
+                        "tertiary-accent": "#7b2600",
+                        "on-primary-fixed-variant": "#08409e",
+                        "error-red": "#ba1a1a",
+                        "outline": "#737685",
+                        "tertiary": "#7b2600",
+                        "tertiary-fixed": "#ffdbcf",
+                        "primary": "#003d9a",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#2f59b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "sidebar-collapsed": "64px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "sidebar-expanded": "260px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "headline-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-xl": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+.glass-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+.glass-card:hover {
+    transform: translatey(-4px) scale(1.01);
+    box-shadow: 0 12px 24px -10px rgba(0, 61, 155, 0.15);
+    background: rgba(255, 255, 255, 0.55)
+    }
+.sidebar-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px)
+    }
+.topbar-glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px)
+    }
+.glow-active {
+    border-left: 4px solid #003d9a;
+    position: relative
+    }
+.glow-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background: linear-gradient(90deg, rgba(0, 61, 155, 0.1), transparent);
+    pointer-events: none
+    }
+.progress-fill {
+    transition: width 1.2s cubic-bezier(0.65, 0, 0.35, 1)
+    }
+.noise-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCAFVumn8Clx2RcrKE90sYiThrykSyyFvfafw_r966BOX2Ef72A9lWFkHgC8922b5DL7xQq-C6x7m5fFJro9tBG4QddRyxbGI42l4apaQh32Q3O6v9i4oUTI-6OnrcBzSphZaW5t2IGWaeCElbXn5yg_u5oAjqMybvaNyfkK0TfpE31W0wP73vwcYbsnh9wIQzOFCWGAqJwQDur-4JdcdMb2llbKTRorKYC1DGxUXC0qP1Z6RmMbAg6);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    vertical-align: middle
+    }
+::-webkit-scrollbar {
+    width: 6px
+    }
+::-webkit-scrollbar-track {
+    background: transparent
+    }
+::-webkit-scrollbar-thumb {
+    background: #b2c5ff;
+    border-radius: 10px
+    }
+
+/* ---------- Responsive sidebar ---------- */
+#sidebar {
+    transition: transform 0.28s ease;
+}
+@media (max-width: 1023px) {
+    #sidebar {
+        transform: translateX(-100%);
+    }
+    #sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+    #main-content {
+        margin-left: 0 !important;
+    }
+}
+#sidebar-backdrop {
+    transition: opacity 0.25s ease;
+}
+
+/* ---------- Modal ---------- */
+.modal-backdrop {
+    transition: opacity 0.2s ease;
+}
+.modal-panel {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+/* ---------- Toast ---------- */
+#toast {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+/* Fade-in for newly filtered / added cards */
+.card-enter {
+    animation: cardEnter 0.35s ease both;
+}
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen flex overflow-hidden">
+<!-- Global Background Animation -->
+<div class="fixed inset-0 z-[-1]">
+<div class="absolute inset-0 noise-texture"></div>
+</div>
+
+<!-- Mobile sidebar backdrop -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-40 opacity-0 pointer-events-none lg:hidden" id="sidebar-backdrop"></div>
+
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-screen w-[260px] sidebar-glass border-r border-outline-variant fixed left-0 top-0 z-50" id="sidebar">
+<div class="p-lg flex items-center gap-md">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-on-primary-container shadow-lg shrink-0">
+<span class="material-symbols-outlined text-[24px]">architecture</span>
+</div>
+<div class="min-w-0">
+<h1 class="font-headline-md text-headline-md font-bold text-primary truncate">MAD Guyz HRMS</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Enterprise Edition</p>
+</div>
+<button class="ml-auto lg:hidden p-1 text-on-surface-variant hover:text-primary" id="sidebar-close" aria-label="Close menu">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 px-sm mt-md space-y-xs overflow-y-auto">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="oho.html">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="employeedetails.html">
+<span class="material-symbols-outlined group-hover:text-primary">badge</span>
+<span class="font-label-md">Employees</span>
+</a>
+<a class="flex items-center gap-md bg-surface-container-high text-primary px-lg py-sm rounded-xl glow-active" href="projects.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-md font-semibold">Projects</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="attendance.html">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_today</span>
+<span class="font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="leavemanage.html">
+<span class="material-symbols-outlined group-hover:text-primary">event_busy</span>
+<span class="font-label-md">Leave</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="payroll.html">
+<span class="material-symbols-outlined group-hover:text-primary">payments</span>
+<span class="font-label-md">Payroll</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-low transition-colors rounded-xl group" href="index.html">
+<span class="material-symbols-outlined group-hover:text-primary">person_add</span>
+<span class="font-label-md">Recruitment</span>
+</a>
+</nav>
+<div class="p-lg border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-md text-error-red px-lg py-sm hover:bg-error-container transition-colors rounded-xl" href="index.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Sign Out</span>
+</a>
+</div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden relative lg:ml-[260px]" id="main-content">
+<!-- TopNavBar -->
+<header class="h-16 topbar-glass border-b border-outline-variant flex items-center justify-between px-md md:px-lg sticky top-0 z-30 gap-md">
+<div class="flex items-center gap-sm md:gap-md flex-1 min-w-0">
+<button class="lg:hidden p-2 -ml-1 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-xl transition-colors shrink-0" id="sidebar-open" aria-label="Open menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative w-full max-w-md group">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full bg-white/50 border-none rounded-xl py-2 pl-10 pr-4 sm:pr-16 text-body-md focus:ring-2 focus:ring-primary-container transition-all placeholder:text-on-surface-variant/50" id="search-input" placeholder="Search projects, clients..." type="text"/>
+<div class="absolute inset-y-0 right-3 hidden sm:flex items-center pointer-events-none">
+<kbd class="hidden sm:inline-flex items-center px-2 py-0.5 border border-outline-variant rounded bg-surface-container-lowest text-on-surface-variant text-[10px] font-medium">CTRL+K</kbd>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm md:gap-md shrink-0">
+<div class="hidden sm:flex items-center gap-sm px-3 py-1.5 bg-surface-container rounded-full text-primary border border-primary/10">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-md">Admin Mode</span>
+</div>
+<div class="hidden md:flex items-center gap-sm">
+<button class="p-2 hover:bg-surface-container rounded-xl transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">apps</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant mx-sm hidden md:block"></div>
+<div class="flex items-center gap-md cursor-pointer hover:bg-surface-container p-1 rounded-xl transition-all">
+<div class="text-right hidden lg:block">
+<p class="font-body-md font-semibold text-on-surface leading-none">Marcus Thorne</p>
+<p class="font-label-md text-on-surface-variant opacity-70">Senior Project Lead</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary/20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfAyeosURK9rmqgUNQlQ8JizGK0Ob9nWgjkzKMYDRnLLYVhuw33J89wgSjO0bFMFp9ksSU1BTx7NC6trKEiuNzhIcglhzZWxlhksLMZ5-Rrngf4TcGezIYw1_rn8d5QRwErzJ-Q7eG2ENT7-rkMEKWDdNx-noC6JiABWQXue5GPYZPCp8Whf1-razEeqj1hIQlyqQDxePiOuQFcslFczTNUJUrjVgSLxrMVpJ-g7-UtAZH8gdVGSU9"/>
+</div>
+</div>
+</header>
+
+<!-- Content Scrollable -->
+<div class="flex-1 overflow-y-auto p-md sm:p-lg lg:p-xl space-y-xl max-w-[1400px] mx-auto w-full">
+
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-xl text-headline-xl font-extrabold text-on-surface tracking-tight">Projects Workspace</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm">Manage enterprise portfolio, track milestones, and optimize team allocation.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex-1 md:flex-none justify-center px-lg py-sm bg-white/70 backdrop-blur text-primary border border-outline-variant font-semibold rounded-xl hover:bg-white transition-all shadow-sm flex items-center gap-sm relative" id="filter-btn">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Filter View</span>
+<span class="hidden items-center justify-center w-5 h-5 rounded-full bg-primary text-on-primary text-[10px] font-bold" id="filter-count">0</span>
+</button>
+<button class="flex-1 md:flex-none justify-center px-lg py-sm bg-primary text-on-primary font-semibold rounded-xl hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-sm" id="new-project-btn">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>New Project</span>
+</button>
+</div>
+</div>
+
+<!-- Dashboard Highlights (Bento Grid) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md sm:gap-lg">
+<div class="glass-card p-md sm:p-lg rounded-2xl col-span-1">
+<div class="flex items-center justify-between mb-md">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="flex items-center text-label-md font-bold text-emerald-600">
++12% <span class="material-symbols-outlined text-[16px]">trending_up</span>
+</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Active Projects</p>
+<h3 class="font-headline-xl text-headline-xl font-bold mt-xs" id="stat-active">24</h3>
+</div>
+<div class="glass-card p-md sm:p-lg rounded-2xl col-span-1">
+<div class="flex items-center justify-between mb-md">
+<div class="p-2 bg-tertiary/10 rounded-lg text-tertiary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="font-label-md text-on-surface-variant">92% util.</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Team Contributors</p>
+<h3 class="font-headline-xl text-headline-xl font-bold mt-xs">156</h3>
+</div>
+<div class="glass-card p-md sm:p-lg rounded-2xl col-span-2 relative overflow-hidden">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-on-surface-variant">Overall Progress</p>
+<h3 class="font-headline-xl text-headline-xl font-bold mt-xs">68%</h3>
+</div>
+<div class="text-right">
+<p class="font-label-md text-on-surface-variant">On Track</p>
+<p class="font-body-md font-bold text-primary">18 of 24 projects</p>
+</div>
+</div>
+<div class="mt-lg w-full bg-surface-container rounded-full h-2 relative">
+<div class="absolute top-0 left-0 h-full bg-primary rounded-full progress-fill" style="width: 68%;"></div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">monitoring</span>
+</div>
+</div>
+</div>
+
+<!-- Project Detail Visualization (Milestones) -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md font-bold flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">timeline</span>
+Strategic Roadmap
+</h3>
+</div>
+<div class="glass-card rounded-2xl overflow-hidden p-lg">
+<div class="overflow-x-auto">
+<div class="min-w-[560px]">
+<div class="flex border-b border-outline-variant/30 pb-md mb-md gap-xl">
+<div class="min-w-[200px] font-label-md font-bold text-on-surface-variant uppercase tracking-wider">Milestone Phase</div>
+<div class="flex-1 grid grid-cols-4 gap-md font-label-md text-on-surface-variant uppercase text-center">
+<span>Week 12</span>
+<span>Week 13</span>
+<span>Week 14</span>
+<span>Week 15</span>
+</div>
+</div>
+<div class="space-y-lg">
+<div class="flex items-center gap-xl">
+<div class="min-w-[200px]">
+<p class="font-body-md font-bold">Cloud Migration</p>
+<p class="text-xs text-on-surface-variant">Infrastructure Stream</p>
+</div>
+<div class="flex-1 relative h-6 bg-surface-container/50 rounded-full">
+<div class="absolute left-[10%] w-[45%] h-full bg-primary/20 border border-primary/30 rounded-full flex items-center px-3 group cursor-pointer hover:bg-primary/30 transition-all">
+<span class="text-[10px] font-bold text-primary truncate">Backend Deployment</span>
+</div>
+<div class="absolute left-[60%] w-[30%] h-full bg-tertiary/20 border border-tertiary/30 rounded-full flex items-center px-3 group cursor-pointer hover:bg-tertiary/30 transition-all">
+<span class="text-[10px] font-bold text-tertiary truncate">Security Audit</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<div class="min-w-[200px]">
+<p class="font-body-md font-bold">Global UI Revamp</p>
+<p class="text-xs text-on-surface-variant">Experience Design</p>
+</div>
+<div class="flex-1 relative h-6 bg-surface-container/50 rounded-full">
+<div class="absolute left-[0%] w-[25%] h-full bg-primary-container/20 border border-primary-container/30 rounded-full flex items-center px-3 group cursor-pointer">
+<span class="text-[10px] font-bold text-primary-container truncate">User Testing</span>
+</div>
+<div class="absolute left-[30%] w-[60%] h-full bg-primary/20 border border-primary/30 rounded-full flex items-center px-3 group cursor-pointer">
+<span class="text-[10px] font-bold text-primary truncate">System-wide Implementation</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Project Portfolio Grid -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md font-bold flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">view_module</span>
+Project Portfolio
+</h3>
+<div class="hidden sm:flex items-center bg-surface-container-high p-1 rounded-lg border border-outline-variant">
+<button class="px-4 py-1.5 rounded-md bg-white shadow-sm text-primary font-semibold text-label-md">Grid</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant font-medium text-label-md hover:bg-white/50 transition-all">List</button>
+</div>
+</div>
+
+<p class="hidden text-on-surface-variant text-body-md py-xl text-center" id="empty-state">No projects match your filters. Try adjusting or <button class="text-primary font-semibold underline" id="clear-filters-link">clear filters</button>.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg" id="portfolio-grid">
+<!-- Project Card 1 -->
+<div class="glass-card rounded-2xl p-lg flex flex-col gap-lg project-card" data-priority="high" data-status="in-progress" data-client="Apex Global Logistics">
+<div class="flex justify-between items-start">
+<div class="flex flex-col min-w-0">
+<span class="px-2 py-0.5 rounded bg-error-container text-error text-[10px] font-bold w-fit mb-2">HIGH PRIORITY</span>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface truncate">Nexus Mobile App</h4>
+<p class="text-label-md text-on-surface-variant truncate">Client: Apex Global Logistics</p>
+</div>
+<button class="p-1 hover:bg-surface-container rounded-lg transition-colors shrink-0">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-on-surface-variant">In Progress</span>
+<span class="font-label-md font-bold text-primary">74%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="h-full bg-primary rounded-full progress-fill" style="width: 74%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiej5dgcbPWbzP0O86hEkqoDjcQIBb89OUnsfWKsuK1mytDjuuyaEg80p0paGVpeef5FOeLVg5WdMHQhrNxbNAx_cMyykL8i0ercJP94hrh78p8auiVDZ6lrYEVWFJwbQby7zXuOLITSoTdoxRinQIGKhISHq91h2qM4Tch-AzoU7Ktv1rLJcjEy-nKBx3kb2rkQMYHceBbiuHEmvlf-2Xn-fGi2rpmU9Fu4wSvzInwa2Yii5Naf__"/>
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHDqF-GtnIIUJluGcxiSbrkMdHpo2US7LzGPuUK6vVTxiNcOJLLWRLPVksJHIgG4m7f-0FipwBeDvlLceAKr3NcF9nD1VQWriM7vVaeGbnctLpKKEE9s_9ndQgJXj64Qdt4yN6igW6SFP0TS5RMDt16-r67NPpgbv697_bx8w_f1Ht1mL4bR6jD8K55hnU6XTYOlHyGdxaekvhOxyf3VD3qOeIVJDXakMapg5Vw1_1nuDq6F5Gpw2H"/>
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB84_ke7cguxDUtG2oJHiS-jUKCn2vWtFnaeEPNPFLvTbXawLVB_50X526laLWK0KO97KZH-E6MWUb5lMyPfJrJZ5sLGdKX6GlkODTLX8wZdje3yZ-XFbATHL3-CZ_dAgW5rd1Z-XUuV3267Rs3i3zdTTqmzTzUsRFZ6II3LRmks313e1LvKQGUZsEtqloQjo-VUNorq19A4bUBFXfB9jJqoK6M4W1sSXesYvR1dSTB4IDitpMvM9ov"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+4</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant text-label-md">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+Oct 15
+</div>
+</div>
+</div>
+
+<!-- Project Card 2 -->
+<div class="glass-card rounded-2xl p-lg flex flex-col gap-lg project-card" data-priority="medium" data-status="internal-review" data-client="FinTech Core">
+<div class="flex justify-between items-start">
+<div class="flex flex-col min-w-0">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary text-[10px] font-bold w-fit mb-2">MEDIUM PRIORITY</span>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface truncate">Data Engine V2</h4>
+<p class="text-label-md text-on-surface-variant truncate">Client: FinTech Core</p>
+</div>
+<button class="p-1 hover:bg-surface-container rounded-lg transition-colors shrink-0">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-on-surface-variant">Internal Review</span>
+<span class="font-label-md font-bold text-primary">92%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="h-full bg-primary-container rounded-full progress-fill" style="width: 92%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2255fyop4a92TEul5a-hxvUOi9chlvSucipS08cJmUMiUwmPlJiU3xAemKDR6zbGves9nI8LQmGn2LHlnhRYhoVgtRUt8O5gPR-tmZJNY5G4kftUMX8I44R8DCg3VqVCSAjOgAYTq9XuRx0XK7pTWRCjE6scYFIKjP531SrtTeFKCNeNLwQos555KycdNwHrQwnTj2P-PPLaO3tJeZkJkOsC-diqyTmcsr6dIaIOLkrTXTwF2gN9d"/>
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP6NuRyLrbCJnAvZbVwjw-AQbwKpHXwImKJHuu-LK_H63hYZcMEzhjZCceRqgWFVM6Lrf6YWZI8TFoMAGnuodeAJ9muS4-x1cstNL-pI-eXLq9W0I7kbshuRsqtbsiDkYfm3blzS96NL1mkg_wZEHljenLO5KFq52BPYUah9GFdLymUGpE20k1ky2e09tIU1XPEwoILnPhxMyg9VWK9Ou-y6qodl5t2Y3X3DaKJfjZDkZnWhh2XB8k"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+2</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant text-label-md">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+Sept 30
+</div>
+</div>
+</div>
+
+<!-- Project Card 3 -->
+<div class="glass-card rounded-2xl p-lg flex flex-col gap-lg project-card" data-priority="low" data-status="concept" data-client="EcoSystems Inc.">
+<div class="flex justify-between items-start">
+<div class="flex flex-col min-w-0">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold w-fit mb-2">LOW PRIORITY</span>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface truncate">Green-Field Expansion</h4>
+<p class="text-label-md text-on-surface-variant truncate">Client: EcoSystems Inc.</p>
+</div>
+<button class="p-1 hover:bg-surface-container rounded-lg transition-colors shrink-0">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-md text-on-surface-variant">Concept</span>
+<span class="font-label-md font-bold text-primary">12%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="h-full bg-tertiary-accent rounded-full progress-fill" style="width: 12%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWEPy55WudF1yUw6hXrnyRrxm2SzfXeSJMwqe2LGGO28Ng-JCUub9WU2P1oCgI8rjNlDLZc8sWgipEw51ofJa6ymFmDkSU34rD9f370TBtk_N_1F8qdBPVWyqGfr-QJjA1VAda8ECMozYz4YyTGwSh6BjVyAWP-56Ua6kfZy9MPirccW8YtKaLlLZj3Sju6vQSmvHnMQpLlgMkGRxdXQmTl3ZIo_iIxVrIl50BVDd4jv2EL3b6WvBQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMZr3R51QZIpXX1tmKSN0vDNyFpCFeuO6NTeGXdDkrglWgstGh09MZoJicmB32vbyp54l5pXoEG946ZcbIYj7ymNf_Kf7-RFBUyuCf-ju_b_rkcfhCdwrs2H-5kTMYBRQfS1m1MPCKXUZJzIA32SdPfLZt_ebXKLTBQ1Pe60cS7o1YONrWADAFusvKKD5FBEav640ixHwl4C-SBAkiq8TxPvwFc__enug5yfpIaCkPrmy-Rx3w-c-b"/>
+<img class="w-8 h-8 rounded-full border-2 border-white ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH7zP6_XgCR5ayZM6zvrvF2YTjPHoRb6sJ1HEs2-mp-rRJTaSUOEyOHWqHNdygEYB21Lbjl8bS-NOjp2CQOcUEzz_I9uLE760jCqukXG0e4BfDm5G7eWiDaB7dKoHphl0PBcfJJBJOJbjuEmz_1DvM1IBRn1c3WhpKAt_shDOkNW92pG9nwyvSt23lS-Uf-nws3Ey3pDUKlPcHxx_Aqi1-qu0JYshOn0eMX0quK86HRkIvudXItbNn"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+8</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant text-label-md">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+Jan 12
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+<!-- Filter View Modal -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-[100] flex items-center justify-center p-md opacity-0 pointer-events-none modal-backdrop" id="filter-modal">
+<div class="glass-card w-full max-w-md rounded-2xl shadow-2xl overflow-hidden scale-95 opacity-0 modal-panel bg-white/90" id="filter-panel">
+<div class="flex items-center justify-between p-lg border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md font-bold flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+Filter Projects
+</h3>
+<button class="p-1 hover:bg-surface-container rounded-lg transition-colors" id="filter-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg space-y-lg max-h-[60vh] overflow-y-auto">
+<div>
+<p class="font-label-md font-bold text-on-surface-variant uppercase mb-sm">Priority</p>
+<div class="flex flex-wrap gap-sm" id="filter-priority">
+<button data-value="all" class="filter-chip active px-4 py-1.5 rounded-full border border-primary bg-primary text-on-primary text-label-md font-semibold">All</button>
+<button data-value="high" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">High</button>
+<button data-value="medium" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">Medium</button>
+<button data-value="low" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">Low</button>
+</div>
+</div>
+<div>
+<p class="font-label-md font-bold text-on-surface-variant uppercase mb-sm">Status</p>
+<div class="flex flex-wrap gap-sm" id="filter-status">
+<button data-value="all" class="filter-chip active px-4 py-1.5 rounded-full border border-primary bg-primary text-on-primary text-label-md font-semibold">All</button>
+<button data-value="in-progress" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">In Progress</button>
+<button data-value="internal-review" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">Internal Review</button>
+<button data-value="concept" class="filter-chip px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant text-label-md font-semibold hover:bg-surface-container transition-colors">Concept</button>
+</div>
+</div>
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-sm block" for="filter-search">Client Name</label>
+<input class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="filter-search" placeholder="e.g. FinTech Core" type="text"/>
+</div>
+</div>
+<div class="p-lg bg-surface-container-low/50 flex justify-between items-center border-t border-outline-variant gap-sm">
+<button class="px-lg py-sm font-semibold text-on-surface-variant hover:bg-surface-container rounded-xl transition-colors" id="filter-reset">Reset</button>
+<button class="px-lg py-sm bg-primary text-on-primary font-semibold rounded-xl hover:shadow-lg transition-all" id="filter-apply">Apply Filters</button>
+</div>
+</div>
+</div>
+
+<!-- New Project Modal -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-[100] flex items-center justify-center p-md opacity-0 pointer-events-none modal-backdrop" id="new-project-modal">
+<div class="glass-card w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden scale-95 opacity-0 modal-panel bg-white/90" id="new-project-panel">
+<div class="flex items-center justify-between p-lg border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md font-bold flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+New Project
+</h3>
+<button class="p-1 hover:bg-surface-container rounded-lg transition-colors" id="new-project-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-lg space-y-md max-h-[65vh] overflow-y-auto" id="new-project-form">
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-name">Project Name</label>
+<input class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="np-name" placeholder="e.g. Orion Platform Redesign" required type="text"/>
+</div>
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-client">Client</label>
+<input class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="np-client" placeholder="e.g. Horizon Retail Group" required type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-priority">Priority</label>
+<select class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="np-priority">
+<option value="high">High</option>
+<option selected="" value="medium">Medium</option>
+<option value="low">Low</option>
+</select>
+</div>
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-status">Status</label>
+<select class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="np-status">
+<option value="concept">Concept</option>
+<option value="in-progress">In Progress</option>
+<option value="internal-review">Internal Review</option>
+</select>
+</div>
+</div>
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-progress">Progress: <span id="np-progress-value">0</span>%</label>
+<input class="w-full accent-primary" id="np-progress" max="100" min="0" type="range" value="0"/>
+</div>
+<div>
+<label class="font-label-md font-bold text-on-surface-variant uppercase mb-xs block" for="np-due">Due Date</label>
+<input class="w-full bg-white border border-outline-variant rounded-xl py-2 px-3 text-body-md focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" id="np-due" type="date"/>
+</div>
+</form>
+<div class="p-lg bg-surface-container-low/50 flex justify-end items-center border-t border-outline-variant gap-sm">
+<button class="px-lg py-sm font-semibold text-on-surface-variant hover:bg-surface-container rounded-xl transition-colors" id="new-project-cancel" type="button">Cancel</button>
+<button class="px-lg py-sm bg-primary text-on-primary font-semibold rounded-xl hover:shadow-lg transition-all" form="new-project-form" type="submit">Create Project</button>
+</div>
+</div>
+</div>
+
+<!-- Toast -->
+<div class="fixed bottom-6 right-6 z-[200] translate-y-24 opacity-0 pointer-events-none" id="toast">
+<div class="glass-card bg-white/90 rounded-xl shadow-2xl px-lg py-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" id="toast-icon">check_circle</span>
+<span class="font-body-md font-semibold text-on-surface" id="toast-message">Done</span>
+</div>
+</div>
+
+<script>
+(() => {
+    /* ---------------- Sidebar (mobile) ---------------- */
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const sidebarOpenBtn = document.getElementById('sidebar-open');
+    const sidebarCloseBtn = document.getElementById('sidebar-close');
+
+    function openSidebar() {
+        sidebar.classList.add('sidebar-open');
+        sidebarBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('sidebar-open');
+        sidebarBackdrop.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
+    }
+    sidebarOpenBtn.addEventListener('click', openSidebar);
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebar.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => {
+        if (window.innerWidth < 1024) closeSidebar();
+    }));
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) closeSidebar();
+    });
+
+    /* ---------------- Generic modal helpers ---------------- */
+    function showModal(backdropEl, panelEl) {
+        backdropEl.classList.remove('opacity-0', 'pointer-events-none');
+        requestAnimationFrame(() => {
+            panelEl.classList.remove('scale-95', 'opacity-0');
+            panelEl.classList.add('scale-100', 'opacity-100');
+        });
+        document.body.style.overflow = 'hidden';
+    }
+    function hideModal(backdropEl, panelEl) {
+        panelEl.classList.remove('scale-100', 'opacity-100');
+        panelEl.classList.add('scale-95', 'opacity-0');
+        backdropEl.classList.add('opacity-0');
+        setTimeout(() => backdropEl.classList.add('pointer-events-none'), 200);
+        document.body.style.overflow = '';
+    }
+
+    function showToast(message, icon = 'check_circle') {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-message').textContent = message;
+        document.getElementById('toast-icon').textContent = icon;
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => {
+            toast.classList.add('translate-y-24', 'opacity-0');
+        }, 2600);
+    }
+
+    /* ---------------- Filter View ---------------- */
+    const filterModal = document.getElementById('filter-modal');
+    const filterPanel = document.getElementById('filter-panel');
+    const filterBtn = document.getElementById('filter-btn');
+    const filterClose = document.getElementById('filter-close');
+    const filterApply = document.getElementById('filter-apply');
+    const filterReset = document.getElementById('filter-reset');
+    const filterSearchInput = document.getElementById('filter-search');
+    const topSearchInput = document.getElementById('search-input');
+    const filterCountBadge = document.getElementById('filter-count');
+    const emptyState = document.getElementById('empty-state');
+    const clearFiltersLink = document.getElementById('clear-filters-link');
+    const portfolioGrid = document.getElementById('portfolio-grid');
+
+    let activePriority = 'all';
+    let activeStatus = 'all';
+
+    function bindChipGroup(containerId, onChange) {
+        const container = document.getElementById(containerId);
+        container.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                container.querySelectorAll('.filter-chip').forEach(c => {
+                    c.classList.remove('active', 'bg-primary', 'text-on-primary', 'border-primary');
+                    c.classList.add('border-outline-variant', 'text-on-surface-variant');
+                });
+                chip.classList.add('active', 'bg-primary', 'text-on-primary', 'border-primary');
+                chip.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                onChange(chip.dataset.value);
+            });
+        });
+    }
+    bindChipGroup('filter-priority', v => activePriority = v);
+    bindChipGroup('filter-status', v => activeStatus = v);
+
+    function applyFilters() {
+        const clientQuery = filterSearchInput.value.trim().toLowerCase();
+        const searchQuery = topSearchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+        let activeFilterCount = 0;
+        if (activePriority !== 'all') activeFilterCount++;
+        if (activeStatus !== 'all') activeFilterCount++;
+        if (clientQuery) activeFilterCount++;
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            const matchesPriority = activePriority === 'all' || card.dataset.priority === activePriority;
+            const matchesStatus = activeStatus === 'all' || card.dataset.status === activeStatus;
+            const client = (card.dataset.client || '').toLowerCase();
+            const name = (card.querySelector('h4')?.textContent || '').toLowerCase();
+            const matchesClientFilter = !clientQuery || client.includes(clientQuery);
+            const matchesTopSearch = !searchQuery || client.includes(searchQuery) || name.includes(searchQuery);
+
+            const shouldShow = matchesPriority && matchesStatus && matchesClientFilter && matchesTopSearch;
+            card.style.display = shouldShow ? '' : 'none';
+            if (shouldShow) visibleCount++;
+        });
+
+        emptyState.classList.toggle('hidden', visibleCount !== 0);
+
+        if (activeFilterCount > 0) {
+            filterCountBadge.textContent = activeFilterCount;
+            filterCountBadge.classList.remove('hidden');
+            filterCountBadge.classList.add('flex');
+        } else {
+            filterCountBadge.classList.add('hidden');
+            filterCountBadge.classList.remove('flex');
+        }
+    }
+
+    filterBtn.addEventListener('click', () => showModal(filterModal, filterPanel));
+    filterClose.addEventListener('click', () => hideModal(filterModal, filterPanel));
+    filterModal.addEventListener('click', e => { if (e.target === filterModal) hideModal(filterModal, filterPanel); });
+
+    filterApply.addEventListener('click', () => {
+        applyFilters();
+        hideModal(filterModal, filterPanel);
+        showToast('Filters applied');
+    });
+
+    filterReset.addEventListener('click', () => {
+        activePriority = 'all';
+        activeStatus = 'all';
+        filterSearchInput.value = '';
+        document.querySelectorAll('.filter-chip').forEach(c => {
+            const isAll = c.dataset.value === 'all';
+            c.classList.toggle('active', isAll);
+            c.classList.toggle('bg-primary', isAll);
+            c.classList.toggle('text-on-primary', isAll);
+            c.classList.toggle('border-primary', isAll);
+            c.classList.toggle('border-outline-variant', !isAll);
+            c.classList.toggle('text-on-surface-variant', !isAll);
+        });
+        applyFilters();
+    });
+
+    clearFiltersLink.addEventListener('click', () => filterReset.click());
+
+    // Live search from the top bar also triggers filtering
+    topSearchInput.addEventListener('input', applyFilters);
+
+    /* ---------------- New Project ---------------- */
+    const newProjectModal = document.getElementById('new-project-modal');
+    const newProjectPanel = document.getElementById('new-project-panel');
+    const newProjectBtn = document.getElementById('new-project-btn');
+    const newProjectClose = document.getElementById('new-project-close');
+    const newProjectCancel = document.getElementById('new-project-cancel');
+    const newProjectForm = document.getElementById('new-project-form');
+    const npProgress = document.getElementById('np-progress');
+    const npProgressValue = document.getElementById('np-progress-value');
+    const statActive = document.getElementById('stat-active');
+
+    npProgress.addEventListener('input', () => npProgressValue.textContent = npProgress.value);
+
+    function openNewProjectModal() {
+        newProjectForm.reset();
+        npProgressValue.textContent = '0';
+        showModal(newProjectModal, newProjectPanel);
+    }
+    newProjectBtn.addEventListener('click', openNewProjectModal);
+    newProjectClose.addEventListener('click', () => hideModal(newProjectModal, newProjectPanel));
+    newProjectCancel.addEventListener('click', () => hideModal(newProjectModal, newProjectPanel));
+    newProjectModal.addEventListener('click', e => { if (e.target === newProjectModal) hideModal(newProjectModal, newProjectPanel); });
+
+    const priorityStyles = {
+        high: { label: 'HIGH PRIORITY', badge: 'bg-error-container text-error', bar: 'bg-primary' },
+        medium: { label: 'MEDIUM PRIORITY', badge: 'bg-surface-container-high text-primary', bar: 'bg-primary-container' },
+        low: { label: 'LOW PRIORITY', badge: 'bg-tertiary-fixed text-on-tertiary-fixed-variant', bar: 'bg-tertiary-accent' }
+    };
+    const statusLabels = {
+        'concept': 'Concept',
+        'in-progress': 'In Progress',
+        'internal-review': 'Internal Review'
+    };
+
+    function formatDate(dateStr) {
+        if (!dateStr) return 'TBD';
+        const d = new Date(dateStr + 'T00:00:00');
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    newProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('np-name').value.trim();
+        const client = document.getElementById('np-client').value.trim();
+        const priority = document.getElementById('np-priority').value;
+        const status = document.getElementById('np-status').value;
+        const progress = npProgress.value;
+        const due = document.getElementById('np-due').value;
+
+        if (!name || !client) return;
+
+        const p = priorityStyles[priority];
+        const card = document.createElement('div');
+        card.className = 'glass-card rounded-2xl p-lg flex flex-col gap-lg project-card card-enter';
+        card.dataset.priority = priority;
+        card.dataset.status = status;
+        card.dataset.client = client;
+        card.innerHTML = `
+            <div class="flex justify-between items-start">
+                <div class="flex flex-col min-w-0">
+                    <span class="px-2 py-0.5 rounded ${p.badge} text-[10px] font-bold w-fit mb-2">${p.label}</span>
+                    <h4 class="font-headline-md text-headline-md font-bold text-on-surface truncate">${name}</h4>
+                    <p class="text-label-md text-on-surface-variant truncate">Client: ${client}</p>
+                </div>
+                <button class="p-1 hover:bg-surface-container rounded-lg transition-colors shrink-0">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+            <div class="space-y-md">
+                <div class="flex justify-between items-end mb-1">
+                    <span class="font-label-md text-on-surface-variant">${statusLabels[status]}</span>
+                    <span class="font-label-md font-bold text-primary">${progress}%</span>
+                </div>
+                <div class="w-full bg-surface-container rounded-full h-2">
+                    <div class="h-full ${p.bar} rounded-full progress-fill" style="width: ${progress}%;"></div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+                <div class="flex -space-x-3">
+                    <div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold text-on-surface-variant">${client.slice(0,2).toUpperCase()}</div>
+                </div>
+                <div class="flex items-center gap-xs text-on-surface-variant text-label-md">
+                    <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+                    ${formatDate(due)}
+                </div>
+            </div>
+        `;
+        portfolioGrid.prepend(card);
+
+        // update active project stat
+        statActive.textContent = (parseInt(statActive.textContent, 10) || 0) + 1;
+
+        // re-run filters so the new card respects the current filter state
+        applyFilters();
+
+        hideModal(newProjectModal, newProjectPanel);
+        showToast('Project created');
+    });
+
+    /* Escape key closes any open modal */
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!filterModal.classList.contains('pointer-events-none')) hideModal(filterModal, filterPanel);
+        if (!newProjectModal.classList.contains('pointer-events-none')) hideModal(newProjectModal, newProjectPanel);
+    });
+
+    /* ---------------- Animated progress bars on load ---------------- */
+    window.addEventListener('DOMContentLoaded', () => {
+        const progressBars = document.querySelectorAll('.progress-fill');
+        progressBars.forEach(bar => {
+            const targetWidth = bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => { bar.style.width = targetWidth; }, 300);
+        });
+    });
+})();
+</script>
+</body></html>
