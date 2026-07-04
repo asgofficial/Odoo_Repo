@@ -1,4 +1,3 @@
-
 <!DOCTYPE html><html class="light" lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -405,7 +404,10 @@
 <p class="font-label-md text-label-md">New Scheme</p>
 </div>
 </div>
-<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-bold group no-print" href="#">Download Form 16 <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span></a>
+<!-- Updated Active Trigger Component for Form 16 -->
+<button onclick="triggerDownloadForm16()" class="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-bold group no-print cursor-pointer hover:underline bg-transparent border-none p-0">
+  Download Form 16 <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">download</span>
+</button>
 </div>
 </div>
 <div class="glass-card rounded-3xl p-md md:p-lg flex flex-col sm:flex-row items-start sm:items-center gap-md md:gap-xl">
@@ -416,7 +418,7 @@
 <p class="font-body-lg text-body-lg font-bold text-on-surface">Citibank N.A. (Global)</p>
 <p class="font-code-sm text-code-sm text-on-surface-variant tracking-widest break-all">XXXX - XXXX - XXXX - 5678</p>
 </div>
-<button class="w-full sm:w-auto bg-surface-container-high px-lg py-sm rounded-lg font-label-md text-label-md font-bold text-on-surface hover:bg-primary hover:text-on-primary transition-all no-print">Request Update</button>
+<button onclick="handleRequestUpdate(this)" class="w-full sm:w-auto bg-surface-container-high px-lg py-sm rounded-lg font-label-md text-label-md font-bold text-on-surface hover:bg-primary hover:text-on-primary transition-all no-print">Request Update</button>
 </div>
 </div>
 </section>
@@ -434,6 +436,13 @@
             const backdrop = document.getElementById('sidebar-backdrop');
             sidebar.classList.toggle('-translate-x-full');
             backdrop.classList.toggle('hidden');
+        }
+
+        // Handle Request Update click to simulate structural Server Down errors
+        function handleRequestUpdate(buttonElement) {
+            buttonElement.innerText = "Server Down";
+            buttonElement.removeAttribute('onclick');
+            buttonElement.className = "w-full sm:w-auto bg-error-container text-error px-lg py-sm rounded-lg font-label-md text-label-md font-bold transition-all cursor-not-allowed no-print";
         }
 
         // Action Trigger System: Print Handler Logic
@@ -479,6 +488,71 @@ Verification: System Calculated Automated Statement
             const temporaryAnchor = document.createElement("a");
             temporaryAnchor.href = URL.createObjectURL(fileBlob);
             temporaryAnchor.download = "Payslip_AUR-PAY-OCT-23.txt";
+            document.body.appendChild(temporaryAnchor);
+            temporaryAnchor.click();
+            document.body.removeChild(temporaryAnchor);
+        }
+
+        // Action Trigger System: Form 16 Compiler Handler Logic
+        function triggerDownloadForm16() {
+            const form16Content = `
+AURA HRMS ENTERPRISE - FORM NO. 16
+========================================================================
+[See rule 31(1)(a)]
+PART A: Certificate under section 203 of the Income-tax Act, 1961 
+for tax deducted at source from income chargeable under the head "Salaries"
+========================================================================
+
+EMPLOYER DETAILS:
+-----------------
+Name and Address: Aura HRMS Enterprise Solutions Ltd.
+                  Global Technology Park, Tower C, Suite 400
+PAN of Deductor:  AURAE1234P
+TAN of Deductor:  AURT09876C
+
+EMPLOYEE DETAILS:
+-----------------
+Name of Employee: Alex Rivera
+Designation:      Sr. Software Architect
+PAN of Employee:  RIVERA9876M
+
+ASSESSMENT YEAR & PERIOD:
+-------------------------
+Assessment Year:  2024 - 2025
+Financial Year:   2023 - 2024
+Period with Empl: 01-Apr-2023 to 31-Mar-2024
+
+========================================================================
+PART B: Details of Salary Paid and Tax Deducted Summary
+========================================================================
+1. Gross Salary
+   (a) Salary as per provisions contained in section 17(1):   $180,000.00
+2. Less: Allowances to the extent exempt under section 10:     $38,400.00
+3. Total Salary received from current employer:               $141,600.00
+4. Deductions under section 16:                                $9,000.00
+5. Income chargeable under the head "Salaries":               $132,600.00
+6. Total Deductions under Chapter VI-A:                       $21,000.00
+7. Total Taxable Income (Net):                                $111,600.00
+8. Total Tax Payable on Net Income:                            $33,600.00
+9. Total Tax Deducted at Source (TDS):                         $33,600.00
+
+========================================================================
+Verification Certificate
+========================================================================
+I, Authorized Corporate Signatory, do hereby certify that a sum of 
+Thirty-Three Thousand Six Hundred Dollars ($33,600.00) has been deducted 
+at source and paid to the credit of the Central Government.
+
+Place: Corporate HQ
+Date: July 04, 2026
+Verification Status: Digitally Signed System Verified Record
+========================================================================
+`;
+
+            const fileBlob = new Blob([form16Content], { type: "text/plain;charset=utf-8" });
+            const temporaryAnchor = document.createElement("a");
+            temporaryAnchor.href = URL.createObjectURL(fileBlob);
+            temporaryAnchor.download = "Form_16_Alex_Rivera_FY2023-24.txt";
             document.body.appendChild(temporaryAnchor);
             temporaryAnchor.click();
             document.body.removeChild(temporaryAnchor);
