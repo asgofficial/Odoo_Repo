@@ -1,12 +1,13 @@
-<html class="light" lang="en"><head></head><body class="bg-background font-body-md text-on-surface selection:bg-primary-container selection:text-white overflow-x-hidden">```html
-
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Aura HRMS - Personal Workspace</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Aura HRMS - Personal Workspace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
         :root {
             --easing: cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -48,12 +49,12 @@
         }
         
         .sidebar-blur {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(24px) saturate(180%);
         }
 
         .header-blur {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(16px) saturate(160%);
         }
 
@@ -110,8 +111,12 @@
             transform: translateY(-4px) scale(1.1);
             color: #003d9a;
         }
+
+        .modal {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
     </style>
-<script id="tailwind-config">
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -131,402 +136,791 @@
                         "background": "#faf8ff",
                         "glass-bg": "rgba(255, 255, 255, 0.4)",
                         "glass-border": "rgba(255, 255, 255, 0.5)"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "2xl": "1rem",
-                        "3xl": "1.5rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "sidebar-collapsed": "64px",
-                        "sidebar-expanded": "260px",
-                        "sm": "8px",
-                        "md": "16px",
-                        "lg": "24px",
-                        "xl": "32px",
-                        "gutter": "24px",
-                        "2xl": "48px"
-                    },
-                    "fontFamily": {
-                        "headline-lg": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "headline-xl": ["Inter"],
-                        "body-md": ["Inter"],
-                        "body-sm": ["Inter"],
-                        "label-md": ["Inter"],
-                        "code-sm": ["JetBrains Mono"]
                     }
                 }
             }
         }
     </script>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-white overflow-x-hidden font-sans">
+
 <div class="noise-overlay"></div>
 <div class="ambient-glow"></div>
-<!-- Atmospheric Background -->
 <div id="bg-canvas-container">
-<canvas id="shader-canvas-ANIMATION_6" style="display:block;width:100%;height:100%"></canvas>
+    <canvas id="shader-canvas-ANIMATION_6" style="display:block;width:100%;height:100%"></canvas>
 </div>
+
+<!-- Mobile Menu Overlay Behind Sidebar -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
 <!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full w-[260px] sidebar-blur border-r border-glass-border flex flex-col z-50 transition-all duration-300">
-<div class="flex flex-col py-lg px-md h-full">
-<div class="px-md mb-xl">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
-<span class="material-symbols-outlined">auto_awesome</span>
-</div>
-<div>
-<h1 class="font-headline-md text-headline-md font-bold text-primary">Aura HRMS</h1>
-<p class="font-label-md text-label-md text-on-surface-variant">My Workspace</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 space-y-xs overflow-y-auto no-scrollbar">
-<a class="flex items-center gap-md px-lg py-sm text-primary relative active-nav-indicator hover:bg-white/20 transition-colors" href="oho.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-body-md text-body-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="employeedetails.html">
-<span class="material-symbols-outlined">person</span>
-<span class="font-body-md text-body-md">My Profile</span>
-</a>
-<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="attendance.html">
-<span class="material-symbols-outlined">schedule</span>
-<span class="font-body-md text-body-md">Attendance</span>
-</a>
-<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="leavemanage.html">
-<span class="material-symbols-outlined">event_busy</span>
-<span class="font-body-md text-body-md">Leave Management</span>
-</a>
-<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="projects.html">
-<span class="material-symbols-outlined">account_tree</span>
-<span class="font-body-md text-body-md">My Projects</span>
-</a>
-<a class="flex items-center gap-md px-lg py-sm text-on-surface-variant hover:bg-white/20 transition-colors" href="payroll.html">
-<span class="material-symbols-outlined">payments</span>
-<span class="font-body-md text-body-md">My Payroll</span>
-</a>
-</nav>
-<div class="mt-auto space-y-xs pt-lg border-t border-glass-border">
-<a class="flex items-center gap-md px-lg py-sm text-tertiary hover:bg-tertiary/10 transition-colors" href="index.html">
-<span class="material-symbols-outlined">logout</span>
-<span class="font-body-md text-body-md">Logout</span>
-</a>
-</div>
-</div>
+<aside id="sidebar" class="fixed left-0 top-0 h-full w-[260px] sidebar-blur border-r border-glass-border flex flex-col z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <div class="flex flex-col py-6 px-4 h-full">
+        <div class="px-4 mb-8 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined">auto_awesome</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-primary leading-tight">Aura HRMS</h1>
+                    <p class="text-xs text-on-surface-variant">My Workspace</p>
+                </div>
+            </div>
+            <button id="closeSidebarBtn" class="lg:hidden p-1 text-on-surface-variant hover:bg-slate-200/50 rounded-lg">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+            <a class="flex items-center gap-4 px-4 py-2.5 text-primary relative active-nav-indicator hover:bg-white/20 transition-colors rounded-lg" href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <button onclick="openModal('profileModal')" class="w-full flex items-center gap-4 px-4 py-2.5 text-on-surface-variant hover:bg-white/20 transition-colors rounded-lg text-left">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-sm font-medium">My Profile</span>
+            </button>
+            <button onclick="openModal('attendanceModal')" class="w-full flex items-center gap-4 px-4 py-2.5 text-on-surface-variant hover:bg-white/20 transition-colors rounded-lg text-left">
+                <span class="material-symbols-outlined">schedule</span>
+                <span class="text-sm font-medium">Attendance</span>
+            </button>
+            <button onclick="openModal('leaveModal')" class="w-full flex items-center gap-4 px-4 py-2.5 text-on-surface-variant hover:bg-white/20 transition-colors rounded-lg text-left">
+                <span class="material-symbols-outlined">event_busy</span>
+                <span class="text-sm font-medium">Leave Management</span>
+            </button>
+            <button onclick="openModal('projectsModal')" class="w-full flex items-center gap-4 px-4 py-2.5 text-on-surface-variant hover:bg-white/20 transition-colors rounded-lg text-left">
+                <span class="material-symbols-outlined">account_tree</span>
+                <span class="text-sm font-medium">My Projects</span>
+            </button>
+            <button onclick="simulatePayslipDownload()" class="w-full flex items-center gap-4 px-4 py-2.5 text-on-surface-variant hover:bg-white/20 transition-colors rounded-lg text-left">
+                <span class="material-symbols-outlined">payments</span>
+                <span class="text-sm font-medium">My Payroll</span>
+            </button>
+        </nav>
+        <div class="mt-auto pt-4 border-t border-glass-border">
+            <a class="flex items-center gap-4 px-4 py-2.5 text-tertiary hover:bg-tertiary/10 transition-colors rounded-lg" href="#">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-sm font-medium">Logout</span>
+            </a>
+        </div>
+    </div>
 </aside>
+
 <!-- TopNavBar -->
-<header class="fixed top-0 right-0 z-40 w-[calc(100%-260px)] h-16 header-blur border-b border-glass-border flex justify-between items-center px-gutter">
-<div class="flex items-center gap-xl flex-1">
-<div class="relative w-full max-w-md group">
-<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
-<input class="w-full h-10 pl-12 pr-16 bg-white/30 border border-glass-border rounded-xl font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary/40 focus:bg-white/80 transition-all outline-none" placeholder="Search tasks or documents..." type="text"/>
-<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
-<kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">CTRL</kbd>
-<kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">K</kbd>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-lg">
-<a class="p-2 hover:bg-primary-container/10 rounded-xl transition-all premium-btn" href="mailto:hr@aurahrms.com" aria-label="Contact support">
-<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
-</a>
-<div class="h-8 w-[1px] bg-glass-border"></div>
-<div class="flex items-center gap-md px-2 py-1 rounded-xl hover:bg-white/30 transition-colors cursor-pointer group active:scale-95">
-<div class="text-right hidden lg:block">
-<p class="font-body-md font-semibold text-primary">Alex Chen</p>
-<p class="font-label-md text-on-surface-variant">Senior Product Designer</p>
-</div>
-<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden shadow-sm group-hover:border-primary/50 transition-all">
-<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW2oZy_7myEKJ7yM_WlcZxDAvabYpweRAwT07PY22xSnhdNh2it7Y2wdXMrriqbhDZedE0vABT801NjnjKOdAl5tvKcSP3to4cKZasiHGFDJ01IIR3-PvAyz95Z3NacCIbHvi2AzGp1aTIpaeD_hnIOheMEDxHK44v771ssCqE4WlNuL5LWYkHHauhhfCDYK7jb23DsqVHr2VTDHgMPus8fp0WcAz7L-2V_iSaknDv_ra-gSUz8HGA"/>
-</div>
-</div>
-</div>
+<header class="fixed top-0 right-0 z-40 w-full lg:w-[calc(100%-260px)] h-16 header-blur border-b border-glass-border flex justify-between items-center px-4 md:px-6">
+    <div class="flex items-center gap-4 flex-1">
+        <button id="menuBtn" class="lg:hidden p-2 text-on-surface-variant hover:bg-white/40 rounded-xl transition-all">
+            <span class="material-symbols-outlined block">menu</span>
+        </button>
+        <div class="relative w-full max-w-xs md:max-w-md group hidden sm:block">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+            <input class="w-full h-10 pl-10 pr-16 bg-white/30 border border-glass-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary/40 focus:bg-white/80 transition-all outline-none" placeholder="Search tasks or documents..." type="text"/>
+            <div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1 pointer-events-none">
+                <kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">CTRL</kbd>
+                <kbd class="px-1.5 py-0.5 text-[10px] font-bold bg-white/50 border border-glass-border rounded text-on-surface-variant">K</kbd>
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <a class="p-2 hover:bg-primary-container/10 rounded-xl transition-all premium-btn hidden sm:inline-block" href="mailto:hr@aurahrms.com" aria-label="Contact support">
+            <span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+        </a>
+        <div class="h-8 w-[1px] bg-glass-border hidden sm:block"></div>
+        <div onclick="openModal('profileModal')" class="flex items-center gap-3 px-2 py-1 rounded-xl hover:bg-white/30 transition-colors cursor-pointer group active:scale-95">
+            <div class="text-right hidden md:block">
+                <p class="text-sm font-semibold text-primary" id="headerProfileName">Alex Chen</p>
+                <p class="text-xs text-on-surface-variant" id="headerProfileTitle">Senior Product Designer</p>
+            </div>
+            <div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden shadow-sm group-hover:border-primary/50 transition-all">
+                <img id="headerProfileImg" alt="Profile" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"/>
+            </div>
+        </div>
+    </div>
 </header>
+
 <!-- Main Content -->
-<main class="ml-[260px] mt-16 min-h-screen flex flex-col relative z-20">
-<div class="p-xl space-y-xl max-w-[1400px] mx-auto w-full">
-<!-- Welcome Hero -->
-<section class="stagger-item" style="animation-delay: 0.1s;">
-<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-xl text-white shadow-2xl">
-<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl opacity-50"></div>
-<div class="relative z-10">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-lg">
-<div>
-<h2 class="font-headline-xl text-headline-xl mb-xs">Good morning, Alex Chen</h2>
-<div class="flex flex-wrap items-center gap-md text-on-primary/80 font-body-md">
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">badge</span> ID: AL-0492</span>
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">location_on</span> London, UK</span>
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">manager</span> Manager: Sarah Jenkins</span>
-</div>
-</div>
-<div class="flex flex-col items-end">
-<p class="font-label-md uppercase tracking-widest text-on-primary/60 mb-1">Current Status</p>
-<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+<main class="lg:ml-[260px] mt-16 min-h-screen flex flex-col relative z-20">
+    <div class="p-4 md:p-6 lg:p-8 space-y-6 lg:space-y-8 max-w-[1400px] mx-auto w-full">
+        
+        <!-- Welcome Hero -->
+        <section class="stagger-item" style="animation-delay: 0.1s;">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-container p-6 md:p-8 text-white shadow-2xl">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl opacity-50"></div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-2">Good morning, <span id="heroWelcomeName">Alex Chen</span></h2>
+                            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-on-primary/80 text-sm">
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">badge</span> ID: AL-0492</span>
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">location_on</span> London, UK</span>
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">person</span> Manager: Sarah Jenkins</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-start md:items-end shrink-0">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-on-primary/60 mb-1">Current Status</p>
+                            <span id="attendanceBadge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
                                 Online &amp; Productive
                             </span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Summary Cards -->
-<section class="grid grid-cols-2 md:grid-cols-5 gap-md stagger-item" style="animation-delay: 0.2s;">
-<div class="glass-card p-lg rounded-2xl">
-<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Check-In</p>
-<p class="font-headline-md text-primary mt-1">09:15 AM</p>
-</div>
-<div class="glass-card p-lg rounded-2xl">
-<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Working Hours</p>
-<div class="flex items-baseline gap-xs mt-1">
-<span class="font-headline-md text-primary counter" data-target="6.5">6.5</span>
-<span class="text-on-surface-variant text-sm">h</span>
-</div>
-</div>
-<div class="glass-card p-lg rounded-2xl">
-<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Leave Balance</p>
-<div class="flex items-baseline gap-xs mt-1">
-<span class="font-headline-md text-primary counter" data-target="15">15</span>
-<span class="text-on-surface-variant text-sm">days</span>
-</div>
-</div>
-<div class="glass-card p-lg rounded-2xl">
-<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Active Projects</p>
-<span class="font-headline-md text-primary mt-1 counter" data-target="3">3</span>
-</div>
-<div class="glass-card p-lg rounded-2xl">
-<p class="text-label-md text-on-surface-variant font-bold uppercase tracking-tighter">Payroll Month</p>
-<p class="font-headline-md text-primary mt-1">Oct 2023</p>
-</div>
-</section>
-<!-- Main Content Grid -->
-<div class="grid grid-cols-12 gap-xl">
-<!-- Left Column: Core Workflows -->
-<div class="col-span-12 lg:col-span-8 space-y-xl">
-<!-- Attendance & Leave (Shared Row) -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-xl stagger-item" style="animation-delay: 0.3s;">
-<!-- Attendance Widget -->
-<div class="glass-card rounded-3xl p-lg space-y-lg flex flex-col">
-<div class="flex justify-between items-center">
-<h3 class="font-headline-md flex items-center gap-sm text-primary">
-<span class="material-symbols-outlined">schedule</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Cards -->
+        <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 stagger-item" style="animation-delay: 0.2s;">
+            <div class="glass-card p-4 rounded-2xl">
+                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Check-In</p>
+                <p class="text-xl font-bold text-primary mt-1" id="summaryCheckIn">09:15 AM</p>
+            </div>
+            <div class="glass-card p-4 rounded-2xl">
+                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Working Hours</p>
+                <div class="flex items-baseline gap-0.5 mt-1">
+                    <span class="text-xl font-bold text-primary counter" data-target="6.5">6.5</span>
+                    <span class="text-on-surface-variant text-xs">h</span>
+                </div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl">
+                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Leave Balance</p>
+                <div class="flex items-baseline gap-0.5 mt-1">
+                    <span class="text-xl font-bold text-primary counter" id="summaryLeaveBalance" data-target="15">15</span>
+                    <span class="text-on-surface-variant text-xs">days</span>
+                </div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl col-span-1">
+                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Active Projects</p>
+                <span class="text-xl font-bold text-primary mt-1 block counter" id="summaryActiveProjects" data-target="2">2</span>
+            </div>
+            <div class="glass-card p-4 rounded-2xl col-span-2 sm:col-span-1">
+                <p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Payroll Month</p>
+                <p class="text-xl font-bold text-primary mt-1">Oct 2026</p>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-12 gap-6 lg:gap-8">
+            <!-- Left Column: Core Workflows -->
+            <div class="col-span-12 lg:col-span-8 space-y-6 lg:space-y-8">
+                <!-- Attendance & Leave (Shared Row) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Attendance Widget -->
+                    <div class="glass-card rounded-3xl p-5 space-y-4 flex flex-col justify-between">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold flex items-center gap-2 text-primary">
+                                <span class="material-symbols-outlined">schedule</span>
                                 Attendance
                             </h3>
-<span class="text-xs font-bold bg-primary/10 text-primary px-2 py-1 rounded">PRESENT</span>
-</div>
-<div class="grid grid-cols-2 gap-md text-center py-md bg-white/20 rounded-2xl">
-<div>
-<p class="text-label-md text-on-surface-variant">Check In</p>
-<p class="font-bold">09:15 AM</p>
-</div>
-<div class="border-l border-glass-border">
-<p class="text-label-md text-on-surface-variant">Check Out</p>
-<p class="text-outline">--:-- --</p>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<div>
-<p class="text-label-md text-on-surface-variant">Attendance Rate</p>
-<p class="font-headline-lg text-primary"><span class="counter" data-target="98">98</span>%</p>
-</div>
-<a class="bg-primary text-white px-lg py-md rounded-2xl font-bold hover:shadow-lg premium-btn inline-flex items-center" href="attendance.html">Mark Attendance</a>
-</div>
-</div>
-<!-- Leave Widget -->
-<div class="glass-card rounded-3xl p-lg space-y-lg flex flex-col">
-<h3 class="font-headline-md flex items-center gap-sm text-primary">
-<span class="material-symbols-outlined">beach_access</span>
-                                Leave Overview
-                            </h3>
-<div class="grid grid-cols-3 gap-2">
-<div class="text-center p-2 rounded-xl bg-white/20">
-<p class="text-[10px] font-bold text-on-surface-variant">CASUAL</p>
-<p class="font-bold text-primary">02</p>
-</div>
-<div class="text-center p-2 rounded-xl bg-white/20">
-<p class="text-[10px] font-bold text-on-surface-variant">SICK</p>
-<p class="font-bold text-primary">05</p>
-</div>
-<div class="text-center p-2 rounded-xl bg-white/20">
-<p class="text-[10px] font-bold text-on-surface-variant">EARNED</p>
-<p class="font-bold text-primary">08</p>
-</div>
-</div>
-<div class="flex-1 flex flex-col justify-center">
-<p class="text-label-md text-on-surface-variant mb-2">Upcoming Holiday</p>
-<div class="flex items-center gap-md bg-white/30 p-2 rounded-2xl border border-white/50">
-<div class="w-10 h-10 bg-primary text-white rounded-xl flex flex-col items-center justify-center font-bold text-xs">
-<span>NOV</span><span>10</span>
-</div>
-<p class="font-bold text-body-sm">National Heritage Day</p>
-</div>
-</div>
-<a class="bg-white/50 border border-primary text-primary px-lg py-md rounded-2xl font-bold hover:bg-primary hover:text-white transition-all inline-flex items-center justify-center" href="leavemanage.html">Apply Leave</a>
-</div>
-</div>
-<!-- My Projects Section -->
-<section class="space-y-md stagger-item" style="animation-delay: 0.4s;">
-<div class="flex items-center justify-between">
-<h3 class="font-headline-md flex items-center gap-sm text-primary">
-<span class="material-symbols-outlined">account_tree</span>
+                            <span id="widgetAttendanceStatus" class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded">PRESENT</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-center py-3 bg-white/20 rounded-2xl">
+                            <div>
+                                <p class="text-xs text-on-surface-variant">Check In</p>
+                                <p class="font-bold text-sm" id="widgetCheckIn">09:15 AM</p>
+                            </div>
+                            <div class="border-l border-glass-border">
+                                <p class="text-xs text-on-surface-variant">Check Out</p>
+                                <p class="text-outline text-sm" id="widgetCheckOut">--:-- --</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-2">
+                            <div>
+                                <p class="text-xs text-on-surface-variant">Attendance Rate</p>
+                                <p class="text-2xl font-bold text-primary"><span class="counter" data-target="98">98</span>%</p>
+                            </div>
+                            <button onclick="openModal('attendanceModal')" id="attendanceWidgetBtn" class="bg-primary text-white px-4 py-2.5 rounded-xl text-xs font-bold hover:shadow-lg premium-btn">Mark Attendance</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Leave Widget -->
+                    <div class="glass-card rounded-3xl p-5 space-y-4 flex flex-col justify-between">
+                        <h3 class="font-bold flex items-center gap-2 text-primary">
+                            <span class="material-symbols-outlined">beach_access</span>
+                            Leave Overview
+                        </h3>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="text-center p-2 rounded-xl bg-white/20">
+                                <p class="text-[10px] font-bold text-on-surface-variant">CASUAL</p>
+                                <p class="font-bold text-primary text-sm" id="casualCount">02</p>
+                            </div>
+                            <div class="text-center p-2 rounded-xl bg-white/20">
+                                <p class="text-[10px] font-bold text-on-surface-variant">SICK</p>
+                                <p class="font-bold text-primary text-sm">05</p>
+                            </div>
+                            <div class="text-center p-2 rounded-xl bg-white/20">
+                                <p class="text-[10px] font-bold text-on-surface-variant">EARNED</p>
+                                <p class="font-bold text-primary text-sm" id="earnedCount">08</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/30 p-2.5 rounded-2xl border border-white/50 flex items-center gap-3">
+                            <div class="w-10 h-10 shrink-0 bg-primary text-white rounded-xl flex flex-col items-center justify-center font-bold text-[11px] leading-tight">
+                                <span>NOV</span><span>10</span>
+                            </div>
+                            <p class="font-bold text-xs truncate">National Heritage Day</p>
+                        </div>
+                        <button onclick="openModal('leaveModal')" class="bg-white/50 border border-primary text-primary px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-white transition-all text-center">Apply Leave</button>
+                    </div>
+                </div>
+
+                <!-- My Projects Section -->
+                <section class="space-y-4 stagger-item" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold flex items-center gap-2 text-primary">
+                            <span class="material-symbols-outlined">account_tree</span>
                             My Active Projects
                         </h3>
-<a class="text-primary text-body-sm hover:underline font-semibold" href="projects.html">View All</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-<!-- Project 1 -->
-<div class="glass-card p-lg rounded-3xl group">
-<div class="flex justify-between items-start mb-md">
-<span class="bg-primary/10 px-sm py-xs rounded text-[10px] font-bold uppercase tracking-wider text-primary">Lead Designer</span>
-<div class="text-tertiary flex items-center gap-xs font-bold text-xs">
-<span class="material-symbols-outlined text-[14px]">event</span> 2 Days Left
+                        <button onclick="openModal('projectsModal')" class="text-primary text-xs hover:underline font-semibold">Manage Projects</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="projectsGrid">
+                        <!-- Project 1 -->
+                        <div class="glass-card p-5 rounded-3xl flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="bg-primary/10 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-primary">Lead Designer</span>
+                                    <div class="text-tertiary flex items-center gap-0.5 font-bold text-xs">
+                                        <span class="material-symbols-outlined text-[14px]">event</span> 2 Days Left
+                                    </div>
                                 </div>
-</div>
-<h4 class="font-bold text-body-lg mb-1">Aura Mobile 2.0</h4>
-<p class="text-on-surface-variant text-body-sm mb-lg">Prototypes &amp; UI Kit finalization.</p>
-<div class="space-y-sm">
-<div class="flex justify-between text-label-md font-bold">
-<span class="text-on-surface-variant">Progress</span>
-<span class="text-primary"><span class="counter" data-target="78">78</span>%</span>
-</div>
-<div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
-<div class="bg-primary h-full rounded-full transition-all duration-1000" data-width="78%" style="width: 78%;"></div>
-</div>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="glass-card p-lg rounded-3xl group">
-<div class="flex justify-between items-start mb-md">
-<span class="bg-secondary/10 px-sm py-xs rounded text-[10px] font-bold uppercase tracking-wider text-secondary">Collaborator</span>
-<span class="text-on-surface-variant text-xs font-bold">Oct 30</span>
-</div>
-<h4 class="font-bold text-body-lg mb-1">Internal HR Portal</h4>
-<p class="text-on-surface-variant text-body-sm mb-lg">Payroll API integration &amp; QA.</p>
-<div class="space-y-sm">
-<div class="flex justify-between text-label-md font-bold">
-<span class="text-on-surface-variant">Progress</span>
-<span class="text-secondary"><span class="counter" data-target="42">42</span>%</span>
-</div>
-<div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
-<div class="bg-secondary h-full rounded-full transition-all duration-1000" data-width="42%" style="width: 42%;"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- My Payroll Section -->
-<section class="stagger-item" style="animation-delay: 0.5s;">
-<div class="glass-card rounded-3xl p-lg">
-<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-lg">
-<div class="flex items-center gap-lg">
-<div class="w-14 h-14 bg-emerald-500/10 text-emerald-600 rounded-2xl flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl">payments</span>
-</div>
-<div>
-<h3 class="font-headline-md text-primary">October 2023 Payroll</h3>
-<p class="text-on-surface-variant text-body-sm">Status: <span class="text-emerald-600 font-bold">Paid</span> (Oct 28, 2023)</p>
-</div>
-</div>
-<div class="flex items-center gap-xl">
-<div class="text-right">
-<p class="text-label-md text-on-surface-variant uppercase font-bold">Net Salary</p>
-<p class="font-headline-lg text-primary">$8,450.00</p>
-</div>
-<a class="flex items-center gap-sm bg-primary text-white px-lg py-md rounded-2xl font-bold premium-btn" href="payroll.html">
-<span class="material-symbols-outlined">download</span>
-                                Download Payslip
-                            </a>
-</div>
-</div>
-</div>
-</section>
-</div>
-<!-- Right Column: Quick Actions & Activity -->
-<aside class="col-span-12 lg:col-span-4 space-y-xl">
-<!-- Quick Actions -->
-<section class="space-y-md stagger-item" style="animation-delay: 0.3s;">
-<h3 class="font-headline-md text-primary px-1">Quick Actions</h3>
-<div class="grid grid-cols-2 gap-md">
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="attendance.html">
-<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">timer</span>
-<span class="text-[11px] font-bold">Mark Attendance</span>
-</a>
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="leavemanage.html">
-<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">event_available</span>
-<span class="text-[11px] font-bold">Apply Leave</span>
-</a>
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="projects.html">
-<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">list_alt</span>
-<span class="text-[11px] font-bold">My Projects</span>
-</a>
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="payroll.html">
-<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">receipt_long</span>
-<span class="text-[11px] font-bold">Download Payslip</span>
-</a>
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="employeedetails.html">
-<span class="material-symbols-outlined action-icon text-primary transition-all duration-300">person_edit</span>
-<span class="text-[11px] font-bold">Update Profile</span>
-</a>
-<a class="glass-card p-md rounded-2xl flex flex-col items-center gap-2 quick-action-card" href="mailto:hr@aurahrms.com">
-<span class="material-symbols-outlined action-icon text-tertiary transition-all duration-300">contact_support</span>
-<span class="text-[11px] font-bold">Raise HR Ticket</span>
-</a>
-</div>
-</section>
-<!-- Recent Activity -->
-<section class="glass-card rounded-3xl p-lg space-y-md stagger-item" style="animation-delay: 0.4s;">
-<h3 class="font-headline-md text-primary">Recent Activity</h3>
-<div class="space-y-lg relative before:absolute before:left-3 before:top-4 before:bottom-4 before:w-[1px] before:bg-glass-border">
-<div class="relative pl-8 flex gap-md">
-<div class="absolute left-1.5 top-2 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm z-10"></div>
-<div>
-<p class="font-bold text-body-sm">Check-in at 09:15 AM</p>
-<p class="text-on-surface-variant text-[11px]">Today, 09:15 AM</p>
-</div>
-</div>
-<div class="relative pl-8 flex gap-md">
-<div class="absolute left-1.5 top-2 w-3 h-3 bg-primary rounded-full border-2 border-white shadow-sm z-10"></div>
-<div>
-<p class="font-bold text-body-sm">Downloaded October Payslip</p>
-<p class="text-on-surface-variant text-[11px]">Oct 28, 04:30 PM</p>
-</div>
-</div>
-<div class="relative pl-8 flex gap-md">
-<div class="absolute left-1.5 top-2 w-3 h-3 bg-tertiary rounded-full border-2 border-white shadow-sm z-10"></div>
-<div>
-<p class="font-bold text-body-sm">Applied for Casual Leave</p>
-<p class="text-on-surface-variant text-[11px]">Oct 26, 11:20 AM</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Support Compact -->
-<section class="glass-card rounded-3xl p-lg space-y-md bg-primary/5 stagger-item" style="animation-delay: 0.5s;">
-<div class="flex items-center gap-md">
-<div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm">
-<span class="material-symbols-outlined">menu_book</span>
-</div>
-<div>
-<p class="font-bold text-body-sm text-primary">HR Handbook</p>
-<p class="text-[11px] text-on-surface-variant leading-none">Policies &amp; Guidelines</p>
-</div>
-</div>
-<p class="text-[11px] text-on-surface-variant">Need help with benefits or policies? Raise a query with HR.</p>
-<button class="w-full py-2 bg-white/50 border border-primary/20 rounded-xl text-[11px] font-bold text-primary hover:bg-primary hover:text-white transition-all">Ask HR a Question</button>
-</section>
-</aside>
-</div>
-</div>
-<footer class="mt-auto p-lg border-t border-glass-border text-center backdrop-blur-md bg-white/10">
-<p class="text-label-md text-on-surface-variant font-medium">© 2023 Aura HRMS. All organizational data is confidential. Support available 24/7.</p>
-</footer>
+                                <h4 class="font-bold text-sm mb-1">Aura Mobile 2.0</h4>
+                                <p class="text-on-surface-variant text-xs mb-4">Prototypes &amp; UI Kit finalization.</p>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-bold">
+                                    <span class="text-on-surface-variant">Progress</span>
+                                    <span class="text-primary"><span class="counter" data-target="78">78</span>%</span>
+                                </div>
+                                <div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-primary h-full rounded-full transition-all duration-1000" data-width="78%" style="width: 78%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project 2 -->
+                        <div class="glass-card p-5 rounded-3xl flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="bg-secondary/10 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-secondary">Collaborator</span>
+                                    <span class="text-on-surface-variant text-xs font-bold">Oct 30</span>
+                                </div>
+                                <h4 class="font-bold text-sm mb-1">Internal HR Portal</h4>
+                                <p class="text-on-surface-variant text-xs mb-4">Payroll API integration &amp; QA.</p>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-bold">
+                                    <span class="text-on-surface-variant">Progress</span>
+                                    <span class="text-secondary"><span class="counter" data-target="42">42</span>%</span>
+                                </div>
+                                <div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-secondary h-full rounded-full transition-all duration-1000" data-width="42%" style="width: 42%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Payroll Section -->
+                <section class="stagger-item" style="animation-delay: 0.5s;">
+                    <div class="glass-card rounded-3xl p-5">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 shrink-0 bg-emerald-500/10 text-emerald-600 rounded-2xl flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-2xl">payments</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-primary text-sm">October 2026 Payroll</h3>
+                                    <p class="text-on-surface-variant text-xs">Status: <span class="text-emerald-600 font-bold">Paid</span> (Oct 28, 2026)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-glass-border">
+                                <div class="text-left sm:text-right">
+                                    <p class="text-[10px] text-on-surface-variant uppercase font-bold">Net Salary</p>
+                                    <p class="text-xl font-bold text-primary">$8,450.00</p>
+                                </div>
+                                <button onclick="simulatePayslipDownload()" class="flex items-center gap-1.5 bg-primary text-white px-4 py-2.5 rounded-xl text-xs font-bold premium-btn">
+                                    <span class="material-symbols-outlined text-sm">download</span>
+                                    Download Payslip
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Quick Actions & Activity -->
+            <aside class="col-span-12 lg:col-span-4 space-y-6 lg:space-y-8">
+                <!-- Quick Actions -->
+                <section class="space-y-4 stagger-item" style="animation-delay: 0.3s;">
+                    <h3 class="font-bold text-primary px-1">Quick Actions</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="openModal('attendanceModal')" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-primary transition-all duration-300">timer</span>
+                            <span class="text-[11px] font-bold text-on-surface">Mark Attendance</span>
+                        </button>
+                        <button onclick="openModal('leaveModal')" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-primary transition-all duration-300">event_available</span>
+                            <span class="text-[11px] font-bold text-on-surface">Apply Leave</span>
+                        </button>
+                        <button onclick="openModal('projectsModal')" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-primary transition-all duration-300">list_alt</span>
+                            <span class="text-[11px] font-bold text-on-surface">My Projects</span>
+                        </button>
+                        <button onclick="simulatePayslipDownload()" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-primary transition-all duration-300">receipt_long</span>
+                            <span class="text-[11px] font-bold text-on-surface">Download Payslip</span>
+                        </button>
+                        <button onclick="openModal('profileModal')" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-primary transition-all duration-300">person_edit</span>
+                            <span class="text-[11px] font-bold text-on-surface">Update Profile</span>
+                        </button>
+                        <button onclick="openModal('ticketModal')" class="glass-card p-4 rounded-2xl flex flex-col items-center gap-2 quick-action-card text-center w-full">
+                            <span class="material-symbols-outlined action-icon text-tertiary transition-all duration-300">contact_support</span>
+                            <span class="text-[11px] font-bold text-on-surface">Raise HR Ticket</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="glass-card rounded-3xl p-5 space-y-4 stagger-item" style="animation-delay: 0.4s;">
+                    <h3 class="font-bold text-primary">Recent Activity</h3>
+                    <div id="activityTimeline" class="space-y-4 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[1px] before:bg-glass-border">
+                        <div class="relative pl-7 flex gap-3">
+                            <div class="absolute left-1.5 top-1.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-sm z-10"></div>
+                            <div>
+                                <p class="font-bold text-xs">Check-in at 09:15 AM</p>
+                                <p class="text-on-surface-variant text-[10px]">Today, 09:15 AM</p>
+                            </div>
+                        </div>
+                        <div class="relative pl-7 flex gap-3">
+                            <div class="absolute left-1.5 top-1.5 w-3 h-3 bg-primary rounded-full border-2 border-white shadow-sm z-10"></div>
+                            <div>
+                                <p class="font-bold text-xs">Downloaded October Payslip</p>
+                                <p class="text-on-surface-variant text-[10px]">Oct 28, 04:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Support Compact -->
+                <section class="glass-card rounded-3xl p-5 space-y-3 bg-primary/5 stagger-item" style="animation-delay: 0.5s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm shrink-0">
+                            <span class="material-symbols-outlined">menu_book</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-xs text-primary">HR Handbook</p>
+                            <p class="text-[10px] text-on-surface-variant leading-none">Policies &amp; Guidelines</p>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-on-surface-variant">Need help with benefits or policies? Ask our intelligent HR assistant directly.</p>
+                    <button onclick="openModal('questionModal')" class="w-full py-2 bg-white/50 border border-primary/20 rounded-xl text-xs font-bold text-primary hover:bg-primary hover:text-white transition-all text-center">Ask HR a Question</button>
+                </section>
+            </aside>
+        </div>
+    </div>
+    
+    <footer class="mt-auto p-4 border-t border-glass-border text-center backdrop-blur-md bg-white/10">
+        <p class="text-xs text-on-surface-variant font-medium">© 2026 Aura HRMS. All organizational data is confidential. Support available 24/7.</p>
+    </footer>
 </main>
+
+<!-- ================= MODALS & DIALOGS (WORKING SYSTEMS) ================= -->
+
+<!-- 1. Attendance Modal -->
+<div id="attendanceModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-sm shadow-2xl space-y-4 scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center">
+            <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined">timer</span> Shift Terminal
+            </h3>
+            <button onclick="closeModal('attendanceModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <p class="text-xs text-on-surface-variant">Simulate checking into or out of your assigned shift schedule.</p>
+        <div class="space-y-2">
+            <button onclick="simulateCheckIn()" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl premium-btn">Perform Check-In</button>
+            <button onclick="simulateCheckOut()" class="w-full py-3 bg-slate-200 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-300 transition-colors">Perform Check-Out</button>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Apply Leave Modal -->
+<div id="leaveModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-md shadow-2xl scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined">event_available</span> Request Absence Time
+            </h3>
+            <button onclick="closeModal('leaveModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="leaveForm" onsubmit="simulateLeaveSubmit(event)" class="space-y-3">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Leave Classification</label>
+                <select id="leaveType" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required>
+                    <option value="Casual">Casual Leave</option>
+                    <option value="Earned">Earned Leave</option>
+                    <option value="Sick">Sick Leave</option>
+                </select>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Start Date</label>
+                    <input type="date" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">End Date</label>
+                    <input type="date" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Justification Reason</label>
+                <textarea rows="2" placeholder="Brief outline of absence context..." class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl premium-btn">File Leave Application</button>
+        </form>
+    </div>
+</div>
+
+<!-- 3. My Projects Modal -->
+<div id="projectsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-md shadow-2xl scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined">account_tree</span> Workspace Registry
+            </h3>
+            <button onclick="closeModal('projectsModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <p class="text-xs text-on-surface-variant mb-3">Add a new workflow tracking target to your active pipeline metrics display.</p>
+        <form id="projectForm" onsubmit="simulateAddProject(event)" class="space-y-3">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Project Code/Title</label>
+                <input id="projName" type="text" placeholder="e.g. Design Token Library Sync" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Immediate Milestone Target</label>
+                <input id="projDesc" type="text" placeholder="e.g. Component structure optimization Strategy" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Operational Role</label>
+                    <select id="projRole" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20">
+                        <option value="Lead Designer">Lead Designer</option>
+                        <option value="Collaborator">Collaborator</option>
+                        <option value="Reviewer">Reviewer</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-on-surface-variant mb-1">Initial Milestone completion %</label>
+                    <input id="projProgress" type="number" min="0" max="100" placeholder="75" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+                </div>
+            </div>
+            <button type="submit" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl premium-btn">Deploy Tracked Allocation</button>
+        </form>
+    </div>
+</div>
+
+<!-- 4. Update Profile Modal -->
+<div id="profileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-md shadow-2xl scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined">person_edit</span> Workspace Identity Card
+            </h3>
+            <button onclick="closeModal('profileModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="profileForm" onsubmit="simulateProfileUpdate(event)" class="space-y-3">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Full Identity Signature</label>
+                <input id="profName" type="text" value="Alex Chen" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Structural Title Assignment</label>
+                <input id="profTitle" type="text" value="Senior Product Designer" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Avatar Vector Reference URL</label>
+                <input id="profImg" type="text" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <button type="submit" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl premium-btn">Commit Registry Revision</button>
+        </form>
+    </div>
+</div>
+
+<!-- 5. Raise HR Ticket Modal -->
+<div id="ticketModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-md shadow-2xl scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-tertiary flex items-center gap-2">
+                <span class="material-symbols-outlined">contact_support</span> Dispatch HR Ticket
+            </h3>
+            <button onclick="closeModal('ticketModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form id="ticketForm" onsubmit="simulateTicketSubmit(event)" class="space-y-3">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Category Domain</label>
+                <select class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required>
+                    <option>Corporate Benefits Ledger &amp; Medical Compensation</option>
+                    <option>Compensatory Matrix Discrepancy</option>
+                    <option>Equipment Infrastructure Provisioning</option>
+                    <option>General Operational Policy Query</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Subject Header</label>
+                <input type="text" placeholder="Summary statement of concern..." class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required/>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant mb-1">Explanatory Description</label>
+                <textarea rows="3" placeholder="Provide operational contexts or relevant event descriptions..." class="w-full rounded-xl border-glass-border bg-white/50 text-sm focus:border-primary focus:ring-primary/20" required></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-tertiary text-white font-bold text-sm rounded-xl premium-btn">Log Grievance Entry</button>
+        </form>
+    </div>
+</div>
+
+<!-- 6. Ask HR Question Modal -->
+<div id="questionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal transition-all duration-300">
+    <div class="bg-white/90 backdrop-blur-md border border-glass-border rounded-3xl p-6 w-full max-w-md shadow-2xl scale-95 transition-transform duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined">forum</span> Interactive Policy Core
+            </h3>
+            <button onclick="closeModal('questionModal')" class="text-on-surface-variant hover:bg-slate-100 rounded-full p-1"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="space-y-4">
+            <div id="qaChatbox" class="h-40 overflow-y-auto border border-glass-border rounded-2xl p-3 bg-slate-50/50 space-y-2 text-xs">
+                <div class="bg-primary/10 text-primary p-2.5 rounded-2xl rounded-tl-none max-w-[85%]">
+                    Welcome to the Aura Core Handbook assistant! Ask anything about corporate policies or benefits.
+                </div>
+            </div>
+            <form onsubmit="simulateAiAnswer(event)" class="flex gap-2">
+                <input id="chatInput" type="text" placeholder="Type query (e.g., parental leave policy)..." class="flex-1 rounded-xl border-glass-border bg-white/50 text-xs focus:border-primary focus:ring-primary/20" required/>
+                <button type="submit" class="bg-primary text-white px-4 rounded-xl font-bold text-xs premium-btn">Query</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Global System Notifications Engine -->
+<div id="sysToast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl border border-white/10 opacity-0 translate-y-2 pointer-events-none transition-all duration-300 flex items-center gap-2">
+    <span class="material-symbols-outlined text-emerald-400 text-sm" id="toastIcon">info</span>
+    <span id="toastMsg">Standard system operation completed.</span>
+</div>
+
 <script>
-    // WebGL Shader Logic
-    (function() {
+    // ================= CLIENT INFRASTRUCTURE SIMULATION ENGINES =================
+    
+    function showToast(message, isErr = false) {
+        const toast = document.getElementById('sysToast');
+        const icon = document.getElementById('toastIcon');
+        document.getElementById('toastMsg').innerText = message;
+        icon.innerText = isErr ? 'warning' : 'check_circle';
+        icon.className = isErr ? 'material-symbols-outlined text-rose-400 text-sm' : 'material-symbols-outlined text-emerald-400 text-sm';
+        
+        toast.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        setTimeout(() => {
+            toast.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+        }, 4000);
+    }
+
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.firstElementChild.classList.remove('scale-95');
+    }
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.firstElementChild.classList.add('scale-95');
+    }
+
+    function addTimelineEvent(title, meta) {
+        const tl = document.getElementById('activityTimeline');
+        const eventNode = document.createElement('div');
+        eventNode.className = "relative pl-7 flex gap-3";
+        eventNode.innerHTML = `
+            <div class="absolute left-1.5 top-1.5 w-3 h-3 bg-primary rounded-full border-2 border-white shadow-sm z-10"></div>
+            <div>
+                <p class="font-bold text-xs">${title}</p>
+                <p class="text-on-surface-variant text-[10px]">${meta}</p>
+            </div>
+        `;
+        tl.prepend(eventNode);
+    }
+
+    // 1. Attendance Engine
+    function simulateCheckIn() {
+        document.getElementById('summaryCheckIn').innerText = "09:15 AM";
+        document.getElementById('widgetCheckIn').innerText = "09:15 AM";
+        document.getElementById('widgetAttendanceStatus').innerText = "PRESENT";
+        document.getElementById('widgetAttendanceStatus').className = "text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded";
+        document.getElementById('attendanceBadge').className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5";
+        document.getElementById('attendanceBadge').innerHTML = '<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>Online & Productive';
+        
+        addTimelineEvent("Check-in Verified", "Today, 09:15 AM");
+        closeModal('attendanceModal');
+        showToast("Shift clock-in event accepted successfully.");
+    }
+
+    function simulateCheckOut() {
+        const nowStr = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        document.getElementById('widgetCheckOut').innerText = nowStr;
+        document.getElementById('widgetAttendanceStatus').innerText = "CLOCKED OUT";
+        document.getElementById('widgetAttendanceStatus').className = "text-[10px] font-bold bg-amber-500/10 text-amber-600 px-2 py-0.5 rounded";
+        document.getElementById('attendanceBadge').className = "bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5";
+        document.getElementById('attendanceBadge').innerHTML = '<span class="w-2 h-2 bg-amber-500 rounded-full"></span>Shift Completed';
+        
+        addTimelineEvent(`Clocked out at ${nowStr}`, `Today, ${nowStr}`);
+        closeModal('attendanceModal');
+        showToast("Shift clock-out configuration applied.");
+    }
+
+    // 2. Absence Application Management
+    function simulateLeaveSubmit(e) {
+        e.preventDefault();
+        const type = document.getElementById('leaveType').value;
+        
+        if(type === 'Casual') {
+            let el = document.getElementById('casualCount');
+            el.innerText = String(parseInt(el.innerText) + 1).padStart(2, '0');
+        } else if (type === 'Earned') {
+            let el = document.getElementById('earnedCount');
+            el.innerText = String(parseInt(el.innerText) + 1).padStart(2, '0');
+        }
+        
+        let lb = document.getElementById('summaryLeaveBalance');
+        lb.innerText = parseInt(lb.innerText) - 1;
+        
+        addTimelineEvent(`Filed ${type} Leave Allocation Request`, "Pending Manager Review");
+        document.getElementById('leaveForm').reset();
+        closeModal('leaveModal');
+        showToast("Leave request filed with team supervisor ledger.");
+    }
+
+    // 3. Project Creation Engine
+    function simulateAddProject(e) {
+        e.preventDefault();
+        const name = document.getElementById('projName').value;
+        const desc = document.getElementById('projDesc').value;
+        const role = document.getElementById('projRole').value;
+        const progress = document.getElementById('projProgress').value;
+        
+        const grid = document.getElementById('projectsGrid');
+        const card = document.createElement('div');
+        card.className = "glass-card p-5 rounded-3xl flex flex-col justify-between";
+        
+        const badgeColor = role === 'Lead Designer' ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary';
+        
+        card.innerHTML = `
+            <div>
+                <div class="flex justify-between items-start mb-3">
+                    <span class="${badgeColor} px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">${role}</span>
+                    <span class="text-on-surface-variant text-xs font-bold">Active</span>
+                </div>
+                <h4 class="font-bold text-sm mb-1">${name}</h4>
+                <p class="text-on-surface-variant text-xs mb-4">${desc}</p>
+            </div>
+            <div class="space-y-1">
+                <div class="flex justify-between text-xs font-bold">
+                    <span class="text-on-surface-variant">Progress</span>
+                    <span class="text-primary">${progress}%</span>
+                </div>
+                <div class="w-full bg-outline-variant/30 rounded-full h-1.5 overflow-hidden">
+                    <div class="bg-primary h-full rounded-full transition-all duration-1000" style="width: ${progress}%;"></div>
+                </div>
+            </div>
+        `;
+        grid.prepend(card);
+        
+        let pCount = document.getElementById('summaryActiveProjects');
+        pCount.innerText = parseInt(pCount.innerText) + 1;
+        
+        addTimelineEvent(`Linked Project Asset: ${name}`, "Just Now");
+        document.getElementById('projectForm').reset();
+        closeModal('projectsModal');
+        showToast("Operational workflow project scope deployed.");
+    }
+
+    // 4. Identity Profile Synchronization
+    function simulateProfileUpdate(e) {
+        e.preventDefault();
+        const name = document.getElementById('profName').value;
+        const title = document.getElementById('profTitle').value;
+        const img = document.getElementById('profImg').value;
+        
+        document.getElementById('headerProfileName').innerText = name;
+        document.getElementById('headerProfileTitle').innerText = title;
+        document.getElementById('heroWelcomeName').innerText = name;
+        document.getElementById('headerProfileImg').src = img;
+        
+        addTimelineEvent("Workspace Directory Identity Restructured", "Just Now");
+        closeModal('profileModal');
+        showToast("Personal workspace parameters deployed successfully.");
+    }
+
+    // 5. HR Grievance Dispatch Setup
+    function simulateTicketSubmit(e) {
+        e.preventDefault();
+        addTimelineEvent("Logged HR Escalation Case", "Assigned Tracking Ticket ID");
+        document.getElementById('ticketForm').reset();
+        closeModal('ticketModal');
+        showToast("Structured HR processing case opened successfully.");
+    }
+
+    // 6. Interactive Knowledge Database Query Core
+    function simulateAiAnswer(e) {
+        e.preventDefault();
+        const inp = document.getElementById('chatInput');
+        const val = inp.value.toLowerCase().trim();
+        if(!val) return;
+        
+        const box = document.getElementById('qaChatbox');
+        
+        const userMsg = document.createElement('div');
+        userMsg.className = "bg-slate-200 text-slate-800 p-2.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-right";
+        userMsg.innerText = inp.value;
+        box.appendChild(userMsg);
+        
+        let replyText = "Query indexed. The global organization manual suggests consulting policy section 4.1-B or reaching your assigned hr representative general support line.";
+        if(val.includes('leave')) replyText = "Aura core parameters allow up to 15 standard annual context leaves. Submit applications 48 hours prior to the requested milestone date.";
+        if(val.includes('payroll') || val.includes('salary')) replyText = "Disbursement operations settle precisely on business day 28 of the current calendar cycle.";
+        
+        setTimeout(() => {
+            const aiMsg = document.createElement('div');
+            aiMsg.className = "bg-primary/10 text-primary p-2.5 rounded-2xl rounded-tl-none max-w-[85%]";
+            aiMsg.innerText = replyText;
+            box.appendChild(aiMsg);
+            box.scrollTop = box.scrollHeight;
+        }, 600);
+        
+        inp.value = '';
+    }
+
+    // 7. Simulated Asset Download System
+    function simulatePayslipDownload() {
+        showToast("Generating payroll manifest package...");
+        setTimeout(() => {
+            addTimelineEvent("Downloaded Oct Payslip Manifest", "Verified via local asset delivery");
+            showToast("October_2026_Payslip.pdf generation sequence completed.");
+        }, 1200);
+    }
+
+    // ================= LAYOUT RESPONSIVENESS AND WEBGL DRIVERS =================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        // Sidebar Toggle Mobile Engine
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function toggleSideNav() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleSideNav);
+        closeSidebarBtn.addEventListener('click', toggleSideNav);
+        overlay.addEventListener('click', toggleSideNav);
+
+        // WebGL Ambient Shader Framework
         const canvas = document.getElementById('shader-canvas-ANIMATION_6');
         function syncSize() {
             const w = window.innerWidth;
@@ -593,55 +987,40 @@
             requestAnimationFrame(render);
         }
         render(0);
-    })();
 
-    // Animation & Counter Logic
-    document.addEventListener('DOMContentLoaded', () => {
-        const animateCounters = () => {
+        // Numerical Incremental Counter Logic
+        setTimeout(() => {
             document.querySelectorAll('.counter').forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
+                if(isNaN(target)) return;
                 const isFloat = counter.getAttribute('data-target').includes('.');
                 let count = 0;
-                const duration = 2000;
+                const duration = 1500;
                 const startTime = performance.now();
                 
                 const update = (currentTime) => {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    const easedProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+                    const easedProgress = 1 - Math.pow(1 - progress, 3);
                     
                     count = easedProgress * target;
-                    
-                    if (isFloat) {
-                        counter.innerText = count.toFixed(1);
-                    } else {
-                        counter.innerText = Math.floor(count);
-                    }
+                    counter.innerText = isFloat ? count.toFixed(1) : Math.floor(count);
                     
                     if (progress < 1) requestAnimationFrame(update);
                 };
                 requestAnimationFrame(update);
             });
-        };
+        }, 400);
 
-        setTimeout(animateCounters, 600);
-
-        // Progress Bar Widths
-        setTimeout(() => {
-            document.querySelectorAll('[data-width]').forEach(bar => {
-                bar.style.width = bar.getAttribute('data-width');
-            });
-        }, 1000);
-
-        // Search Keyboard Shortcut
+        // Keybinding Shortcuts Configuration
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
-                document.querySelector('input[type="text"]').focus();
+                const searchInput = document.querySelector('input[type="text"]');
+                if(searchInput) searchInput.focus();
             }
         });
     });
 </script>
-
-
-```</body></html>
+</body>
+</html>
