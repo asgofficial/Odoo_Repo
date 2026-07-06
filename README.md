@@ -11,7 +11,7 @@ HRMS is a next-generation Human Resource Management System designed to centraliz
 
 The platform combines modern UI with intelligent automation to improve productivity, reduce manual work, and provide actionable insights for organizations.
 
-⸻
+_____
 
 Features
 
